@@ -4,6 +4,7 @@ const path = require('path');
 
 const jwt = require('jsonwebtoken');
 let alert = require('alert'); 
+const messageBird = require('messagebird')('0skFL1EuGttnDOr3iqGu8C01s');
 const activatekey = 'accountactivatekey123';
 const clientURL = 'http://localhost:8000';
 
@@ -90,9 +91,10 @@ module.exports.signIn = function(req, res){
 // get the sign up data
 module.exports.create = function(req,res){
 
-    const {name, email, password, confirmPassword} = req.body;
-    console.log(name , email, password, confirmPassword);
+    const {name, email, password, confirmPassword, phone, verify} = req.body;
+    console.log(name , email, password, confirmPassword, phone, verify);
     console.log(req.body);
+
     if( password != confirmPassword){
         alert("Password and Confirm Password should be same");
         return res.redirect('back');
@@ -103,41 +105,114 @@ module.exports.create = function(req,res){
             console.log('Error in finding user in Sign-in ');
             return res.redirect('back');
         }
-        
+
         if(!user){ 
 
-            const token = jwt.sign({name, email, password, confirmPassword},activatekey,{expiresIn : '20m'});
+            if(verify == 'EMAIL'){
+                const token = jwt.sign({name, email, password, confirmPassword, phone},activatekey,{expiresIn : '20m'});
 
-            const data = {
-                from: 'noreply@student.com',
-                to: req.body.email,
-                subject: 'Account Activation Key',
-                html : `
-                    <h2>Please click  on below link to activate your account</h2>
-                    <a href="${clientURL}/authentication/activate?token=${token}">CLICK HERE</a>
-                `
-            };
-            mg.messages().send(data, function (error, body) {
-                if(error){
-                    console.log(error.message);
-                    return res.redirect('back');
-                }
-                console.log('Email has been sent for vecrification');
-                return res.redirect('back');    
-            });
-
-            // User.create(req.body,function(err,user){
-            //     if(err){
-            //         console.log('Error in creating a user while sign-in');
-            //         return res.redirect('back');
-            //     }else{
-            //         console.log("SignUp successfully!!");
-            //         return res.redirect('back');
-            //     }
-            // });
-        }else{
+                const data = {
+                    from: 'noreply@student.com',
+                    to: req.body.email,
+                    subject: 'Account Activation Key',
+                    html : `
+                        <h2>Please click  on below link to activate your account</h2>
+                        <a href="${clientURL}/authentication/activate?token=${token}">CLICK HERE</a>
+                    `
+                };
+                mg.messages().send(data, function (error, body) {
+                    if(error){
+                        console.log(error.message);
+                        return res.redirect('back');
+                    }
+                    console.log('Email has been sent for vecrification');
+                    return res.redirect('back');    
+                });
+    
+                // User.create(req.body,function(err,user){
+                //     if(err){
+                //         console.log('Error in creating a user while sign-in');
+                //         return res.redirect('back');
+                //     }else{
+                //         console.log("SignUp successfully!!");
+                //         return res.redirect('back');
+                //     }
+                // });
+            }
+            else{
+                var number = phone;
+                messageBird.verify.create(number, {
+                    template: "Your Verification code is %token."
+                }, function(err, resp){
+                    if(err){
+                        console.log(err);
+                        return res.redirect('back');
+                    }
+                    else{
+                        console.log(resp);
+                        return res.render('otp-auth', {
+                            title: "Verify OTP",
+                            name: name,
+                            email: email,
+                            password: password,
+                            phone: phone,
+                            id: resp.id
+                        });
+                    }
+                });
+            }
+        }
+        else{
             console.log('User with this email already exist!!');
             return res.redirect('back');
+        }
+    });
+}
+
+module.exports.otp = function(req, res){
+    var id = req.body.id;
+    var token = req.body.token;
+    var email = req.body.email;
+    var name = req.body.name;
+    var password = req.body.password;
+    var phone = req.body.phone;
+
+    messageBird.verify.verify(id, token, function(err, response){
+        if(err){
+            console.log(err);
+            console.log("id is ", id);
+            console.log("token is ", token);
+            res.render('step2', {
+                error: err.errors[0].description,
+                id : id
+            });
+        }
+        else{
+            var user1 = new User();
+            user1.name = name;
+            user1.email = email;
+            user1.password = password;
+            user1.phone = phone;
+            User.findOne({email : email}, function(err , user){
+                if(err){
+                    console.log('Error in finding user in Sign-in ');
+                }
+                
+                if(!user){
+                    User.create(user1,function(err,user){
+                        if(err){
+                            console.log('Error in creating a user while account activation', err);
+                            return res.redirect('back');
+                        }
+                        console.log("SignUp successfully!!");
+                        return res.render('step3',{
+                            title: "Home Page"
+                        });
+                    });
+                }else{
+                    return res.redirect('/');
+                }
+            });
         }
     });
 }
@@ -151,12 +226,12 @@ module.exports.activateAccount = function(req,res){
                 console.log('Incorrect or expire link');
                 return res.redirect('back');
             }
-            const{name , email , password, confirmPassword} = decodedToken;
+            const{name , email , password, confirmPassword, phone} = decodedToken;
             var user1 = new User();
             user1.name = name;
             user1.email = email;
             user1.password = password;
-            user1.confirmPassword = confirmPassword;
+            user1.phone = phone;
             User.findOne({email : email}, function(err , user){
                 if(err){
                     console.log('Error in finding user in Sign-in ');

@@ -50,8 +50,22 @@ body {
     border-bottom: 1px solid black;
     padding-left: 5px;
     padding-top: 17px; }
+  .container #login-form .radioButton {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: auto;
+    margin-top: 20px; }
   .container #login-form #verify-email {
-    size: 10px; }
+    border: 0px;
+    width: auto;
+    height: 1em; }
+  .container #login-form #verify-phone {
+    border: 0px;
+    width: auto;
+    height: 1em; }
+  .container #login-form label {
+    color: gray; }
   .container #login-form #submit:active {
     background-color: #576d80; }
   .container #login-form #horizontal-line {
@@ -69,14 +83,15 @@ body {
     margin-top: 1%; }
   .container .google {
     position: relative;
-    height: 7%;
+    height: 5%;
     width: 80%;
     border: 1px solid #9c9a9a;
     margin: auto;
     padding-top: 2%;
     font-size: 19px;
     border-radius: 50px;
-    margin-top: 1%; }
+    margin-top: 1%;
+    margin-bottom: 20px; }
     .container .google .image {
       position: relative;
       margin-right: 85%;

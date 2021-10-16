@@ -65,8 +65,28 @@ body{
             padding-left: 5px;
             padding-top: 17px;
         }
+
+        .radioButton{
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            margin: auto;
+            margin-top: 20px;
+        }
+
         #verify-email{
-            size: 10px;
+            border: 0px;
+            width: auto;
+            height: 1em;
+        }
+
+        #verify-phone{
+            border: 0px;
+            width: auto;
+            height: 1em;
+        }
+        label{
+            color: gray;
         }
 
         #submit:active{
@@ -99,7 +119,7 @@ body{
 
     .google{
         position: relative;
-        height:7%;
+        height:5%;
         width: 80%;
         border: 1px solid rgb(156, 154, 154);
         margin: auto;
@@ -107,6 +127,7 @@ body{
         font-size: 19px;
         border-radius: 50px;
         margin-top: 1%;
+        margin-bottom: 20px;
 
         .image{
             position: relative;
