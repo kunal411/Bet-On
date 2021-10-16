@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/css/sign_in.css">
+
+<div class="container">
+    <h1>Login</h1>
+
+    <form action="/users/create-session" method="POST" id="login-form">
+        <input type="email" id="email" name="email" placeholder="Email Address *"  required>
+        <input type="password" id="password" name="password" placeholder="Password *"  required>
+        <input type="submit" id="submit" value="Continue">
+    </form>
+
+    <div class="line-1"></div>
+    <p id="or">OR</p>
+    <div class="line-1"></div>
+
+    <div class="google">
+        <div class="image">
+            <img src="https://ninjasfiles.s3.amazonaws.com/0000000000003099.png" alt="google" width="20">
+        </div>
+
+        <div class="link">
+            <a href="/users/auth/google">Login with Google</a>
+        </div>
+    </div>
+</div>

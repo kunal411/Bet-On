@@ -1,0 +1,34 @@
+<link rel="stylesheet" href="/css/sign_up.css">
+<div class="container">
+    <h1>Sign Up</h1>
+
+    <form action="/users/create" method="POST" id="login-form">
+        <input type="text" name="name" id="name" placeholder="Your Name *" required>
+        <input type="email" name="email" id="email" placeholder="Your Email *" required>
+        <input type="tel" name="phone" id="phone" placeholder="Your Phone Number *" required>
+        <input type="password" name="password" id="password" placeholder="Password *" required>
+        <input type="password" name="confirmPassword" id="confirm-password" placeholder="Confirm Password *" required>
+
+        <input type="radio" name="verify" id="verify-email" value="EMAIL">
+        <label for="verify-email">EMAIL</label>
+        <input type="radio" name="verify" id="verify-phone" value="PHONE">
+        <label for="verify-phone">PHONE</label>
+
+        <input type="submit" value="Sign Up" id="submit">
+    
+    </form>
+    
+    <div class="line-1"></div>
+    <p id="or">OR</p>
+    <div class="line-1"></div>
+
+    <div class="google">
+        <div class="image">
+            <img src="https://ninjasfiles.s3.amazonaws.com/0000000000003099.png" alt="google" width="20">
+        </div>
+
+        <div class="link">
+            <a href="/users/auth/google">Signup with Google</a>
+        </div>
+    </div>
+</div>
