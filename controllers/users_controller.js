@@ -94,7 +94,8 @@ module.exports.create = function(req,res){
     const {name, email, password, confirmPassword, phone, verify} = req.body;
     console.log(name , email, password, confirmPassword, phone, verify);
     console.log(req.body);
-
+    // var p = Buffer.from(password).toString('base64');
+    // console.log(Buffer.from(p, 'base64').toString());
     if( password != confirmPassword){
         alert("Password and Confirm Password should be same");
         return res.redirect('back');
@@ -149,13 +150,18 @@ module.exports.create = function(req,res){
                         return res.redirect('back');
                     }
                     else{
+                        var n, pa, ph, em;
+                        n = Buffer.from(name).toString('base64');
+                        em = Buffer.from(email).toString('base64');
+                        pa = Buffer.from(password).toString('base64');
+                        ph = Buffer.from(phone).toString('base64');
                         console.log(resp);
                         return res.render('otp-auth', {
                             title: "Verify OTP",
-                            name: name,
-                            email: email,
-                            password: password,
-                            phone: phone,
+                            name: n,
+                            email: em,
+                            password: pa,
+                            phone: ph,
                             id: resp.id
                         });
                     }
@@ -172,10 +178,10 @@ module.exports.create = function(req,res){
 module.exports.otp = function(req, res){
     var id = req.body.id;
     var token = req.body.token;
-    var email = req.body.email;
-    var name = req.body.name;
-    var password = req.body.password;
-    var phone = req.body.phone;
+    var email = Buffer.from(req.body.email, 'base64').toString();
+    var name = Buffer.from(req.body.name, 'base64').toString();
+    var password = Buffer.from(req.body.password, 'base64').toString();
+    var phone = Buffer.from(req.body.phone, 'base64').toString();
 
     messageBird.verify.verify(id, token, function(err, response){
         if(err){

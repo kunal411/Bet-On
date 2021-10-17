@@ -20,6 +20,7 @@ passport.use(new googleStrategy({
             console.log(profile);
             if(user){
                 //if found set this user as req.user
+                console.log('User Already Exists');
                 return done(null, user);
             }else{
                 //if not found then create this user and set this user as req.user
