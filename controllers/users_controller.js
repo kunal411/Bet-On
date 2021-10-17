@@ -14,63 +14,14 @@ const domain = 'sandboxa1a4db53718b4068b7ef30a64848a271.mailgun.org';
 const mailgun = require("mailgun-js");
 const mg = mailgun({apiKey: mailGunKey , domain: domain});
 
-// let's keep it same as before
-// module.exports.profile = function(req, res){
-//     User.findById(req.params.id, function(err, user){
-//         return res.render('user_profile', {
-//             title: 'User Profile',
-//             profile_user: user
-//         });
-//     });
-
-// }
-
-
-// module.exports.update = async function(req, res){
-//     if(req.user.id == req.params.id){
-//         // User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
-//         //     return res.redirect('back');
-//         // });
-//         try{
-//             let user = await User.findById(req.params.id);
-//             User.uploadedAvatar(req, res, function(err){
-//                 if(err){
-//                     console.log('****multer error : ', err);
-//                 }
-//                 else{
-//                     user.name = req.body.name;
-//                     user.email = req.body.email;
-//                     if(req.file){
-
-//                         if(user.avatar){
-//                             if(fs.existsSync(path.join(__dirname, '..', user.avatar))){
-//                                 fs.unlinkSync(path.join(__dirname, '..', user.avatar));
-//                             }
-//                         }
-//                         //this is saving the path of the uploaded file into the avatar field in the user
-//                         user.avatar = User.avatarPath + '/' + req.file.filename;
-//                     }
-//                     user.save();
-//                     console.log(req.file);
-//                 }
-//                 return res.redirect('back');
-//             });
-//         }catch(err){
-//             return res.redirect('back');
-//         }
-//     }else{
-//         return res.status(401).send('Unauthorized');
-//     }
-// }
-
 
 // render the sign up page
 module.exports.signUp = function(req, res){
     if (req.isAuthenticated()){
-        return res.redirect('/users/profile');
+        return res.render('step3', {
+            title: 'home page'
+        });
     }
-
-
     return res.render('user_sign_up', {
         title: "BETON-DOMINO | Sign Up"
     })
@@ -81,7 +32,9 @@ module.exports.signUp = function(req, res){
 module.exports.signIn = function(req, res){
 
     if (req.isAuthenticated()){
-        return res.redirect('/users/profile');
+        return res.render('step3', {
+            title: 'home page'
+        });
     }
     return res.render('user_sign_in', {
         title: "BETON-DOMINO | Sign In"
@@ -94,17 +47,16 @@ module.exports.create = function(req,res){
     const {name, email, password, confirmPassword, phone, verify} = req.body;
     console.log(name , email, password, confirmPassword, phone, verify);
     console.log(req.body);
-    // var p = Buffer.from(password).toString('base64');
-    // console.log(Buffer.from(p, 'base64').toString());
     if( password != confirmPassword){
         alert("Password and Confirm Password should be same");
-        return res.redirect('back');
+        return res.redirect('/sign-up');
     }
     
     User.findOne({email : email}, function(err , user){
         if(err){
-            console.log('Error in finding user in Sign-in ');
-            return res.redirect('back');
+            alert('Something went wrong, please sign-up again');
+            console.log(err);
+            return res.redirect('/sign-up');
         }
 
         if(!user){ 
@@ -123,22 +75,15 @@ module.exports.create = function(req,res){
                 };
                 mg.messages().send(data, function (error, body) {
                     if(error){
+                        alert('Something went wrong, please sign-up again');
                         console.log(error.message);
-                        return res.redirect('back');
+                        return res.redirect('/sign-up');
                     }
-                    console.log('Email has been sent for vecrification');
-                    return res.redirect('back');    
+                    console.log('Email has been sent for verification');
+                    alert('Email has been sent for verification, please veirfy');
+                    return res.redirect('sign-in');    
                 });
     
-                // User.create(req.body,function(err,user){
-                //     if(err){
-                //         console.log('Error in creating a user while sign-in');
-                //         return res.redirect('back');
-                //     }else{
-                //         console.log("SignUp successfully!!");
-                //         return res.redirect('back');
-                //     }
-                // });
             }
             else{
                 var number = phone;
@@ -146,8 +91,9 @@ module.exports.create = function(req,res){
                     template: "Your Verification code is %token."
                 }, function(err, resp){
                     if(err){
+                        alert('Something went wrong, please sign-up again');
                         console.log(err);
-                        return res.redirect('back');
+                        return res.redirect('/sign-up');
                     }
                     else{
                         var n, pa, ph, em;
@@ -169,8 +115,9 @@ module.exports.create = function(req,res){
             }
         }
         else{
+            alert('Email id already exists');
             console.log('User with this email already exist!!');
-            return res.redirect('back');
+            return res.redirect('sign-in');
         }
     });
 }
@@ -201,7 +148,9 @@ module.exports.otp = function(req, res){
             user1.phone = phone;
             User.findOne({email : email}, function(err , user){
                 if(err){
+                    alert('Something went wrong, please sign-up again');
                     console.log('Error in finding user in Sign-in ');
+                    return res.redirect('/sign-up');
                 }
                 
                 if(!user){
@@ -216,7 +165,7 @@ module.exports.otp = function(req, res){
                         });
                     });
                 }else{
-                    return res.redirect('/');
+                    return res.redirect('/sign-in');
                 }
             });
         }
@@ -230,7 +179,7 @@ module.exports.activateAccount = function(req,res){
         jwt.verify(token,activatekey, function(err, decodedToken){
             if(err){
                 console.log('Incorrect or expire link');
-                return res.redirect('back');
+                return res.redirect('http://localhost:8000/users/sign-up');
             }
             const{name , email , password, confirmPassword, phone} = decodedToken;
             var user1 = new User();
@@ -241,6 +190,7 @@ module.exports.activateAccount = function(req,res){
             User.findOne({email : email}, function(err , user){
                 if(err){
                     console.log('Error in finding user in Sign-in ');
+                    return res.redirect('http://localhost:8000/users/sign-up');
                 }
                 
                 if(!user){
@@ -249,29 +199,30 @@ module.exports.activateAccount = function(req,res){
                             console.log('Error in creating a user while account activation', err);
                             return res.redirect('back');
                         }
-                        return res.redirect('/');
+                        return res.redirect('http://localhost:8000/users/sign-in');
                     });
                 }else{
-                    console.log("SignUp successfully!!");
-                    return res.redirect('back');
+                    // alert('Email id already exists')
+                    return res.redirect('http://localhost:8000/users/sign-in');
                 }
             });
         });
     }else{
+        alert('Something went wrong, please sign-up again');
         console.log('Something went wrong!!');
-        return res.redirect('back');
+        return res.redirect('http://localhost:8000/users/sign-in');
     }
 }
 
 
 // sign in and create a session for the user
 module.exports.createSession = function(req, res){
-    return res.redirect('/');
+    return res.render('step3', {
+        title: 'Home Page'
+    });
 }
 
 module.exports.destroySession = function(req, res){
     req.logout();
-
-
-    return res.redirect('/');
+    return res.redirect('sign-in');
 }
