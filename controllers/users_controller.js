@@ -49,14 +49,14 @@ module.exports.create = function(req,res){
     console.log(req.body);
     if( password != confirmPassword){
         alert("Password and Confirm Password should be same");
-        return res.redirect('/sign-up');
+        return res.redirect('http://localhost:8000/users/sign-up');
     }
     
     User.findOne({email : email}, function(err , user){
         if(err){
             alert('Something went wrong, please sign-up again');
             console.log(err);
-            return res.redirect('/sign-up');
+            return res.redirect('http://localhost:8000/users/sign-up');
         }
 
         if(!user){ 
@@ -93,7 +93,7 @@ module.exports.create = function(req,res){
                     if(err){
                         alert('Something went wrong, please sign-up again');
                         console.log(err);
-                        return res.redirect('/sign-up');
+                        return res.redirect('http://localhost:8000/users/sign-up');
                     }
                     else{
                         var n, pa, ph, em;
@@ -129,13 +129,15 @@ module.exports.otp = function(req, res){
     var name = Buffer.from(req.body.name, 'base64').toString();
     var password = Buffer.from(req.body.password, 'base64').toString();
     var phone = Buffer.from(req.body.phone, 'base64').toString();
+    console.log(email, name, password, phone);
 
     messageBird.verify.verify(id, token, function(err, response){
         if(err){
             console.log(err);
             console.log("id is ", id);
             console.log("token is ", token);
-            res.render('step2', {
+            res.render('otp-auth', {
+                title: 'Verify OTP',
                 error: err.errors[0].description,
                 id : id
             });

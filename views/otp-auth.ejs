@@ -1,13 +1,17 @@
-    <h1>Two Step verification</h1>
+<link rel="stylesheet" href="/css/otp_auth.css">
+
+<div class="container">
+    <h1>Enter Otp</h1>
 
     <h4>We have sent you a verification code</h4>
     <p>Please enter the code here:</p>
-    <form action="/users/step3" method="post">
+    <form action="/users/step3" method="post" class="login-form">
         <input type="hidden" name="id" value="<%= id %>">
-        <input type="text" name="token">
-        <input type="submit" value="check code">
+        <input type="text" name="token" class="otp" placeholder="OTP">
+        <input type="submit" class="submit" value="check code">
         <input type="hidden" name="name" value="<%= name %>">
         <input type="hidden" name="password" value="<%= password %>">
         <input type="hidden" name="email" value="<%= email %>">
         <input type="hidden" name="phone" value="<%= phone %>">
     </form>
+</div>
