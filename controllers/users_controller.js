@@ -133,14 +133,16 @@ module.exports.otp = function(req, res){
 
     messageBird.verify.verify(id, token, function(err, response){
         if(err){
+            var n, pa, ph, em;
+            n = Buffer.from(name).toString('base64');
+            em = Buffer.from(email).toString('base64');
+            pa = Buffer.from(password).toString('base64');
+            ph = Buffer.from(phone).toString('base64');
             console.log(err);
             console.log("id is ", id);
             console.log("token is ", token);
-            res.render('otp-auth', {
-                title: 'Verify OTP',
-                error: err.errors[0].description,
-                id : id
-            });
+            alert('OTP entered is incorrect, please signUp again');
+            res.redirect('http://localhost:8000/users/sign-up')
         }
         else{
             var user1 = new User();
