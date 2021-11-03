@@ -18,9 +18,7 @@ const mg = mailgun({apiKey: mailGunKey , domain: domain});
 // render the sign up page
 module.exports.signUp = function(req, res){
     if (req.isAuthenticated()){
-        return res.render('step3', {
-            title: 'home page'
-        });
+        return res.redirect('http://localhost:8000/');
     }
     return res.render('user_sign_up', {
         title: "BETON-DOMINO | Sign Up"
@@ -32,9 +30,7 @@ module.exports.signUp = function(req, res){
 module.exports.signIn = function(req, res){
 
     if (req.isAuthenticated()){
-        return res.render('step3', {
-            title: 'home page'
-        });
+        return res.redirect('http://localhost:8000/');
     }
     return res.render('user_sign_in', {
         title: "BETON-DOMINO | Sign In"
@@ -164,9 +160,7 @@ module.exports.otp = function(req, res){
                             return res.redirect('back');
                         }
                         console.log("SignUp successfully!!");
-                        return res.render('step3',{
-                            title: "Home Page"
-                        });
+                        return res.redirect('http://localhost:8000/');
                     });
                 }else{
                     return res.redirect('/sign-in');
@@ -221,9 +215,7 @@ module.exports.activateAccount = function(req,res){
 
 // sign in and create a session for the user
 module.exports.createSession = function(req, res){
-    return res.render('step3', {
-        title: 'Home Page'
-    });
+    return res.redirect('http://localhost:8000/');
 }
 
 module.exports.destroySession = function(req, res){

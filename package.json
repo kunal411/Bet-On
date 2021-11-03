@@ -35,7 +35,10 @@
     "passport": "^0.4.1",
     "passport-google-oauth": "^2.0.0",
     "passport-jwt": "^4.0.0",
-    "passport-local": "^1.0.0"
+    "cric-live": "^1.0.19",
+    "passport-local": "^1.0.0",
+    "jQuery": "^1.7.4",
+    "jsdom": "^18.0.0"
   },
   "bugs": {
     "url": "https://github.com/kunal411/Bet-On/issues"

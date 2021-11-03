@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        body{
+            background-image: url('https://images.unsplash.com/photo-1559579313-021b6ec9f6d6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c3RhZGl1bXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+
+        .teams{
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .match-info{
+            padding: 20px;
+        }
+
+        .container{
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .card{
+            margin: 10px;
+            width: 20rem;
+            background-color: rgba(255,255,255,0.8);
+            text-align: center;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <% function compare( a, b ) { %>
+            <% if ( a.date < b.date ){ %>
+            <%   return -1; %>
+            <% } %>
+            <% if ( a.date > b.date ){ %>
+            <%   return 1; %>
+            <% } %>
+            <% return 0; %>
+        <% } %>
+          
+        <% matches.results.sort( compare ); %>
+        <% console.log(matches); %>
+        <% for(let i = 0; i <= matches.results.length - 1; i++) { %>
+            <% let mat = matches.results[i]; %>
+            <% if(mat.home.code == "" || mat.away.code == "") {%>
+                <% continue; %>
+            <% } %>
+            <div class="card" id="<%= mat.id %>" data-home-name="<%= mat.home.name %>" data-away-name="<%= mat.away.name %>">
+                <div class="card-body">
+                <p class="card-title"><%= mat.match_title %></p>
+                <div class="teams">
+                    <div class="match-info">
+                        <h4><%= mat.home.code %></h4>
+                    </div>
+                    <div class="match-info">
+                        <h4>vs</h4>
+                    </div>
+                    <div class="match-info">
+                        <h4><%= mat.away.code %></h4>
+                    </div>
+                </div>
+                    <% const date1 = new Date(); %>
+                    <% let d1 = new Date(mat.date); %>
+                    <% let diffTime = (d1 - date1); %>
+                    <% let hour = parseInt(diffTime/(60 * 60 * 1000)); %>
+                    <% let min = parseInt(diffTime/(60 * 1000)) - (hour * 60); %>
+                    <% let sec = parseInt(diffTime/(1000)) - (min * 60) - (hour * 3600); %>
+                    <% if(diffTime <= 0) {%>
+                        <% ans = "Match has already started" %>
+                    <% } else { %>
+                        <% if(hour == 0){ %>
+                            <% ans = min.toString() + " m " + sec.toString() + " s "; %>
+                            <% if(min == 0){ %>
+                                <% ans = sec.toString() + " s "; %>
+                            <% } %>
+                        <%} else{ %>
+                            <% ans = hour.toString() + " h " + min.toString() + " m " + sec.toString() + " s "; %>
+                        <% } %>
+                    <% } %>
+                    <p class="match-status" id="<%= mat.date %>">
+                        <%= ans %>
+                    </p>
+                </div>
+            </div>
+        <% } %>
+    </div>
+
+    <script src="/js/card.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
