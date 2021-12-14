@@ -231,37 +231,39 @@
 
     <div id="select-players-parent">
 
-        <div id="select-players">
-            <% let playerListHome = match_details.results[0].live_details.teamsheets.home %>
-            <% let playerListAway = match_details.results[0].live_details.teamsheets.away %>
-        
-            <strong class="team-name"><%= homeTeamName %></strong>
-            <br>
-        
-            <% for(let i = 0; i < playerListHome.length; i++){ %>
-                <% let playerDet = playerListHome[i]; %>
-                <div class="player-block">
-                    <div class="player_name"><%= playerDet.player_name %></div>
-                    <div class="player_position"><%= playerDet.position %></div>
-                    <div><i class="fas fa-plus-circle player-add-icon"  data-player-info="<%= playerDet.player_name %>"></i></div>
-                </div>
-                <% } %>
+        <% if(match_details.results[0].live_details) { %>
+            <div id="select-players">
+                <% let playerListHome = match_details.results[0].live_details.teamsheets.home %>
+                <% let playerListAway = match_details.results[0].live_details.teamsheets.away %>
+            
+                <strong class="team-name"><%= homeTeamName %></strong>
+                <br>
+            
+                <% for(let i = 0; i < playerListHome.length; i++){ %>
+                    <% let playerDet = playerListHome[i]; %>
+                    <div class="player-block">
+                        <div class="player_name"><%= playerDet.player_name %></div>
+                        <div class="player_position"><%= playerDet.position %></div>
+                        <div><i class="fas fa-plus-circle player-add-icon"  data-player-info="<%= playerDet.player_name %>"></i></div>
+                    </div>
+                    <% } %>
+                    
+                <br>
+                <br>
                 
-            <br>
-            <br>
-            
-            <strong class="team-name"><%= awayTeamName %></strong>
-            <br>
-            
-            <% for(let i = 0; i < playerListAway.length; i++){ %>
-                <% let playerDet = playerListAway[i]; %>
-                <div class="player-block">
-                    <div class="player_name"><%= playerDet.player_name %></div>
-                    <div class="player_position"><%= playerDet.position %></div>
-                    <div><i class="fas fa-plus-circle player-add-icon" data-player-info="<%= playerDet.player_name %>"></i></div>
-                </div>
-            <% } %>
-        </div>
+                <strong class="team-name"><%= awayTeamName %></strong>
+                <br>
+                
+                <% for(let i = 0; i < playerListAway.length; i++){ %>
+                    <% let playerDet = playerListAway[i]; %>
+                    <div class="player-block">
+                        <div class="player_name"><%= playerDet.player_name %></div>
+                        <div class="player_position"><%= playerDet.position %></div>
+                        <div><i class="fas fa-plus-circle player-add-icon" data-player-info="<%= playerDet.player_name %>"></i></div>
+                    </div>
+                <% } %>
+            </div>
+        <% } %>
         <div class="select-player-footer">
             <button id="select-player-save">SAVE</button>
             <button id="select-player-cancel">CANCEL</button>

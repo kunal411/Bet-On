@@ -12,7 +12,7 @@ module.exports.contest = function(req,res){
         'x-rapidapi-key': process.env.API_KEY,
         useQueryString: true
         }
-    };
+    }; 
     let matchDet = {
         "results": []
     };
