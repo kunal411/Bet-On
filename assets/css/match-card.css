@@ -1,0 +1,29 @@
+body{
+    background-image: url('https://images.unsplash.com/photo-1559579313-021b6ec9f6d6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c3RhZGl1bXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+
+.teams{
+    display: flex;
+    justify-content: space-around;
+}
+
+.match-info{
+    padding: 20px;
+}
+
+.container{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.card{
+    margin: 10px;
+    width: 20rem;
+    background-color: rgba(255,255,255,0.8);
+    text-align: center;
+    color: black;
+}

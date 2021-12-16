@@ -1,274 +1,110 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title><%= title %></title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    </head>
-    <style>
-        *{
-            padding: 0;
-            margin: 0;
-        }
-        body{
-            background-image: url('https://images.unsplash.com/photo-1559579313-021b6ec9f6d6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c3RhZGl1bXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80');
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-size: 100% 100%;
-        }
-        #container{
-            display: flex;
-            flex-direction: column;
-            margin-top: 5%;
-            margin-bottom: 5%;
+<link rel="stylesheet" href="/css/contest-card.css">
 
-        }
-        .contest-card{
-            width: 60%;
-            display: flex;
-            background-color: rgba(255,255,255,0.8);
-            margin: auto;
-            flex-direction: column;
-            padding: 1% 3%;
-            border-radius: 5px;
-            margin-bottom: 2%;
-        }
-        .pool-price{
-            display: flex;
-            justify-content: space-between;
-            padding: 2% 0;
-        }
-        .card-header{
-            display: flex;
-            justify-content: space-between;
-            font-size: smaller;
-            color: gray;
-        }
-        .contest-participation{
-            display: flex;
-            justify-content: space-between;
-        }
-        .team-name{
-            color: white;
-            font-size: 2rem;
-            text-align: center;
-            display: block;
-        }
-        .pool-price p{
-            font-size: xx-large;
-            font-weight: bolder;
-        }
-        .pool-price button{
-            background-color: #00b137;
-            border-radius: 5%;
-            width: 15%;
-
-        }
-        .create-team-footer{
-            position: fixed;
-            height: 7%;
-            width: 100%;
-            bottom: 0;
-            background-color: #234692;
-            justify-content: center;
-            text-align: center;
-            display: flex;
-            
-        }
-        .create-team-footer button{
-            width: 80%;
-            height: 80%;
-            color: white;
-            background-color: #234692;
-            margin: auto;
-            border: solid 2px white;
-            border-radius: 5px;
-        }
-        #select-players-parent{
-            display: none;
-            height: 80%;
-            width: 50%;
-            position: fixed;
-            top: 10%;
-            left: 25%;
-            background-color: black;
-            border-radius: 10px;
-        }
-        #select-players{
-            height: 88%;    
-            width: 100%;
-            background-attachment: fixed;
-            overflow-y: auto;
-        }
-        #select-players::-webkit-scrollbar {
-            display: none;
-        }
-
-        .player-block{
-            color: white;
-            display: flex;
-            justify-content: space-around;
-            border: 1px solid white;
-            border-radius: 20px;
-            padding: 2%;
-            margin: 2%;
-        }
-
-        .player_name{
-            width: 40%;
-        }
-
-        .player_position{
-            width: 40%;
-        }
-
-        .player-add-icon{
-            font-size: 20px;
-            width: 20%;
-        }
-        .select-player-footer{
-            display: flex;
-            justify-content: space-around;
-            margin: 2%;
-            margin-top: 0;
-            border-top: solid 1px gray;
-        }
-        #select-player-save{
-            width: 45%;
-            background-color: black;
-            color: white;
-            padding: 2%;
-            margin: 2%;
-            border: solid 1px white;
-            border-radius: 10px;
-
-        }
-        #select-player-cancel{
-            width: 45%;
-            background-color: black;
-            color: white;
-            padding: 2%;
-            margin: 2%;
-            border: solid 1px white;
-            border-radius: 10px;
-        }
-        #select-player-save:hover{
-            background-color: #00b137;
-        }
-        #select-player-cancel:hover{
-            background-color: red;
-        }
-
-
-    </style>
-</head>
-<body>
-    <div id="container">
-        <div class="contest-card">
-            <div class="card-header">
-                <p>Prize Pool</p>
-                <p>Entry</p>
-            </div>
-            <div class="pool-price">
-                <p>₹11 Crores</p>
-                <button>₹11</button>
-            </div>
-            <div class="contest-participation">
-                <p> 11,000 Spots Left</p>
-                <p> 1,11,111 Spots</p>
-            </div>
+<div id="container">
+    <div class="contest-card">
+        <div class="card-header">
+            <p>Prize Pool</p>
+            <p>Entry</p>
         </div>
-
-        <div class="contest-card">
-            <div class="card-header">
-                <p>Prize Pool</p>
-                <p>Entry</p>
-            </div>
-            <div class="pool-price">
-                <p>₹11 Crores</p>
-                <button>₹11</button>
-            </div>
-            <div class="contest-participation">
-                <p> 11,000 Spots Left</p>
-                <p> 1,11,111 Spots</p>
-            </div>
+        <div class="pool-price">
+            <p>₹11 Crores</p>
+            <button>₹11</button>
         </div>
-
-        <div class="contest-card">
-            <div class="card-header">
-                <p>Prize Pool</p>
-                <p>Entry</p>
-            </div>
-            <div class="pool-price">
-                <p>₹11 Crores</p>
-                <button>₹11</button>
-            </div>
-            <div class="contest-participation">
-                <p> 11,000 Spots Left</p>
-                <p> 1,11,111 Spots</p>
-            </div>
+        <div class="contest-participation">
+            <p> 11,000 Spots Left</p>
+            <p> 1,11,111 Spots</p>
         </div>
-
-        <div class="contest-card">
-            <div class="card-header">
-                <p>Prize Pool</p>
-                <p>Entry</p>
-            </div>
-            <div class="pool-price">
-                <p>₹11 Crores</p>
-                <button>₹11</button>
-            </div>
-            <div class="contest-participation">
-                <p> 11,000 Spots Left</p>
-                <p> 1,11,111 Spots</p>
-            </div>
-        </div>
-
     </div>
 
-    <div class="create-team-footer">
-        <button id="create-team-button">CREATE TEAM</button>
+    <div class="contest-card">
+        <div class="card-header">
+            <p>Prize Pool</p>
+            <p>Entry</p>
+        </div>
+        <div class="pool-price">
+            <p>₹11 Crores</p>
+            <button>₹11</button>
+        </div>
+        <div class="contest-participation">
+            <p> 11,000 Spots Left</p>
+            <p> 1,11,111 Spots</p>
+        </div>
     </div>
 
-    <div id="select-players-parent">
+    <div class="contest-card">
+        <div class="card-header">
+            <p>Prize Pool</p>
+            <p>Entry</p>
+        </div>
+        <div class="pool-price">
+            <p>₹11 Crores</p>
+            <button>₹11</button>
+        </div>
+        <div class="contest-participation">
+            <p> 11,000 Spots Left</p>
+            <p> 1,11,111 Spots</p>
+        </div>
+    </div>
 
-        <% if(match_details.results[0].live_details) { %>
-            <div id="select-players">
-                <% let playerListHome = match_details.results[0].live_details.teamsheets.home %>
-                <% let playerListAway = match_details.results[0].live_details.teamsheets.away %>
-            
-                <strong class="team-name"><%= homeTeamName %></strong>
-                <br>
-            
-                <% for(let i = 0; i < playerListHome.length; i++){ %>
-                    <% let playerDet = playerListHome[i]; %>
-                    <div class="player-block">
-                        <div class="player_name"><%= playerDet.player_name %></div>
-                        <div class="player_position"><%= playerDet.position %></div>
-                        <div><i class="fas fa-plus-circle player-add-icon"  data-player-info="<%= playerDet.player_name %>"></i></div>
-                    </div>
-                    <% } %>
-                    
-                <br>
-                <br>
-                
-                <strong class="team-name"><%= awayTeamName %></strong>
-                <br>
-                
-                <% for(let i = 0; i < playerListAway.length; i++){ %>
-                    <% let playerDet = playerListAway[i]; %>
-                    <div class="player-block">
-                        <div class="player_name"><%= playerDet.player_name %></div>
-                        <div class="player_position"><%= playerDet.position %></div>
-                        <div><i class="fas fa-plus-circle player-add-icon" data-player-info="<%= playerDet.player_name %>"></i></div>
-                    </div>
+    <div class="contest-card">
+        <div class="card-header">
+            <p>Prize Pool</p>
+            <p>Entry</p>
+        </div>
+        <div class="pool-price">
+            <p>₹11 Crores</p>
+            <button>₹11</button>
+        </div>
+        <div class="contest-participation">
+            <p> 11,000 Spots Left</p>
+            <p> 1,11,111 Spots</p>
+        </div>
+    </div>
+
+</div>
+
+<div class="create-team-footer">
+    <button id="create-team-button">CREATE TEAM</button>
+</div>
+
+<div id="select-players-parent">
+
+    <% if(match_details.results[0].live_details) { %>
+        <div id="select-players">
+            <% let playerListHome = match_details.results[0].live_details.teamsheets.home %>
+            <% let playerListAway = match_details.results[0].live_details.teamsheets.away %>
+        
+            <strong class="team-name"><%= homeTeamName %></strong>
+            <br>
+        
+            <% for(let i = 0; i < playerListHome.length; i++){ %>
+                <% let playerDet = playerListHome[i]; %>
+                <div class="player-block">
+                    <div class="player_name"><%= playerDet.player_name %></div>
+                    <div class="player_position"><%= playerDet.position %></div>
+                    <div><i class="fas fa-plus-circle player-add-icon"  data-player-info="<%= playerDet.player_name %>"></i></div>
+                </div>
                 <% } %>
-            </div>
-        <% } %>
-        <div class="select-player-footer">
-            <button id="select-player-save">SAVE</button>
-            <button id="select-player-cancel">CANCEL</button>
+                
+            <br>
+            <br>
+            
+            <strong class="team-name"><%= awayTeamName %></strong>
+            <br>
+            
+            <% for(let i = 0; i < playerListAway.length; i++){ %>
+                <% let playerDet = playerListAway[i]; %>
+                <div class="player-block">
+                    <div class="player_name"><%= playerDet.player_name %></div>
+                    <div class="player_position"><%= playerDet.position %></div>
+                    <div><i class="fas fa-plus-circle player-add-icon" data-player-info="<%= playerDet.player_name %>"></i></div>
+                </div>
+            <% } %>
         </div>
+    <% } %>
+    <div class="select-player-footer">
+        <button id="select-player-save">SAVE</button>
+        <button id="select-player-cancel">CANCEL</button>
     </div>
-    <script src="/js/contest-card.js"></script>
-</body>
-</html>
+</div>
+<script src="/js/contest-card.js"></script>
