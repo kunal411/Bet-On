@@ -10,7 +10,8 @@ body {
   border: 1px solid black;
   margin: auto;
   text-align: center;
-  margin-top: 120px; }
+  margin-top: 120px;
+  padding-top: 20px; }
   .container #login-form input {
     block-size: 45px;
     width: 80%;
@@ -83,7 +84,7 @@ body {
     margin-top: 1%; }
   .container .google {
     position: relative;
-    height: 5%;
+    height: 6%;
     width: 80%;
     border: 1px solid #9c9a9a;
     margin: auto;
@@ -97,12 +98,12 @@ body {
       margin-right: 85%;
       margin-top: 5px; }
     .container .google .link {
-      margin-top: -22px; }
+      margin-top: -24px; }
       .container .google .link a {
         text-decoration: none;
         font-family: sans-serif;
         color: #9c9a9a;
-        padding: 11px 88px 12px 88px;
+        padding: 11px 61px 12px 88px;
         border-radius: 50px; }
     .container .google :hover {
       border: 0px;
