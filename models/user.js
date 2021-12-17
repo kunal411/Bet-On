@@ -2,6 +2,14 @@ const mongoose = require('mongoose');
 const crypto = require('crypto');
 
 const userSchema = new mongoose.Schema({
+    userId: {
+        type : String,
+        trim : true,
+        required : true,
+        unique : true,
+        lowercase : true
+    },
+
     email : {
         type : String,
         trim : true,
@@ -22,7 +30,15 @@ const userSchema = new mongoose.Schema({
     phone : {
         type : String,
         trim : true
-    }
+    },
+
+    matchIds: [
+        {
+            type : String,
+            trim : true,
+            lowercase : true
+        }
+    ]
 },{
     timestamps : true
 });

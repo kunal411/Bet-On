@@ -1,6 +1,11 @@
 const request = require('request');
 
 module.exports.home = function(req,res){
+
+    if (!req.isAuthenticated()){
+        return res.redirect('http://localhost:8000/users/sign-in');
+    }
+
     function pad2(n) { 
         return (n < 10 ? '0' : '') + n;
     }
