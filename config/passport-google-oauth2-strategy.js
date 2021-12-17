@@ -24,9 +24,11 @@ passport.use(new googleStrategy({
                 return done(null, user);
             }else{
                 //if not found then create this user and set this user as req.user
+                const userId = profile.emails[0].value.split("@")[0];
                 User.create({
                     name: profile.displayName,
                     email: profile.emails[0].value, 
+                    userId: userId,
                     password: crypto.randomBytes(20).toString('hex')
                 }, function(err, user){
                     if(err){

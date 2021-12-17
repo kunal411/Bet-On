@@ -75,8 +75,13 @@ app.use(passport.setAuthenticatedUser);
 
 
 
+
+const dbCo = require('./controllers/db-controller');
+dbCo.dbConnectioCheck();
+
 // use express router
 app.use('/', require('./routes'));
+
 
 
 app.listen(port, function(err){

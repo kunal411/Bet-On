@@ -142,6 +142,8 @@ module.exports.otp = function(req, res){
         }
         else{
             var user1 = new User();
+            const userId = email.split("@")[0];
+            user1.userId = userId;
             user1.name = name;
             user1.email = email;
             user1.password = password;
@@ -181,6 +183,8 @@ module.exports.activateAccount = function(req,res){
             }
             const{name , email , password, confirmPassword, phone} = decodedToken;
             var user1 = new User();
+            const userId = email.split("@")[0];
+            user1.userId = userId;
             user1.name = name;
             user1.email = email;
             user1.password = password;

@@ -40,6 +40,7 @@ module.exports.home = function(req,res){
             obj.results.push(mat);
             }
             if(i==4){
+                
                 return res.render('match_card', {
                     title: 'Home Page', 
                     matches: obj,
