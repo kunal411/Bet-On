@@ -8,9 +8,9 @@
 
         .mini-logo{
             #logo-img{
-                height: 50px;
+                height: 70px;
                 width: 200px;
-                background-image: url("../img/logo_img.jpg");
+                background-image: url("../img/logo-img.png");
                 background-size:cover;
             }
         }
@@ -21,7 +21,9 @@
                 display: flex;
                 list-style: none;
                 li{
-                    margin-right: 10px;
+                    margin-right: 15px;
+                    margin-top: 20px;
+                    font-size: larger;
                 }
             }
         }
