@@ -54,10 +54,17 @@ module.exports.home = function (req, res) {
     }   
     let obj = {
         "results": []
-    };
-    Matches.find({}, function(err, matchList){
+    }; 
+    let date=new Date();
+    date.setDate(date.getDate() - 1);
+    let startDate = date.toISOString();
+    date.setDate(date.getDate() + 6);
+    let endDate = date.toISOString();
+    Matches.find({"match_date": {
+        $gte: Date(startDate),
+        $lt: Date(endDate),}}, function(err, matchList){
         if(err){
-            console.log('Error in fetching Todo List in DB');
+            console.log('Error in fetching Matches from DB');
             return;
         }
 
@@ -67,7 +74,7 @@ module.exports.home = function (req, res) {
                 home: {
                     name : matchList[i].teamHomeName,
                     code: matchList[i].teamHomeCode.toUpperCase()
-                },
+                }, 
                 away: {
                     name : matchList[i].teamAwayName,
                     code: matchList[i].teamAwayCode.toUpperCase()

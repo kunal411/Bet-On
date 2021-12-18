@@ -1,10 +1,11 @@
 #layout-footer {
-  color: white;
+  color: black;
   padding: 5px 10px;
   display: flex;
-  justify-content: flex-start; }
+  justify-content: center; }
   #layout-footer a {
-    color: white;
+    color: black;
+    font-weight: bold;
     text-decoration: none; }
   #layout-footer .footer-nav ul {
     list-style: none; }

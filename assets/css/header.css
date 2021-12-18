@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   padding: 0 10px;
-  color: white;
+  color: black;
   box-shadow: 1px 1px 1px 1px lightgrey; }
   #layout-header nav .mini-logo #logo-img {
     height: 70px;
@@ -18,5 +18,5 @@
       margin-top: 20px;
       font-size: larger; }
   #layout-header nav a {
-    color: white;
+    color: black;
     text-decoration: none; }

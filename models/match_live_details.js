@@ -30,6 +30,13 @@ const matchDetailsSchema = new mongoose.Schema({
             points: {
                 type : Number,
                 required : true
+            },
+
+            position: {
+                type : String,
+                trim : true,
+                required : true,
+                lowercase : true
             }
         }
     ],
@@ -54,6 +61,13 @@ const matchDetailsSchema = new mongoose.Schema({
             points: {
                 type : Number,
                 required : true
+            },
+
+            position: {
+                type : String,
+                trim : true,
+                required : true,
+                lowercase : true
             }
         }
     ]

@@ -1,13 +1,14 @@
 #layout-footer{
-    color: white;
+    color: black;
     a{
-        color: white;
+        color: black;
+        font-weight: bold;
         text-decoration: none;
     }
 
     padding: 5px 10px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
 
     .footer-nav{
         ul{

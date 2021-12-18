@@ -1,7 +1,7 @@
 const Match = require('../models/match');
 const request = require('request');
 
-module.exports.dbConnectioCheck = function(){
+module.exports.addMatchtoDb = function(){
     function pad2(n) { 
         return (n < 10 ? '0' : '') + n;
     }

@@ -76,8 +76,11 @@ app.use(passport.setAuthenticatedUser);
 
 
 
-const dbCo = require('./controllers/db-controller');
-dbCo.dbConnectioCheck();
+const dbCo = require('./controllers/matchDB-controller');
+dbCo.addMatchtoDb();
+
+const LivematchdetController = require('./controllers/match-LiveDetailsDB-controller');
+LivematchdetController.addMatchLiveDettoDb();
 
 // use express router
 app.use('/', require('./routes'));
