@@ -37,22 +37,23 @@ module.exports.dbConnectioCheck = function(){
             }
             if(i==4){
                 
-                for(let i=0;i<5;i++){
+                for(let i=0;i<obj.results.length;i++){
                     let match1 = new Match();
                     const matchId = obj.results[i].id;
                     console.log(obj.results[i]);
                     match1.matchId = matchId;
                     match1.teamHomeName = obj.results[i].home.name;
                     match1.teamAwayName = obj.results[i].away.name;
+                    match1.date = obj.results[i].date;
                     if(obj.results[i].home.code == ""){
-                        match1.teamHomeCode = obj.results[i].home.name.substr(0,3).toUpperCase();
+                        continue;
                     }else{
-                        match1.teamHomeCode = obj.results[i].home.code.toUpperCase();
+                        match1.teamHomeCode = obj.results[i].home.code;
                     }
                     if(obj.results[i].away.code == ""){ 
-                        match1.teamAwayCode = obj.results[i].away.name.substr(0,3).toUpperCase();
+                        continue;
                     }else{
-                        match1.teamAwayCode = obj.results[i].away.code.toUpperCase();
+                        match1.teamAwayCode = obj.results[i].away.code;
                     }
 
                     Match.findOne({matchId : matchId}, function(err , match){

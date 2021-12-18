@@ -37,6 +37,12 @@ const matchSchema = new mongoose.Schema({
         required : true,
         lowercase : true
     },
+
+    date : {
+        type : String,
+        required : true
+    },
+
     contests: [
         {
             type:  mongoose.Schema.Types.ObjectId,
