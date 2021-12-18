@@ -4,10 +4,11 @@
   padding: 0 10px;
   color: white;
   box-shadow: 1px 1px 1px 1px lightgrey; }
-  #layout-header nav .mini-logo p {
-    margin: 5px;
-    font-size: 1.4rem;
-    font-weight: bold; }
+  #layout-header nav .mini-logo #logo-img {
+    height: 50px;
+    width: 200px;
+    background-image: url("../img/logo_img.jpg");
+    background-size: cover; }
   #layout-header nav .auth-links ul {
     margin: 5% 5px;
     display: flex;

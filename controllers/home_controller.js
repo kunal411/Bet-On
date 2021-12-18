@@ -2,9 +2,8 @@
 const { matchedData } = require('express-validator');
 const Matches = require('../models/match');
 module.exports.home = function (req, res) {
-    // if (!req.isAuthenticated()) {
-    //     return res.redirect('http://localhost:8000/users/sign-in');
-    // }
+    
+    
     // function pad2(n) {
     //     return (n < 10 ? '0' : '') + n;
     // }
@@ -49,6 +48,10 @@ module.exports.home = function (req, res) {
     //     var year = date.getFullYear();
     //     formattedDate = year + "-" + month + "-" + day;
     // }
+
+    if (!req.isAuthenticated()) {
+        return res.redirect('http://localhost:8000/users/sign-in');
+    }   
     let obj = {
         "results": []
     };
@@ -63,11 +66,11 @@ module.exports.home = function (req, res) {
                 match_title : matchList[i].matchTitle,
                 home: {
                     name : matchList[i].teamHomeName,
-                    code: matchList[i].teamHomeCode
+                    code: matchList[i].teamHomeCode.toUpperCase()
                 },
                 away: {
                     name : matchList[i].teamAwayName,
-                    code: matchList[i].teamAwayCode
+                    code: matchList[i].teamAwayCode.toUpperCase()
                 },
                 date: matchList[i].date,
                 match_id: matchList[i].matchId

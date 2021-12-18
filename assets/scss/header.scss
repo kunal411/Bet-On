@@ -7,10 +7,11 @@
         box-shadow: 1px 1px 1px 1px lightgrey;
 
         .mini-logo{
-            p{
-                margin: 5px;
-                font-size: 1.4rem;
-                font-weight: bold;
+            #logo-img{
+                height: 50px;
+                width: 200px;
+                background-image: url("../img/logo_img.jpg");
+                background-size:cover;
             }
         }
 
