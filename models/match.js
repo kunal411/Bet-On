@@ -24,54 +24,19 @@ const matchSchema = new mongoose.Schema({
         lowercase : true
     },
 
-    teamHomePlayers: [
-        {
-            playerId : {
-                type : String,
-                trim : true,
-                required : true,
-                unique : true,
-                lowercase : true
-            },
+    teamHomeCode : {
+        type : String,
+        trim : true,
+        required : true,
+        lowercase : true
+    },
 
-            playerName: {
-                type : String,
-                trim : true,
-                required : true,
-                lowercase : true
-            },
-
-            points: {
-                type : Number,
-                required : true
-            }
-        }
-    ],
-
-    teamAwayPlayers: [
-        {
-            playerId : {
-                type : String,
-                trim : true,
-                required : true,
-                unique : true,
-                lowercase : true
-            },
-
-            playerName: {
-                type : String,
-                trim : true,
-                required : true,
-                lowercase : true
-            },
-
-            points: {
-                type : Number,
-                required : true
-            }
-        }
-    ],
-
+    teamAwayCode : {
+        type : String,
+        trim : true,
+        required : true,
+        lowercase : true
+    },
     contests: [
         {
             type:  mongoose.Schema.Types.ObjectId,
