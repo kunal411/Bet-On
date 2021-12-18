@@ -38,24 +38,24 @@ module.exports.dbConnectioCheck = function(){
             if(i==4){
                 
                 for(let i=0;i<5;i++){
-                    var match1 = new Match();
+                    let match1 = new Match();
                     const matchId = obj.results[i].id;
+                    console.log(obj.results[i]);
                     match1.matchId = matchId;
                     match1.teamHomeName = obj.results[i].home.name;
                     match1.teamAwayName = obj.results[i].away.name;
                     if(obj.results[i].home.code == ""){
-                        match1.teamHomeCode = obj.results[i].home.name.substr(0,3).toUpperCase;
+                        match1.teamHomeCode = obj.results[i].home.name.substr(0,3).toUpperCase();
                     }else{
-
-                        match1.teamHomeCode = obj.results[i].home.code;
+                        match1.teamHomeCode = obj.results[i].home.code.toUpperCase();
                     }
-                    if(obj.results[i].away.code == ""){
-                        match1.teamAwayCode = obj.results[i].away.name.substr(0,3).toUpperCase;
+                    if(obj.results[i].away.code == ""){ 
+                        match1.teamAwayCode = obj.results[i].away.name.substr(0,3).toUpperCase();
                     }else{
-                        match1.teamAwayCode = obj.results[i].away.code;
+                        match1.teamAwayCode = obj.results[i].away.code.toUpperCase();
                     }
 
-                    Match.findOne({mathId : matchId}, function(err , match){
+                    Match.findOne({matchId : matchId}, function(err , match){
                         if(err){
                             console.log('Error in finding match id ');
                             return;
@@ -66,17 +66,14 @@ module.exports.dbConnectioCheck = function(){
                             Match.create(match1,function(err,match){
                                 if(err){
                                     console.log('Error in creating match while putting in db', err);
-                                    return;
                                     // return res.redirect('back');
                                 }
                                 console.log('match is successfully added in db! ');
-                                return;
                                 // return res.redirect('http://localhost:8000/users/sign-in');
                             });
                         }else{
                             // alert('Email id already exists')
                             console.log('Match already exist in database! ');
-                            return;
                             // return res.redirect('http://localhost:8000/users/sign-in');
                         }
                     });
