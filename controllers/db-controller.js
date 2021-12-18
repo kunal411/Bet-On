@@ -42,6 +42,7 @@ module.exports.dbConnectioCheck = function(){
                     const matchId = obj.results[i].id;
                     console.log(obj.results[i]);
                     match1.matchId = matchId;
+                    match1.matchTitle = obj.results[i].match_title;
                     match1.teamHomeName = obj.results[i].home.name;
                     match1.teamAwayName = obj.results[i].away.name;
                     match1.date = obj.results[i].date;

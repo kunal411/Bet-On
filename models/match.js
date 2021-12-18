@@ -43,6 +43,11 @@ const matchSchema = new mongoose.Schema({
         required : true
     },
 
+    matchTitle: {
+        type: String,
+        required: true
+    },
+
     contests: [
         {
             type:  mongoose.Schema.Types.ObjectId,
