@@ -73,7 +73,7 @@ module.exports.home = function (req, res) {
                     code: matchList[i].teamAwayCode.toUpperCase()
                 },
                 date: matchList[i].date,
-                match_id: matchList[i].matchId
+                id: matchList[i].matchId
             }
             obj.results.push(mat);
         }
