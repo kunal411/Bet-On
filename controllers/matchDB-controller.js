@@ -15,7 +15,7 @@ module.exports.addMatchtoDb = function(){
     var day = pad2(date.getDate());//day (1-31)
     var year= date.getFullYear(); 
     var formattedDate =  year+"-"+month+"-"+day;
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 1; i++) {
         console.log(formattedDate);
         
         const options = {

@@ -1,3 +1,4 @@
+const alert = require('alert');
 const MatchLiveDetail = require('../models/match_live_details');
 
 module.exports.contest = function(req,res){
@@ -13,7 +14,6 @@ module.exports.contest = function(req,res){
         if(err){
             console.log('Error in finding match id in match details ');
             return;
-            // return res.redirect('http://localhost:8000/users/sign-up');
         }
         else if(match){
             lineOut=true;
@@ -35,6 +35,8 @@ module.exports.contest = function(req,res){
             });
         }else{
             console.log('Live details are not out yet..');
+            alert('LineUps are not out yet!!');
+            return res.redirect('back');
         }
     })
 }
