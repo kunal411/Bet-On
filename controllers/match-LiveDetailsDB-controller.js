@@ -46,26 +46,35 @@ module.exports.addMatchLiveDettoDb = function(){
                             request(options, function (error, response, body) {
                                 if (error) throw new Error(error);
                                 let s = JSON.parse(body);
+                                // console.log(s);
                                 if(s.results.live_details != null){
                                     let LiveMatchDet = new MatchLiveDetail();
                                     LiveMatchDet.matchId = matchId;
-                                    for(let x in s.results.live_details.teamsheets.home){
+                                    for(let x of s.results.live_details.teamsheets.home){
+                                        if(x.position == 'Unknown'){
+                                            x.position = 'Batsman';
+                                        }
                                         let playerDet = {
                                             playerId : x.player_id, 
                                             playerName : x.player_name,
                                             points : 4,
                                             position: x.position
                                         }
+                                        // console.log(matchId+" "+playerDet.playerId+" "+playerDet.playerName+" "+playerDet.position);
                                         LiveMatchDet.teamHomePlayers.push(playerDet);
                                     }
-            
-                                    for(let x in s.results.live_details.teamsheets.away){
+
+                                    for(let x of s.results.live_details.teamsheets.away){
+                                        if(x.position == 'Unknown'){
+                                            x.position = 'Batsman';
+                                        }
                                         let playerDet = {
                                             playerId : x.player_id, 
                                             playerName : x.player_name,
                                             points : 4,
                                             position: x.position
                                         }
+                                        // console.log(matchId+" "+playerDet.playerId+" "+playerDet.playerName+" "+playerDet.position);
                                         LiveMatchDet.teamAwayPlayers.push(playerDet);
                                     }
             
