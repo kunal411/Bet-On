@@ -8,7 +8,7 @@ module.exports.contest = function(req,res){
     let matchDet = {
         "results": []
     };
-    let lineOut = false;
+    let lineOut = true;
     MatchLiveDetail.findOne({matchId : match_id}, function(err , match){
         if(err){
             console.log('Error in finding match id in match details ');
@@ -16,7 +16,6 @@ module.exports.contest = function(req,res){
             // return res.redirect('http://localhost:8000/users/sign-up');
         }
         else if(match){
-            lineOut=true;
             let s = {
                 live_details : {
                     teamsheets : {
@@ -27,6 +26,7 @@ module.exports.contest = function(req,res){
             }
             matchDet.results.push(s);
         }else{
+            lineOut=false;
             console.log('Live details are not out yet..');
         }
     })

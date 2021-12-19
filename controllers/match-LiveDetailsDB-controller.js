@@ -47,7 +47,7 @@ module.exports.addMatchLiveDettoDb = function(){
                                 if (error) throw new Error(error);
                                 let s = JSON.parse(body);
                                 // console.log(s);
-                                if(s.results.live_details != null){
+                                if(s.results.live_details != null && s.results.live_details.teamsheets.home.length != 0){
                                     let LiveMatchDet = new MatchLiveDetail();
                                     LiveMatchDet.matchId = matchId;
                                     for(let x of s.results.live_details.teamsheets.home){
