@@ -3,6 +3,7 @@ const cookieParser = require('cookie-parser');
 const app = express();
 const port = 8000;
 const expressLayouts = require('express-ejs-layouts');
+const schedule = require('node-schedule');
 const db = require('./config/mongoose');
 // used for session cookie
 const session = require('express-session');
@@ -77,7 +78,9 @@ app.use(passport.setAuthenticatedUser);
 
 
 const dbCo = require('./controllers/matchDB-controller');
-dbCo.addMatchtoDb();
+schedule.scheduleJob('* * */1 * * *',()=>{
+    dbCo.addMatchtoDb();
+})
 
 const LivematchdetController = require('./controllers/match-LiveDetailsDB-controller');
 LivematchdetController.addMatchLiveDettoDb();

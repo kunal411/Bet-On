@@ -27,3 +27,11 @@ body{
     text-align: center;
     color: black;
 }
+.match-status{
+    margin-bottom: 0;
+}
+.match-status-lineup{
+    color: red;
+    font-size: big;
+    margin-bottom: 0;
+}

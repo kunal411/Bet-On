@@ -37,3 +37,11 @@ for(let i = 0 ; i < card.length; i++){
     });
 }
 
+var matchLineUp = document.querySelectorAll('.match-status-lineup');
+for(let i = 0 ; i < matchLineUp.length; i++){
+    let status = matchLineUp[i].getAttribute('data-status');
+    if(status == "Line-ups are out!"){
+        matchLineUp[i].style.color = "#17bd14";
+    }
+}
+

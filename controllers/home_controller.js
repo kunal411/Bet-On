@@ -32,7 +32,7 @@ module.exports.home = function (req, res) {
                     liveStatus = "Error, Cannot find the details of this match!!"
                     // console.log('Error in finding live match in database!!');
                 }else if(match){
-                    liveStatus = "Line-ups are out";
+                    liveStatus = "Line-ups are out!";
                 }else{
                     liveStatus = "Line-ups are not out yet!";
                 }
