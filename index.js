@@ -78,7 +78,7 @@ app.use(passport.setAuthenticatedUser);
 
 
 const dbCo = require('./controllers/matchDB-controller');
-schedule.scheduleJob('* * */1 * * *',()=>{
+schedule.scheduleJob({hour: 0, minute: 0},()=>{
     dbCo.addMatchtoDb();
 })
 

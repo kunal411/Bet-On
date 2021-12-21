@@ -1,6 +1,9 @@
 <link rel="stylesheet" href="/css/contest-card.css">
 
 <div id="container">
+    <h1 class="container-heading">
+        <%= homeTeamName.toUpperCase() %> -Vs- <%= awayTeamName.toUpperCase() %>
+    </h1>
     <div class="contest-card">
         <div class="card-header">
             <p>Prize Pool</p>
@@ -74,14 +77,14 @@
             <% let playerListHome = match_details.results[0].live_details.teamsheets.home %>
             <% let playerListAway = match_details.results[0].live_details.teamsheets.away %>
         
-            <strong class="team-name"><%= homeTeamName %></strong>
+            <strong class="team-name"><%= homeTeamName.toUpperCase() %></strong>
             <br>
         
             <% for(let i = 0; i < playerListHome.length; i++){ %>
                 <% let playerDet = playerListHome[i]; %>
                 <div class="player-block">
-                    <div class="player_name" id=<%= playerDet.playerId %> ><%= playerDet.playerName %></div>
-                    <div class="player_position"><%= playerDet.position %></div>
+                    <div class="player_name" id=<%= playerDet.playerId %> ><%= playerDet.playerName.toUpperCase() %></div>
+                    <div class="player_position"><%= playerDet.position.toUpperCase() %></div>
                     <div><i class="fas fa-plus-circle player-add-icon"  data-player-info="<%= playerDet.player_name %>"></i></div>
                 </div>
                 <% } %>
@@ -89,14 +92,14 @@
             <br>
             <br>
             
-            <strong class="team-name"><%= awayTeamName %></strong>
+            <strong class="team-name"><%= awayTeamName.toUpperCase() %></strong>
             <br>
             
             <% for(let i = 0; i < playerListAway.length; i++){ %>
                 <% let playerDet = playerListAway[i]; %>
                 <div class="player-block">
-                    <div class="player_name" id=<%= playerDet.playerId %> ><%= playerDet.playerName %></div>
-                    <div class="player_position"><%= playerDet.position %></div>
+                    <div class="player_name" id=<%= playerDet.playerId %> ><%= playerDet.playerName.toUpperCase() %></div>
+                    <div class="player_position"><%= playerDet.position.toUpperCase() %></div>
                     <div><i class="fas fa-plus-circle player-add-icon" data-player-info="<%= playerDet.player_name %>"></i></div>
                 </div>
             <% } %>
