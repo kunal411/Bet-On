@@ -31,7 +31,8 @@ module.exports.contest = function(req,res){
                 match_details: matchDet,
                 homeTeamName: homeTeamName,
                 awayTeamName: awayTeamName,
-                lineupsOut : lineOut
+                lineupsOut : lineOut,
+                matchId: match_id
             });
         }else{
             console.log('Live details are not out yet..');
