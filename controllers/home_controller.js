@@ -88,7 +88,7 @@ module.exports.home = async function (req, res){
              // "match_date": {
             // $gte: Date(startDate),
             // $lt: Date(endDate),
-        // }
+        // } 
         });
         for(let i = 0; i < matchList.length; i++){
             let liveStatus="";

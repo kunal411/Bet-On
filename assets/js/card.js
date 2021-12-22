@@ -33,6 +33,7 @@ for(let i = 0 ; i < card.length; i++){
     let homeName = card[i].getAttribute('data-home-name');
     let awayName = card[i].getAttribute('data-away-name');
     card[i].addEventListener('click',function(){
+        console.log('Card clicked');
         window.location.href = `http://localhost:8000/match/contest?id=${match_id}&homeTeamName=${homeName}&awayTeamName=${awayName}`;
     });
 }

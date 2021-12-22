@@ -55,7 +55,7 @@ module.exports.contest = async function(req,res){
 
     try{
         let match = await MatchLiveDetail.findOne({matchId : match_id});  
-        if(user){
+        if(match){
             lineOut=true;
             let s = {
                 live_details : {
