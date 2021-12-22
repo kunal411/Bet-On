@@ -48,10 +48,9 @@ const matchSchema = new mongoose.Schema({
         required: true
     },
 
-    contests: [
+    contestId: [
         {
-            type:  mongoose.Schema.Types.ObjectId,
-            ref: 'Contest'
+            type: String
         }
     ]
 },{

@@ -1,15 +1,6 @@
 const mongoose = require('mongoose');
-const crypto = require('crypto');
 
 const contestSchema = new mongoose.Schema({
-    contestId: {
-        type : String,
-        trim : true,
-        required : true,
-        unique : true,
-        lowercase : true
-    },
-
     price: {
         type : Number,
         required : true,
@@ -25,13 +16,14 @@ const contestSchema = new mongoose.Schema({
         required : true,
     },
 
-    teams: [
+    teamsId : [
         {
-            type:  mongoose.Schema.Types.ObjectId,
-            ref: 'Team'
+            type : String,
+            trim : true,
+            lowercase : true
         }
     ],
-
+    
     matchId: {
         type : String,
         trim : true,

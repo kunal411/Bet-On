@@ -76,14 +76,20 @@ app.use(passport.setAuthenticatedUser);
 
 
 
-
 const dbCo = require('./controllers/matchDB-controller');
-schedule.scheduleJob({hour: 0, minute: 0},()=>{
+let promise = new Promise((resolve,reject)=>{
     dbCo.addMatchtoDb();
+    resolve();
 })
 
+// schedule.scheduleJob({hour: 0, minute: 0},()=>{
+//     dbCo.addMatchtoDb();
+// })
+
 const LivematchdetController = require('./controllers/match-LiveDetailsDB-controller');
-LivematchdetController.addMatchLiveDettoDb();
+promise.then( ()=>{
+    LivematchdetController.addMatchLiveDettoDb();
+})
 
 // use express router
 app.use('/', require('./routes'));
