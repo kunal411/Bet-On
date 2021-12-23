@@ -143,10 +143,11 @@ module.exports.addMatchtoDb = async function(){
     var month = "09";
     var year = "2021"; 
     var formattedDate =  year+"-"+month+"-"+day;
-    const numberOfDays = 5;
+    const numberOfDays = 0;
 
     for (let i = 0; i < numberOfDays; i++){
         console.log(formattedDate);
+        console.log(process.env.API_KEY);
         const options = {
             method: 'GET',
             url: `https://cricket-live-data.p.rapidapi.com/fixtures-by-date/${formattedDate}`,
@@ -169,6 +170,7 @@ module.exports.addMatchtoDb = async function(){
             })
         });
         promise.then( async (s)=>{
+            console.log(s);
             for(mat of s.results){
                 obj.results.push(mat);
             }

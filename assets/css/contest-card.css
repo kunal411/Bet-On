@@ -18,7 +18,8 @@ body{
 .container-heading{
     color: black;
     text-align: center;
-    text-decoration: underline;
+    margin-bottom: 3%;
+    font-family: monospace;
     margin-bottom: 3%;
 }
 .contest-card{
@@ -86,6 +87,36 @@ body{
     border: solid 2px white;
     border-radius: 5px;
 }
+
+#join-contest{
+    display: none;
+    height: 20%;
+    width: 50%;
+    position: fixed;
+    top: 40%;
+    left: 25%;
+    background-color: black;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+}
+
+#join-contest p{
+    margin-top: 2%;
+    font-size: 160%;
+}
+
+#join-noJoin-button{
+    display: flex;
+    justify-content: space-around;
+}
+
+#join-noJoin-button button{
+    height: 20%;
+    width: 10%;
+    margin-top: 3%;
+}
+
 #select-players-parent{
     display: none;
     height: 80%;

@@ -4,7 +4,7 @@
     <h1 class="container-heading">
         <%= homeTeamName.toUpperCase() %> -Vs- <%= awayTeamName.toUpperCase() %>
     </h1>
-    <div class="contest-card">
+    <!-- <div class="contest-card">
         <div class="card-header">
             <p>Prize Pool</p>
             <p>Entry</p>
@@ -62,8 +62,38 @@
             <p> 11,000 Spots Left</p>
             <p> 1,11,111 Spots</p>
         </div>
-    </div>
+    </div> -->
+    <% for(let x of contests) { %>
+        <div class="contest-card">
+            <div class="card-header">
+                <p>Prize Pool</p>
+                <p>Entry</p>
+            </div>
+            <div class="pool-price">
+                <p>₹ <%= x.price %></p>
+                <button id="money-to-join-contest" data-contest-id = "<%= x.contestId%>" data-match-id="<%= matchId %>">₹<%= x.price/x.totalSpots %></button>
+            </div>
+            <div class="contest-participation">
+                <p> <%= x.spotsLeft %> Spots Left</p>
+                <p> <%= x.totalSpots %> Spots</p>
+            </div>
+        </div>
+    <% } %>
 
+    
+</div>
+
+<div id="join-contest">
+    <p>Do you want to join this contest?</p>
+    <div id="join-noJoin-button">
+        <button id="yes-contest-join-button">
+            Yes
+        </button>
+
+        <button id="no-contest-join-button">
+            No
+        </button>
+    </div>
 </div>
 
 <div class="create-team-footer">
