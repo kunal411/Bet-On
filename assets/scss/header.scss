@@ -5,6 +5,13 @@
         padding: 0 10px;
         color: black;
         box-shadow: 1px 1px 1px 1px lightgrey;
+        position: fixed;
+        width: 100%;
+        top : 0;
+        z-index: 2;
+        background-image: url('https://images.unsplash.com/photo-1559579313-021b6ec9f6d6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c3RhZGl1bXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80');
+        background-repeat: no-repeat;
+        background-size: 100% auto;
 
         .mini-logo{
             #logo-img{

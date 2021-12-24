@@ -63,6 +63,20 @@ module.exports.addMatchLiveScoreDettoDb = async function(){
                     let toss = s.results.live_details.match_summary.toss;
                     let result = s.results.live_details.match_summary.result;
 
+                    let title_fi = s.results.live_details.scorecard[0].title;
+                    let overs_fi = s.results.live_details.scorecard[0].overs;
+                    let runs_fi = s.results.live_details.scorecard[0].runs;
+                    let wickets_fi = s.results.live_details.scorecard[0].wickets;
+                    let fow_fi = s.results.live_details.scorecard[0].fow;
+                    let extrasDetails_fi = s.results.live_details.scorecard[0].extras_detail;
+                    
+                    let title_si = s.results.live_details.scorecard[1].title;
+                    let overs_si = s.results.live_details.scorecard[1].overs;
+                    let runs_si = s.results.live_details.scorecard[1].runs;
+                    let wickets_si = s.results.live_details.scorecard[1].wickets;
+                    let fow_si = s.results.live_details.scorecard[1].fow;
+                    let extrasDetails_si = s.results.live_details.scorecard[1].extras_detail;
+                    
                     let teamHomePlayers = matchList[i].teamHomePlayers;
                     let teamAwayPlayers = matchList[i].teamAwayPlayers;
 
@@ -85,6 +99,7 @@ module.exports.addMatchLiveScoreDettoDb = async function(){
                                 teamHomePlayers[i].sixes = batter.sixes;
                                 teamHomePlayers[i].strikeRate = batter.strike_rate;
                                 teamHomePlayers[i].howOut = batter.how_out;
+                                teamHomePlayers[i].batOrder = batter.bat_order;
                             }
                         }
                         for(let bowler of bowling){
@@ -93,7 +108,6 @@ module.exports.addMatchLiveScoreDettoDb = async function(){
                                 teamHomePlayers[i].maidens = bowler.maidens;
                                 teamHomePlayers[i].runsConceded = bowler.runs_conceded;
                                 teamHomePlayers[i].wickets = bowler.wickets;
-                                teamHomePlayers[i].economy = bowler.economy;
                                 teamHomePlayers[i].economy = bowler.economy;
                             }
                         }
@@ -110,6 +124,7 @@ module.exports.addMatchLiveScoreDettoDb = async function(){
                                 teamAwayPlayers[i].sixes = batter.sixes;
                                 teamAwayPlayers[i].strikeRate = batter.strike_rate;
                                 teamAwayPlayers[i].howOut = batter.how_out;
+                                teamAwayPlayers[i].batOrder = batter.bat_order;
                             }
                         }
                         for(let bowler of bowling){
@@ -126,15 +141,30 @@ module.exports.addMatchLiveScoreDettoDb = async function(){
                         teamHomePlayers[i].points = pointCalculator(teamHomePlayers[i].runs, teamHomePlayers[i].fours, teamHomePlayers[i].sixes, teamHomePlayers[i].sixes, teamHomePlayers[i].wickets, teamHomePlayers[i].economy);
                         teamAwayPlayers[i].points = pointCalculator(teamAwayPlayers[i].runs, teamAwayPlayers[i].fours, teamAwayPlayers[i].sixes, teamAwayPlayers[i].sixes, teamAwayPlayers[i].wickets, teamAwayPlayers[i].economy);
 
-                        const matchUpdate = await MatchLiveDetail.updateOne({matchId:matchId}, { $set : {
-                            inPlay : inPlay,
-                            status : status,
-                            toss : toss,
-                            result : result,
-                            teamHomePlayers : teamHomePlayers,
-                            teamAwayPlayers : teamAwayPlayers
-
-                        }})
+                        try{
+                            const matchUpdate = await MatchLiveDetail.updateOne({matchId:matchId}, { $set : {
+                                inPlay : inPlay,
+                                status : status,
+                                toss : toss,
+                                result : result,
+                                teamHomePlayers : teamHomePlayers,
+                                teamAwayPlayers : teamAwayPlayers,
+                                titleFI : title_fi,
+                                oversFI : overs_fi,
+                                wicketsFI : wickets_fi,
+                                runFI : runs_fi,
+                                fowFI : fow_fi,
+                                extrasDetailFI : extrasDetails_fi,
+                                titleSI : title_si,
+                                oversSI : overs_si,
+                                wicketsSI : wickets_si,
+                                runSI : runs_si,
+                                fowSI : fow_si,
+                                extrasDetailSI : extrasDetails_si   
+                            }})
+                        }catch(err){
+                            console.log("Error : " + err);
+                        }
                     }
                 }else{
                     let inPlay = "No";

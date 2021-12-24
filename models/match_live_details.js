@@ -100,6 +100,11 @@ const matchDetailsSchema = new mongoose.Schema({
                 trim : true,
                 required : true,
                 lowercase : true
+            },
+
+            batOrder : {
+                type : Number,
+                default : -1
             }
         }
     ],
@@ -194,6 +199,11 @@ const matchDetailsSchema = new mongoose.Schema({
                 trim : true,
                 required : true,
                 lowercase : true
+            },
+
+            batOrder : {
+                type : Number,
+                default : -1
             }
         }
     ],
@@ -217,7 +227,56 @@ const matchDetailsSchema = new mongoose.Schema({
 
     result : {
         type : String
+    },
+
+    titleFI : {
+        type : String
+    },
+
+    oversFI : {
+        type : Number
+    },
+
+    runFI : {
+        type : Number
+    },
+
+    wicketsFI : {
+        type : Number
+    },
+
+    fowFI : {
+        type :String
+    },
+    
+    extrasDetailFI : {
+        type : String
+    },
+
+    titleSI : {
+        type : String
+    },
+
+    oversSI : {
+        type : Number
+    },
+
+    runSI : {
+        type : Number
+    },
+
+    wicketsSI : {
+        type : Number
+    },
+
+    fowSI : {
+        type :String
+    },
+    
+    extrasDetailSI : {
+        type : String
     }
+
 
 },{
     timestamps : true

@@ -3,6 +3,9 @@
 <div id="container">
     <% let playerListHome = match_details.results[0].live_details.teamsheets.home %>
     <% let playerListAway = match_details.results[0].live_details.teamsheets.away %>
+    <div id = "score-btn-div">
+        <button id="scoreCard" >SCORECARD</button>
+    </div>
 
     <h1 class="container-heading">
         <%= homeTeamName.toUpperCase() %> -Vs- <%= awayTeamName.toUpperCase() %>
