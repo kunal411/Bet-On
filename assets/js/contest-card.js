@@ -1,4 +1,5 @@
 const createBtn = document.getElementById('create-team-button');
+const createContestBtn = document.getElementById('create-contest-button');
 const contestCards = document.querySelectorAll('#money-to-join-contest');
 let contestId;
 let matchId;
@@ -10,10 +11,19 @@ createBtn.addEventListener('click',function(){
     div.style.display="block";
 });
 
+createContestBtn.addEventListener('click',function(){
+    console.log('Create contest button clicked');
+    const div=document.getElementById('create-contest-parent');
+    const backgrnd=document.getElementById('container');
+    backgrnd.style.opacity = "0.5";
+    div.style.display="block";
+})
+
 for(let i = 0; i < contestCards.length; i++){
     contestCards[i].addEventListener('click', function(){
         console.log('Contest card clicked');
         contestId = contestCards[i].getAttribute('data-contest-id');
+        console.log(contestId);
         matchId = contestCards[i].getAttribute('data-match-id');
         const div=document.getElementById('join-contest');
         const backgrnd=document.getElementById('container');

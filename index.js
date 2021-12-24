@@ -77,19 +77,35 @@ app.use(passport.setAuthenticatedUser);
 
 
 const dbCo = require('./controllers/matchDB-controller');
-let promise = new Promise((resolve,reject)=>{
-    dbCo.addMatchtoDb();
-    resolve();
-})
+const LivematchdetController = require('./controllers/match-LiveDetailsDB-controller');
+const LiveMatchScore = require('./controllers/match-livescoreDB-controller');
 
-// schedule.scheduleJob({hour: 0, minute: 0},()=>{
+async function addMatch(){
+    await dbCo.addMatchtoDb();
+}
+async function addLiveMatch(){
+    await LivematchdetController.addMatchLiveDettoDb();
+}
+async function addLiveScore(){
+    await LiveMatchScore.addMatchLiveScoreDettoDb();
+}
+
+addMatch();
+addLiveMatch();
+addLiveScore();
+
+// let promise = new Promise((resolve,reject)=>{
 //     dbCo.addMatchtoDb();
+//     resolve();
 // })
 
-const LivematchdetController = require('./controllers/match-LiveDetailsDB-controller');
-promise.then( ()=>{
-    LivematchdetController.addMatchLiveDettoDb();
-})
+// // schedule.scheduleJob({hour: 0, minute: 0},()=>{
+// //     dbCo.addMatchtoDb();
+// // })
+
+// promise.then( ()=>{
+//     LivematchdetController.addMatchLiveDettoDb();
+// })
 
 // use express router
 app.use('/', require('./routes'));

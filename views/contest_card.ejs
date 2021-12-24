@@ -86,18 +86,19 @@
 <div id="join-contest">
     <p>Do you want to join this contest?</p>
     <div id="join-noJoin-button">
-        <button id="yes-contest-join-button">
+        <button id="yes-contest-join-button" class="save-btn">
             Yes
         </button>
 
-        <button id="no-contest-join-button">
+        <button id="no-contest-join-button" class="cancel-btn">
             No
         </button>
     </div>
 </div>
 
 <div class="create-team-footer">
-    <button id="create-team-button">CREATE TEAM</button>
+    <button id="create-team-button" class="create-footer-button">CREATE TEAM</button>
+    <button id="create-contest-button" class="create-footer-button">CREATE  CONTEST</button>
 </div>
 
 <div id="select-players-parent">
@@ -136,8 +137,34 @@
         </div>
     <% } %>
     <div class="select-player-footer">
-        <button id="select-player-save">SAVE</button>
-        <button id="select-player-cancel">CANCEL</button>
+        <button id="select-player-save" class="save-btn">SAVE</button>
+        <button id="select-player-cancel" class="cancel-btn">CANCEL</button>
     </div>
+</div>
+
+<div id="create-contest-parent">
+    <div class="create-player-container">
+        <div class ="create-contest-details">
+            <div class="entry">
+                <label for="entry">Entry Amount : </label>
+                <div>
+                    ₹&nbsp;<input id ="entry" type="number">
+                </div>
+                
+            </div>
+            <div class="spots">
+                <label for="spots">Total Spots : </label>
+                <div>
+                    &nbsp;&nbsp;<input id ="spots" type="number">
+                </div>
+            </div>
+        </div>
+    
+        <div class="create-contest-footer">
+            <button id="create-contest-save" class="save-btn">SAVE</button>
+            <button id="create-contest-cancel" class="cancel-btn">CANCEL</button>
+        </div>
+    </div>
+
 </div>
 <script src="/js/contest-card.js"></script>

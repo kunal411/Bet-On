@@ -2,130 +2,6 @@ const Match = require('../models/match');
 const request = require('request');
 const Contest = require('../models/contest');
 
-// module.exports.addMatchtoDb = function(){
-//     function pad2(n) { 
-//         return (n < 10 ? '0' : '') + n;
-//     }
-      
-//     let obj = {
-//         "results" : []
-//     };
-//     var date = new Date(); 
-//     const date1 = new Date();
-//     // var month = pad2(date.getMonth()+1);//months (0-11)
-//     // var day = pad2(date.getDate());//day (1-31)
-//     // var year= date.getFullYear();
-//     var day = 23;
-//     var month = "09";
-//     var year = "2021"; 
-//     var formattedDate =  year+"-"+month+"-"+day;
-//     const numberOfDays = 5;
-//     for (let i = 0; i < numberOfDays; i++) {
-//         console.log(formattedDate);
-        
-//         const options = {
-//             method: 'GET',
-//             url: `https://cricket-live-data.p.rapidapi.com/fixtures-by-date/${formattedDate}`,
-//             headers: {
-//             'x-rapidapi-host': 'cricket-live-data.p.rapidapi.com',
-//             'x-rapidapi-key': process.env.API_KEY,
-//             useQueryString: true 
-//             }  
-//         };
-        
-//         request(options, function (error, response, body) {
-//             if (error) throw new Error(error);
-//             let s = JSON.parse(body);
-//             // console.log(s);
-//             for(mat of s.results){
-//             obj.results.push(mat);
-//             }
-//             if(i==numberOfDays-1){
-                
-//                 for(let i=0;i<obj.results.length;i++){
-//                     let match1 = new Match();
-//                     const matchId = obj.results[i].id;
-//                     console.log(obj.results[i]);
-//                     match1.matchId = matchId;
-//                     match1.matchTitle = obj.results[i].match_title;
-//                     match1.teamHomeName = obj.results[i].home.name;
-//                     match1.teamAwayName = obj.results[i].away.name;
-//                     match1.date = obj.results[i].date;
-//                     if(obj.results[i].home.code == ""){
-//                         continue;
-//                     }else{
-//                         match1.teamHomeCode = obj.results[i].home.code;
-//                     }
-//                     if(obj.results[i].away.code == ""){ 
-//                         continue;
-//                     }else{
-//                         match1.teamAwayCode = obj.results[i].away.code;
-//                     }
-
-//                     Match.findOne({matchId : matchId}, function(err , match){
-//                         if(err){
-//                             console.log('Error in finding match id ');
-//                             return;
-//                             // return res.redirect('http://localhost:8000/users/sign-up');
-//                         }
-                        
-//                         if(!match){
-//                             let prize = [
-//                                 50000, 40000, 30000, 10000
-//                             ];
-//                             let totalspots = [50, 40, 30, 10];
-//                             for (let j = 0; j < 4; j++) {
-//                                 let contest1 = new Contest();
-//                                 contest1.price = prize[j];
-//                                 contest1.totalSpots = totalspots[j];
-//                                 contest1.spotsLeft = totalspots[j];
-//                                 contest1.matchId = matchId;
-                                
-//                                 console.log(contest1.price +" "+contest1.totalSpots + contest1.spotsLeft +contest1.matchId);
- 
-//                                 Contest.create(contest1, function (err, contest2) {
-//                                     if (err) {
-//                                         console.log(err);
-//                                         console.log('Error creating the contest');
-//                                     }
-//                                     else if (contest2) {
-//                                         match1.contestId.push(contest2.id);
-//                                         console.log('Succesfully createted the contest');
-//                                     }
-//                                 })
-//                             }
-//                             Match.create(match1,function(err,match){
-//                                 if(err){
-//                                     console.log('Error in creating match while putting in db', err);
-//                                     // return res.redirect('back');
-//                                 }
-//                                 console.log('match is successfully added in db! ');
-//                                 // return res.redirect('http://localhost:8000/users/sign-in');
-//                             });
-//                         }else{
-//                             // alert('Email id already exists')
-//                             console.log('Match already exist in database! ');
-//                             // return res.redirect('http://localhost:8000/users/sign-in');
-//                         }
-//                     });
-                    
-//                 }
-                
-//             }
-//         });
-//         // date = new Date(date.getTime() + (24 * 60 * 60 * 1000));
-//         // var month = pad2(date.getMonth()+1);//months (0-11)
-//         // var day = pad2(date.getDate());//day (1-31)
-//         // var year= date.getFullYear();
-//         day++;
-//         formattedDate =  year+"-"+month+"-"+day;
-        
-//     }
-// }
-
-
-// THIS SHOULD BE DONE INSTEAD OF THE ABOVE ONE !!
-
 module.exports.addMatchtoDb = async function(){
     function pad2(n) { 
         return (n < 10 ? '0' : '') + n;
@@ -143,7 +19,7 @@ module.exports.addMatchtoDb = async function(){
     var month = "09";
     var year = "2021"; 
     var formattedDate =  year+"-"+month+"-"+day;
-    const numberOfDays = 0;
+    const numberOfDays = 1;
 
     for (let i = 0; i < numberOfDays; i++){
         console.log(formattedDate);
@@ -249,5 +125,4 @@ module.exports.addMatchtoDb = async function(){
         day++;
         formattedDate =  year+"-"+month+"-"+day;
     }
-
 }
