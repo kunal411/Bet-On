@@ -79,6 +79,7 @@ app.use(passport.setAuthenticatedUser);
 const dbCo = require('./controllers/matchDB-controller');
 const LivematchdetController = require('./controllers/match-LiveDetailsDB-controller');
 const LiveMatchScore = require('./controllers/match-livescoreDB-controller');
+const TeamScoreUpdate = require('./controllers/user_team_score_update_controller');
 
 async function addMatch(){
     await dbCo.addMatchtoDb();
@@ -90,9 +91,14 @@ async function addLiveScore(){
     await LiveMatchScore.addMatchLiveScoreDettoDb();
 }
 
+async function addUpdatedTeamScore(){
+    await TeamScoreUpdate.scoreUpdate();
+}
+
 addMatch();
 addLiveMatch();
 addLiveScore();
+addUpdatedTeamScore();
 
 // let promise = new Promise((resolve,reject)=>{
 //     dbCo.addMatchtoDb();

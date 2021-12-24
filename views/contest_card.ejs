@@ -1,68 +1,13 @@
 <link rel="stylesheet" href="/css/contest-card.css">
 
 <div id="container">
+    <% let playerListHome = match_details.results[0].live_details.teamsheets.home %>
+    <% let playerListAway = match_details.results[0].live_details.teamsheets.away %>
+
     <h1 class="container-heading">
         <%= homeTeamName.toUpperCase() %> -Vs- <%= awayTeamName.toUpperCase() %>
     </h1>
-    <!-- <div class="contest-card">
-        <div class="card-header">
-            <p>Prize Pool</p>
-            <p>Entry</p>
-        </div>
-        <div class="pool-price">
-            <p>₹11 Crores</p>
-            <button>₹11</button>
-        </div>
-        <div class="contest-participation">
-            <p> 11,000 Spots Left</p>
-            <p> 1,11,111 Spots</p>
-        </div>
-    </div>
 
-    <div class="contest-card">
-        <div class="card-header">
-            <p>Prize Pool</p>
-            <p>Entry</p>
-        </div>
-        <div class="pool-price">
-            <p>₹11 Crores</p>
-            <button>₹11</button>
-        </div>
-        <div class="contest-participation">
-            <p> 11,000 Spots Left</p>
-            <p> 1,11,111 Spots</p>
-        </div>
-    </div>
-
-    <div class="contest-card">
-        <div class="card-header">
-            <p>Prize Pool</p>
-            <p>Entry</p>
-        </div>
-        <div class="pool-price">
-            <p>₹11 Crores</p>
-            <button>₹11</button>
-        </div>
-        <div class="contest-participation">
-            <p> 11,000 Spots Left</p>
-            <p> 1,11,111 Spots</p>
-        </div>
-    </div>
-
-    <div class="contest-card">
-        <div class="card-header">
-            <p>Prize Pool</p>
-            <p>Entry</p>
-        </div>
-        <div class="pool-price">
-            <p>₹11 Crores</p>
-            <button>₹11</button>
-        </div>
-        <div class="contest-participation">
-            <p> 11,000 Spots Left</p>
-            <p> 1,11,111 Spots</p>
-        </div>
-    </div> -->
     <% for(let x of contests) { %>
         <div class="contest-card">
             <div class="card-header">
@@ -105,8 +50,6 @@
 
     <% if(lineupsOut) { %>
         <div id="select-players">
-            <% let playerListHome = match_details.results[0].live_details.teamsheets.home %>
-            <% let playerListAway = match_details.results[0].live_details.teamsheets.away %>
         
             <strong class="team-name"><%= homeTeamName.toUpperCase() %></strong>
             <br>

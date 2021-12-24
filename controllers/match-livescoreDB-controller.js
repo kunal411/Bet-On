@@ -1,6 +1,21 @@
 const request = require('request');
 const MatchLiveDetail = require('../models/match_live_details');
 
+function pointCalculator(runs, fours, sixes, strikeRate, wicket, economy){
+    let totalPoints = runs + fours*1 + sixes*2 + 25*wicket;
+    while(runs >= 50){
+        totalPoints += 20;
+        runs -= 50;
+    }
+    if(strikeRate < 100){
+        totalPoints -= 10;
+    }
+    if(economy >= 12){
+        totalPoints -= 10;
+    }
+    return totalPoints;
+}
+
 module.exports.addMatchLiveScoreDettoDb = async function(){
     let date= new Date();
     let endDate = date;
@@ -108,8 +123,8 @@ module.exports.addMatchLiveScoreDettoDb = async function(){
                         }
                         
                         // Function to be written to calculate the points
-                        teamHomePlayers[i].points = 0;
-                        teamAwayPlayers[i].points = 0;
+                        teamHomePlayers[i].points = pointCalculator(teamHomePlayers[i].runs, teamHomePlayers[i].fours, teamHomePlayers[i].sixes, teamHomePlayers[i].sixes, teamHomePlayers[i].wickets, teamHomePlayers[i].economy);
+                        teamAwayPlayers[i].points = pointCalculator(teamAwayPlayers[i].runs, teamAwayPlayers[i].fours, teamAwayPlayers[i].sixes, teamAwayPlayers[i].sixes, teamAwayPlayers[i].wickets, teamAwayPlayers[i].economy);
 
                         const matchUpdate = await MatchLiveDetail.updateOne({matchId:matchId}, { $set : {
                             inPlay : inPlay,

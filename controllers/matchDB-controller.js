@@ -19,7 +19,7 @@ module.exports.addMatchtoDb = async function(){
     var month = "09";
     var year = "2021"; 
     var formattedDate =  year+"-"+month+"-"+day;
-    const numberOfDays = 1;
+    const numberOfDays = 0;
 
     for (let i = 0; i < numberOfDays; i++){
         console.log(formattedDate);
@@ -37,7 +37,7 @@ module.exports.addMatchtoDb = async function(){
         let promise = new Promise((resolve,reject) =>{
             request(options,function(error,response,body){
                 if (error){
-                    reject(error);
+                    reject(error); 
                 }
                 // console.log(body)
                 let s = JSON.parse(body);
