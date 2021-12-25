@@ -3,6 +3,11 @@ const MatchLiveDetail = require('../models/match_live_details');
 const Contest = require('../models/contest');
 
 module.exports.contest = async function(req,res){
+
+    if (!req.isAuthenticated()) {
+        return res.redirect('http://localhost:8000/users/sign-in');
+    } 
+
     const match_id = req.query.id;
     const homeTeamName = req.query.homeTeamName;
     const awayTeamName = req.query.awayTeamName;
@@ -21,7 +26,23 @@ module.exports.contest = async function(req,res){
                     teamsheets : {
                         home : match.teamHomePlayers,
                         away : match.teamAwayPlayers
-                    }
+                    },
+                    extrasDetailFI : match.extrasDetailFI,
+                    extrasDetailSI : match.extrasDetailSI,
+                    fowFI : match.fowFI,
+                    fowSI : match.fowSI,
+                    inPlay : match.inPlay,
+                    oversFI : match.oversFI,
+                    oversSI : match.oversSI,
+                    result : match.result,
+                    runFI : match.runFI,
+                    runSI : match.runSI,
+                    status : match.status,
+                    titleFI : match.titleFI,
+                    titleSI : match.titleSI,
+                    toss : match.toss,
+                    wicketsFI : match.wicketsFI,
+                    wicketsSI : match.wicketsSI
                 }
             }
             try{

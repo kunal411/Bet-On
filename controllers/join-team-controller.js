@@ -5,9 +5,10 @@ const Team = require('../models/team');
 module.exports.joinTeam = async function(req, res){
     const contestId = req.query.contestId;
     const matchId = req.query.matchId;
-    // console.log('kunal ' + matchId);
+    const teamId = matchId + req.user.userId;
+    console.log(teamId);
     try{
-        let team = await Team.findOne({matchId : matchId});
+        let team = await Team.findOne({teamId : teamId});
         if(team){
             try{
                 

@@ -1,12 +1,12 @@
 const createBtn = document.getElementById('create-team-button');
 const createContestBtn = document.getElementById('create-contest-button');
 const contestCards = document.querySelectorAll('#money-to-join-contest');
+const backgrnd=document.getElementById('container');
 let contestId;
 let matchId;
 createBtn.addEventListener('click',function(){
     console.log('Create team button clicked');
     const div=document.getElementById('select-players-parent');
-    const backgrnd=document.getElementById('container');
     backgrnd.style.opacity = "0.5";
     div.style.display="block";
 });
@@ -14,7 +14,6 @@ createBtn.addEventListener('click',function(){
 createContestBtn.addEventListener('click',function(){
     console.log('Create contest button clicked');
     const div=document.getElementById('create-contest-parent');
-    const backgrnd=document.getElementById('container');
     backgrnd.style.opacity = "0.5";
     div.style.display="block";
 })
@@ -26,15 +25,26 @@ for(let i = 0; i < contestCards.length; i++){
         console.log(contestId);
         matchId = contestCards[i].getAttribute('data-match-id');
         const div=document.getElementById('join-contest');
-        const backgrnd=document.getElementById('container');
         backgrnd.style.opacity = "0.5";
         div.style.display="block";
     })
 }
 
+const scorecard = document.getElementById('scoreCard');
+const scorecardContainer = document.getElementById('scorecard-container');
+scorecard.addEventListener('click', function(){
+    backgrnd.style.opacity = "0.5";
+    scorecardContainer.style.display="block";
+})
+
+const closeScorecard = document.getElementById('close-scorecard');
+closeScorecard.addEventListener('click', function(){
+    backgrnd.style.opacity = '1';
+    scorecardContainer.style.display="none";
+})
+
 const noButton = document.getElementById('no-contest-join-button');
 noButton.addEventListener('click', function(){
-    const backgrnd=document.getElementById('container');
     backgrnd.style.opacity = "1";
     const div=document.getElementById('join-contest');
     div.style.display="none";
@@ -84,7 +94,6 @@ saveButton.addEventListener('click',function(){
         alert('Team saved successfully!!');
         const div=document.getElementById('select-players-parent');
         div.style.display="none";
-        const backgrnd=document.getElementById('container');
         backgrnd.style.opacity = "1";
         let players = JSON.stringify(addedPlayers);
         window.location.href = `http://localhost:8000/match/contest/team?id=${matchId}&teamArray=${players}`;
@@ -101,7 +110,6 @@ cancelButton.addEventListener('click',function(){
     for(let i=0;i<playersDivs.length;i++){
         playersDivs[i].style.backgroundColor="black";
     }
-    const backgrnd=document.getElementById('container');
     backgrnd.style.opacity = "1";
     const div=document.getElementById('select-players-parent');
     div.style.display="none";

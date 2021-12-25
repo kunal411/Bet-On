@@ -1,11 +1,13 @@
 #layout-footer {
   color: black;
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
+  z-index: -1;
   padding: 5px 10px;
   display: flex;
   justify-content: center; }
-  #layout-footer a {
-    color: black;
-    font-weight: bold;
-    text-decoration: none; }
-  #layout-footer .footer-nav ul {
-    list-style: none; }
+  #layout-footer .footer-container {
+    margin-bottom: 0;
+    font-weight: 600; }

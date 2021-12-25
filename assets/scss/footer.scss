@@ -1,18 +1,17 @@
 #layout-footer{
     color: black;
-    a{
-        color: black;
-        font-weight: bold;
-        text-decoration: none;
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    z-index: -1;
+
+    .footer-container{
+        margin-bottom: 0;
+        font-weight: 600;
     }
 
     padding: 5px 10px;
     display: flex;
     justify-content: center;
-
-    .footer-nav{
-        ul{
-            list-style: none;
-        }
-    }
 }

@@ -23,11 +23,11 @@ module.exports.scoreUpdate = async function(){
             try{
                 let teams = await Teams.find({matchId: matchId});
                 for(let a = 0; a < teams.length; a++){
-                    if(teams[0]){ 
+                    if(teams[a]){ 
                         let playersDetails1 = matchList[i].teamHomePlayers;
                         let playersDetails2 = matchList[i].teamAwayPlayers;
                         let playersDetails = playersDetails1.concat(playersDetails2);
-                        let players = teams[0].players;
+                        let players = teams[a].players;
                         let points = 0;
                         for(let x = 0; x < players.length; x++){
                             let playerId = players[x].playerId;
@@ -38,7 +38,7 @@ module.exports.scoreUpdate = async function(){
                             }
                         }
                         try{
-                            const updatedTeam = await Teams.updateOne({matchId:matchId}, { $set : {
+                            const updatedTeam = await Teams.updateOne({teamId:teams[a].teamId}, { $set : {
                                 points:points
                             }})
                         }catch(err){

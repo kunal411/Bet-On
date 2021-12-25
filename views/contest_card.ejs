@@ -3,9 +3,11 @@
 <div id="container">
     <% let playerListHome = match_details.results[0].live_details.teamsheets.home %>
     <% let playerListAway = match_details.results[0].live_details.teamsheets.away %>
+    <% let details = match_details.results[0].live_details %>
     <div id = "score-btn-div">
         <button id="scoreCard" >SCORECARD</button>
     </div>
+
 
     <h1 class="container-heading">
         <%= homeTeamName.toUpperCase() %> -Vs- <%= awayTeamName.toUpperCase() %>
@@ -27,8 +29,147 @@
             </div>
         </div>
     <% } %>
+</div>
 
-    
+<div id="scorecard-container">
+
+    <div class="toss">
+        <% if(details.inPlay == "Yes") {%>
+            <p><%= details.toss %></p>
+        <% }else {  %>
+            <p><%= details.status %></p>
+        <% } %>
+    </div>
+
+    <i class="fa fa-window-close" id="close-scorecard" style="font-size:24px;color:white"></i>
+
+    <div id="team-score">
+        <span><%= homeTeamName.toUpperCase() %></span>
+        <span id="score"><%= details.runFI %>-<%= details.wicketsFI %> (<%= details.oversFI %> Ov)</span>
+    </div>
+    <div class="grid-container">
+        <div class="grid-item grid-item-header">Batter</div>
+        <div class="grid-item grid-item-header"></div>
+        <div class="grid-item grid-item-header">R</div>  
+        <div class="grid-item grid-item-header">B</div>
+        <div class="grid-item grid-item-header">4s</div>
+        <div class="grid-item grid-item-header">6s</div>  
+        <div class="grid-item grid-item-header">SR</div>
+        <% playerListHome.sort(function(a, b){return a.batOrder - b.batOrder}); %>
+        <% for(let x of playerListHome) { %>
+            <% if(x.batOrder != -1) { %>
+                <div class="grid-item"><%= x.playerName.charAt(0).toUpperCase() + x.playerName.slice(1) %></div>
+                <div class="grid-item"><%= x.howOut%></div>
+                <div class="grid-item"><%= x.runs %></div>  
+                <div class="grid-item"><%= x.balls %></div>
+                <div class="grid-item"><%= x.fours %></div>
+                <div class="grid-item"><%= x.sixes %></div>  
+                <div class="grid-item"><%= x.strikeRate %></div>
+            <% } %>
+        <% } %>
+        <div id="extras">
+            <span>Extras</span>
+            <span id="extras-details"><%= details.extrasDetailFI %></span>
+        </div>
+      </div>
+
+      <br>
+
+      <div id="fow">
+        <div class="fow-header">Fall of Wickets</div>
+        <p id="fow-details"><%= details.fowFI %></p>
+      </div>
+
+      <br>
+      <br>
+
+      <div class="grid-container">
+        <div class="grid-item grid-item-header">Bowler</div>
+        <div class="grid-item grid-item-header"></div>
+        <div class="grid-item grid-item-header">O</div>  
+        <div class="grid-item grid-item-header">M</div>
+        <div class="grid-item grid-item-header">R</div>
+        <div class="grid-item grid-item-header">W</div>  
+        <div class="grid-item grid-item-header">ECO</div>
+        <% for(let x of playerListHome) { %>
+            <% if(x.overs != 0) {%>
+                <div class="grid-item"><%= x.playerName.charAt(0).toUpperCase() + x.playerName.slice(1) %></div>
+                <div class="grid-item"></div>
+                <div class="grid-item"><%= x.overs %></div>  
+                <div class="grid-item"><%= x.maidens %></div>
+                <div class="grid-item"><%= x.runsConceded %></div>
+                <div class="grid-item"><%= x.wickets %></div>  
+                <div class="grid-item"><%= x.economy %></div>
+            <% } %>
+        <% } %>
+      </div>
+
+      <br>
+      <br>
+      <br>
+
+      <div id="team-score">
+        <span><%= awayTeamName.toUpperCase() %></span>
+        <span id="score"><%= details.runSI %>-<%= details.wicketsSI %> (<%= details.oversSI %> Ov)</span>
+      </div>
+      <div class="grid-container">
+        <div class="grid-item grid-item-header">Batter</div>
+        <div class="grid-item grid-item-header"></div>
+        <div class="grid-item grid-item-header">R</div>  
+        <div class="grid-item grid-item-header">B</div>
+        <div class="grid-item grid-item-header">4s</div>
+        <div class="grid-item grid-item-header">6s</div>  
+        <div class="grid-item grid-item-header">SR</div>
+        <% playerListAway.sort(function(a, b){return a.batOrder - b.batOrder}); %>
+        <% for(let x of playerListAway) { %>
+            <% if(x.batOrder != -1) { %>
+                <div class="grid-item"><%= x.playerName.charAt(0).toUpperCase() + x.playerName.slice(1) %></div>
+                <div class="grid-item"><%= x.howOut%></div>
+                <div class="grid-item"><%= x.runs %></div>  
+                <div class="grid-item"><%= x.balls %></div>
+                <div class="grid-item"><%= x.fours %></div>
+                <div class="grid-item"><%= x.sixes %></div>  
+                <div class="grid-item"><%= x.strikeRate %></div>
+            <% } %>
+        <% } %>
+        <div id="extras">
+            <span>Extras</span>
+            <span id="extras-details"><%= details.extrasDetailSI %></span>
+        </div>
+      </div>
+
+      <br>
+
+      <div id="fow">
+        <div class="fow-header">Fall of Wickets</div>
+        <p id="fow-details"><%= details.fowSI %></p>
+      </div>
+
+      <br>
+      <br>
+
+      <div class="grid-container">
+        <div class="grid-item grid-item-header">Bowler</div>
+        <div class="grid-item grid-item-header"></div>
+        <div class="grid-item grid-item-header">O</div>  
+        <div class="grid-item grid-item-header">M</div>
+        <div class="grid-item grid-item-header">R</div>
+        <div class="grid-item grid-item-header">W</div>  
+        <div class="grid-item grid-item-header">ECO</div>
+        <% for(let x of playerListAway) { %>
+            <% if(x.overs != 0) {%>
+                <div class="grid-item"><%= x.playerName.charAt(0).toUpperCase() + x.playerName.slice(1) %></div>
+                <div class="grid-item"></div>
+                <div class="grid-item"><%= x.overs %></div>  
+                <div class="grid-item"><%= x.maidens %></div>
+                <div class="grid-item"><%= x.runsConceded %></div>
+                <div class="grid-item"><%= x.wickets %></div>  
+                <div class="grid-item"><%= x.economy %></div>
+            <% } %>
+        <% } %>
+
+        <br>
+      </div>
 </div>
 
 <div id="join-contest">
