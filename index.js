@@ -87,31 +87,18 @@ async function addMatch(){
 async function addLiveMatch(){
     await LivematchdetController.addMatchLiveDettoDb();
 }
-// async function addLiveScore(){
-//     await LiveMatchScore.addMatchLiveScoreDettoDb();
-// }
+async function addLiveScore(){
+    await LiveMatchScore.addMatchLiveScoreDettoDb();
+}
 
-// async function addUpdatedTeamScore(){
-//     await TeamScoreUpdate.scoreUpdate();
-// }
+async function addUpdatedTeamScore(){
+    await TeamScoreUpdate.scoreUpdate();
+}
 
 addMatch();
 addLiveMatch();
 // addLiveScore();
 // addUpdatedTeamScore();
-
-// let promise = new Promise((resolve,reject)=>{
-//     dbCo.addMatchtoDb();
-//     resolve();
-// })
-
-// // schedule.scheduleJob({hour: 0, minute: 0},()=>{
-// //     dbCo.addMatchtoDb();
-// // })
-
-// promise.then( ()=>{
-//     LivematchdetController.addMatchLiveDettoDb();
-// })
 
 // use express router
 app.use('/', require('./routes'));

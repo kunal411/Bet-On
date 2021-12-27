@@ -140,3 +140,13 @@ cancelButton.addEventListener('click',function(){
     div.style.display="none";
     addedPlayers = [];
 });
+
+const contestCard = document.querySelectorAll('.contest-card');
+for(let i = 0; i < contestCard.length; i++){
+    let contestId = contestCard[i].getAttribute('data-contest-id');
+    let matchId = contestCard[i].getAttribute('data-match-id');
+    contestCard[i].addEventListener('click', function(){
+        console.log(contestId); 
+        window.location.href = `http://localhost:8000/match/contest/leaderboard?matchId=${matchId}&contestId=${contestId}`;
+    })
+}

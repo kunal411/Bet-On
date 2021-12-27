@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="/css/leaderboard.css">
+
+<h2 id="leaderboard-heading">
+    LEADERBOARD
+</h2>
+<div class="container">
+    <div class="grid-container">
+        <div class="grid-item grid-item-header">Player</div>
+        <div class="grid-item grid-item-header">Points</div>
+        <div class="grid-item grid-item-header">Ranking</div>
+        <% result.sort(function(a, b){return b.userPoints - a.userPoints}); %>
+        <% for(let i = 0; i < result.length; i++) {%>
+            <% if(result[i].userName == userId) {%>
+                <div class="grid-item user-standing" data-rank="<%=i+1%>" data-totalWinner="<%= numberOfWinners %>">
+                    <%= result[i].userName%>
+                </div>
+                <div class="grid-item user-standing"><%= result[i].userPoints %></div>  
+                <div class="grid-item user-standing"><%= i+1 %></div>
+                <% break; %>
+            <% } %>
+        <% }%>  
+        <% for(let i = 0; i < result.length; i++) {%>
+            <% if(result[i].userName == userId) {%>
+                <% continue; %>
+            <% } %>
+            <div class="grid-item"><%= result[i].userName%></div>
+            <div class="grid-item"><%= result[i].userPoints %></div>  
+            <div class="grid-item"><%= i+1 %></div>
+        <% }%>  
+    </div>
+</div>
+
+<script src="/js/leaderboard.js"></script>

@@ -295,6 +295,9 @@ label{
     border-radius: 10px;
     overflow-y: scroll;
 }
+#scorecard-container::-webkit-scrollbar{
+    display: none;
+}
 
 .grid-container {
     display: grid;
@@ -399,15 +402,18 @@ label{
 .winnings-breakdown-container{
     display: none;
     position: fixed;
-    height: 50%;
+    height: 54%;
     width: 24%;
-    top: 25%;
+    top: 23%;
     left: 38%;
     background-color: black;
     border-radius: 10px;
     overflow-y: scroll;
     color: white;
     text-align: center;
+}
+.winnings-breakdown-container::-webkit-scrollbar{
+    display: none;
 }
 
 .winnings-breakdown-container h4{

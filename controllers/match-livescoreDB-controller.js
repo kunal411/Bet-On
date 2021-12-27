@@ -79,7 +79,7 @@ module.exports.addMatchLiveScoreDettoDb = async function(){
                     let batting2 = [];
                     let bowling2 = [];
                     
-                    if(s.results.live_details.scorecard.length == 2){
+                    if(s.results.live_details.scorecard.length > 1){
                         title_si = s.results.live_details.scorecard[1].title;
                         overs_si = s.results.live_details.scorecard[1].overs;
                         runs_si = s.results.live_details.scorecard[1].runs;

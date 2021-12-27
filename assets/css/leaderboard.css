@@ -1,0 +1,37 @@
+body{
+    background-image: url('https://images.unsplash.com/photo-1559579313-021b6ec9f6d6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c3RhZGl1bXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+
+#leaderboard-heading{
+    text-align: center;
+    font-family: monospace;
+}
+.container{
+    width: 60%;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: 50% 30% 20%;
+}
+
+.grid-item {
+    font-size: 15px;
+    text-align: left;
+    color: black;
+    background-color: rgba(255,255,255,0.8);
+    border-bottom: 1px solid gray;
+    padding-left: 5%;
+    font-weight: 700;
+    padding: 2%;
+}
+
+.user-standing{
+    background-color: #00b137;
+}
+
+.grid-item-header{
+    background-color: #a7a0a0;
+}

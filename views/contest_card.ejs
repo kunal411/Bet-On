@@ -14,7 +14,7 @@
     </h1>
     <% let count = 0 %>
     <% for(let x of contests) { %>
-        <div class="contest-card">
+        <div class="contest-card"  data-contest-id = "<%= x.contestId%>" data-match-id="<%= matchId %>">
             <div class="card-header">
                 <p>Prize Pool</p>
                 <p>Entry</p>
