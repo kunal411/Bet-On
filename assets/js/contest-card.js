@@ -19,8 +19,9 @@ createContestBtn.addEventListener('click',function(){
 })
 
 for(let i = 0; i < contestCards.length; i++){
-    contestCards[i].addEventListener('click', function(){
+    contestCards[i].addEventListener('click', function(event){
         console.log('Contest card clicked');
+        event.stopPropagation();
         contestId = contestCards[i].getAttribute('data-contest-id');
         console.log(contestId);
         matchId = contestCards[i].getAttribute('data-match-id');
@@ -32,7 +33,8 @@ for(let i = 0; i < contestCards.length; i++){
 
 const winningBreakup = document.querySelectorAll('.contest-prize-pool');
 for(let i = 0;i < winningBreakup.length; i++){
-    winningBreakup[i].addEventListener('click', function(){
+    winningBreakup[i].addEventListener('click', function(event){
+        event.stopPropagation();
         const count = winningBreakup[i].getAttribute('data-count');
         const winningBreakupContainer = document.querySelectorAll('.winnings-breakdown-container');
         backgrnd.style.opacity = "1";

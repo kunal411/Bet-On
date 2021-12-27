@@ -17,7 +17,8 @@ passport.use(new LocalStrategy({
                 return done(err);
             }
 
-            if (!user || user.password != password){
+            const userPassword = Buffer.from(user.password, 'base64').toString();
+            if (!user || userPassword != password){
                 return done(null, false);
             }
 

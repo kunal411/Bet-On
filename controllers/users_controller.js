@@ -4,12 +4,12 @@ const path = require('path');
 
 const jwt = require('jsonwebtoken');
 let alert = require('alert'); 
-const messageBird = require('messagebird')('0skFL1EuGttnDOr3iqGu8C01s');
+const messageBird = require('messagebird')('tkHcvInDskcXMVonVdf7aQKD9');
 const activatekey = 'accountactivatekey123';
 const clientURL = 'http://localhost:8000';
 
-const mailGunKey ='b1787e2d85011b99456fadc88536a30c-2ac825a1-4a96be09';
-const domain = 'sandboxa1a4db53718b4068b7ef30a64848a271.mailgun.org';
+const mailGunKey = process.env.mailGunKey;
+const domain = process.env.domain;
 
 const mailgun = require("mailgun-js");
 const mg = mailgun({apiKey: mailGunKey , domain: domain});
@@ -146,7 +146,7 @@ module.exports.otp = function(req, res){
             user1.userId = userId;
             user1.name = name;
             user1.email = email;
-            user1.password = password;
+            user1.password = Buffer.from(password).toString('base64');
             user1.phone = phone;
             User.findOne({email : email}, function(err , user){
                 if(err){
@@ -187,7 +187,7 @@ module.exports.activateAccount = function(req,res){
             user1.userId = userId;
             user1.name = name;
             user1.email = email;
-            user1.password = password;
+            user1.password = Buffer.from(password).toString('base64');
             user1.phone = phone;
             User.findOne({email : email}, function(err , user){
                 if(err){

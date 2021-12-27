@@ -110,6 +110,7 @@ input::-webkit-inner-spin-button {
     border-radius: 5%;
     width: 15%;
     height: 50;
+    cursor: pointer;
 }
 
 .create-team-footer{
