@@ -12,7 +12,7 @@
     <h1 class="container-heading">
         <%= homeTeamName.toUpperCase() %> -Vs- <%= awayTeamName.toUpperCase() %>
     </h1>
-
+    <% let count = 0 %>
     <% for(let x of contests) { %>
         <div class="contest-card">
             <div class="card-header">
@@ -20,7 +20,7 @@
                 <p>Entry</p>
             </div>
             <div class="pool-price">
-                <p>₹ <%= x.price %></p>
+                <p class="contest-prize-pool" data-count = "<%= count %>">₹ <%= x.price %> ↓</p>
                 <button id="money-to-join-contest" data-contest-id = "<%= x.contestId%>" data-match-id="<%= matchId %>">₹<%= x.price/x.totalSpots %></button>
             </div>
             <div class="contest-participation">
@@ -28,6 +28,21 @@
                 <p> <%= x.totalSpots %> Spots</p>
             </div>
         </div>
+
+        <div class="winnings-breakdown-container">
+            <i class="fa fa-window-close close-breakup" style="font-size:24px;color:white"></i>
+            <h4>Winnings Breakdown</h4>
+            <div class="grid-container1">
+                <div class="grid-item grid-item-header">Rank</div>
+                <div class="grid-item grid-item-header">Winnings</div>
+                <% for(let i = 0; i < x.prizeDetails.length; i++) { %>
+                    <div class="grid-item">Rank <%= i + 1 %></div>
+                    <div class="grid-item">₹ <%= x.prizeDetails[i].prize %></div>
+                <% } %>
+            </div>
+        </div>
+
+        <% count++ %>
     <% } %>
 </div>
 
@@ -40,11 +55,13 @@
             <p><%= details.status %></p>
         <% } %>
     </div>
-
+    <% if(details.titleFI && details.titleFI.split(' ')[0].toLowerCase() != homeTeamName.split(' ')[0].toLowerCase()) {%>
+        <% [playerListHome, playerListAway] = [playerListAway, playerListHome] %>
+    <% } %>
     <i class="fa fa-window-close" id="close-scorecard" style="font-size:24px;color:white"></i>
 
     <div id="team-score">
-        <span><%= homeTeamName.toUpperCase() %></span>
+        <span><%= details.titleFI %></span>
         <span id="score"><%= details.runFI %>-<%= details.wicketsFI %> (<%= details.oversFI %> Ov)</span>
     </div>
     <div class="grid-container">
@@ -56,7 +73,7 @@
         <div class="grid-item grid-item-header">6s</div>  
         <div class="grid-item grid-item-header">SR</div>
         <% playerListHome.sort(function(a, b){return a.batOrder - b.batOrder}); %>
-        <% for(let x of playerListHome) { %>
+        <% for(let x of playerListHome) { %> 
             <% if(x.batOrder != -1) { %>
                 <div class="grid-item"><%= x.playerName.charAt(0).toUpperCase() + x.playerName.slice(1) %></div>
                 <div class="grid-item"><%= x.howOut%></div>
@@ -91,7 +108,7 @@
         <div class="grid-item grid-item-header">R</div>
         <div class="grid-item grid-item-header">W</div>  
         <div class="grid-item grid-item-header">ECO</div>
-        <% for(let x of playerListHome) { %>
+        <% for(let x of playerListAway) { %>
             <% if(x.overs != 0) {%>
                 <div class="grid-item"><%= x.playerName.charAt(0).toUpperCase() + x.playerName.slice(1) %></div>
                 <div class="grid-item"></div>
@@ -109,7 +126,7 @@
       <br>
 
       <div id="team-score">
-        <span><%= awayTeamName.toUpperCase() %></span>
+        <span><%= details.titleSI %></span>
         <span id="score"><%= details.runSI %>-<%= details.wicketsSI %> (<%= details.oversSI %> Ov)</span>
       </div>
       <div class="grid-container">
@@ -156,7 +173,7 @@
         <div class="grid-item grid-item-header">R</div>
         <div class="grid-item grid-item-header">W</div>  
         <div class="grid-item grid-item-header">ECO</div>
-        <% for(let x of playerListAway) { %>
+        <% for(let x of playerListHome) { %>
             <% if(x.overs != 0) {%>
                 <div class="grid-item"><%= x.playerName.charAt(0).toUpperCase() + x.playerName.slice(1) %></div>
                 <div class="grid-item"></div>

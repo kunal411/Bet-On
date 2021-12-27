@@ -29,7 +29,19 @@ const contestSchema = new mongoose.Schema({
         trim : true,
         required : true,
         lowercase : true
-    }
+    },
+
+    prizeDetails : [
+        {
+            prize : {
+                type : Number,
+                required: true
+            },
+            prizeHolder : {
+                type : String
+            }
+        }
+    ]
 },{
     timestamps : true
 });

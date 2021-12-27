@@ -31,6 +31,13 @@ input::-webkit-inner-spin-button {
     font-family: monospace;
     font-size: 1.5rem;
 }
+
+#scorecard:hover{
+    background-color: rgb(197, 188, 188);
+    cursor: pointer;
+    transition: 0.2s ease-in;
+}
+
 .container-heading{
     color: black;
     text-align: center;
@@ -49,6 +56,27 @@ input::-webkit-inner-spin-button {
     border-radius: 5px;
     margin-bottom: 3%;
 }
+
+.contest-card:hover{
+    width: 62%;
+    transition: 0.2s ease-in;
+    background-color: rgba(255,255,255,0.8);
+    padding: 1.1% 2%;
+    cursor: pointer;
+}
+
+.contest-prize-pool{
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 1%;
+}
+
+.contest-prize-pool:hover{
+    background-color: rgb(197, 188, 188);
+    cursor: pointer;
+    transition: 0.2s ease-in;
+}
+
 .pool-price{
     display: flex;
     justify-content: space-between;
@@ -74,7 +102,7 @@ input::-webkit-inner-spin-button {
     display: block;
 }
 .pool-price p{
-    font-size: xx-large;
+    font-size: large;
     font-weight: bolder;
 }
 .pool-price button{
@@ -82,8 +110,8 @@ input::-webkit-inner-spin-button {
     border-radius: 5%;
     width: 15%;
     height: 50;
-
 }
+
 .create-team-footer{
     position: fixed;
     height: 7%;
@@ -273,6 +301,15 @@ label{
     grid-template-columns: 25% 25% 10% 10% 10% 10% 10%;
     padding: 10px;
 }
+
+.grid-container1{
+    display: grid;
+    grid-template-columns: 45% 45%;
+    padding: 10px;
+    justify-content: center;
+    line-height: 300%;
+}
+
 .grid-item {
     font-size: 15px;
     text-align: left;
@@ -342,7 +379,37 @@ label{
     right: 2%;
 }
 
+.close-breakup{
+    position: absolute;
+    color: white;
+    top: 2%;
+    right: 2%;
+}
+
+.close-breakup:hover{
+    cursor: pointer;
+    color: gray;
+}
+
 #close-scorecard:hover{
     cursor: pointer;
     color: gray;
+}
+
+.winnings-breakdown-container{
+    display: none;
+    position: fixed;
+    height: 50%;
+    width: 24%;
+    top: 25%;
+    left: 38%;
+    background-color: black;
+    border-radius: 10px;
+    overflow-y: scroll;
+    color: white;
+    text-align: center;
+}
+
+.winnings-breakdown-container h4{
+    margin-top: 10%;
 }

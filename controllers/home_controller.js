@@ -1,5 +1,4 @@
 // const request = require('request');
-const { matchedData } = require('express-validator');
 const Matches = require('../models/match');
 const LiveMatches = require('../models/match_live_details');
 
@@ -17,10 +16,10 @@ module.exports.home = async function (req, res){
         date.setDate(date.getDate() + 6);
         let endDate = date.toISOString();
         let matchList = await Matches.find({
-             // "match_date": {
-            // $gte: Date(startDate),
-            // $lt: Date(endDate),
-        // } 
+            "match_date": {
+            $gte: Date(startDate),
+            $lt: Date(endDate),
+        } 
         });
         for(let i = 0; i < matchList.length; i++){
             let liveStatus="";

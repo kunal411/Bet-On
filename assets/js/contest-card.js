@@ -30,6 +30,31 @@ for(let i = 0; i < contestCards.length; i++){
     })
 }
 
+const winningBreakup = document.querySelectorAll('.contest-prize-pool');
+for(let i = 0;i < winningBreakup.length; i++){
+    winningBreakup[i].addEventListener('click', function(){
+        const count = winningBreakup[i].getAttribute('data-count');
+        const winningBreakupContainer = document.querySelectorAll('.winnings-breakdown-container');
+        backgrnd.style.opacity = "1";
+        for(let i = 0; i < winningBreakupContainer.length; i++){
+            winningBreakupContainer[i].style.display = "none";
+        }
+        winningBreakupContainer[count].style.display = "block";
+    })
+}
+
+const closeBreakup = document.querySelectorAll('.close-breakup');
+for(let i = 0; i < closeBreakup.length; i++){
+    closeBreakup[i].addEventListener('click', function(){
+        const winningBreakupContainer = document.querySelectorAll('.winnings-breakdown-container');
+        backgrnd.style.opacity = "1";
+        for(let i = 0; i < winningBreakupContainer.length; i++){
+            winningBreakupContainer[i].style.display = "none";
+        }
+    })
+}
+
+
 const scorecard = document.getElementById('scoreCard');
 const scorecardContainer = document.getElementById('scorecard-container');
 scorecard.addEventListener('click', function(){

@@ -2,6 +2,13 @@ const Match = require('../models/match');
 const request = require('request');
 const Contest = require('../models/contest');
 
+// function prizeBreakupRules(prize, numWinners){
+//     let prizeMoneyBreakup = [];
+//     for(let i = 0; i < numWinners; i++){
+
+//     }
+// }
+
 module.exports.addMatchtoDb = async function(){
     function pad2(n) { 
         return (n < 10 ? '0' : '') + n;
@@ -12,12 +19,12 @@ module.exports.addMatchtoDb = async function(){
     };
     var date = new Date(); 
     const date1 = new Date();
-    // var month = pad2(date.getMonth()+1);//months (0-11)
-    // var day = pad2(date.getDate());//day (1-31)
-    // var year= date.getFullYear();
-    var day = 23;
-    var month = "09";
-    var year = "2021"; 
+    var month = pad2(date.getMonth()+1);//months (0-11)
+    var day = pad2(date.getDate());//day (1-31)
+    var year= date.getFullYear();
+    // var day = 23;
+    // var month = "09";
+    // var year = "2021"; 
     var formattedDate =  year+"-"+month+"-"+day;
     const numberOfDays = 0;
 
@@ -77,6 +84,9 @@ module.exports.addMatchtoDb = async function(){
                             let prize = [
                                 50000, 40000, 30000, 10000
                             ];
+                            // let prizeBreakup = [
+                            //     5, 4, 3, 1
+                            // ];
                             let totalspots = [50, 40, 30, 10];
                             for (let j = 0; j < 4; j++){
                                 let contest1 = new Contest();
@@ -84,6 +94,24 @@ module.exports.addMatchtoDb = async function(){
                                 contest1.totalSpots = totalspots[j];
                                 contest1.spotsLeft = totalspots[j];
                                 contest1.matchId = matchId;
+                                let prizeDetails = [
+                                    {
+                                        prize : prize[j] * 0.4
+                                    },
+                                    {
+                                        prize : prize[j] * 0.25
+                                    },
+                                    {
+                                        prize : prize[j] * 0.20
+                                    },
+                                    {
+                                        prize : prize[j] * 0.10
+                                    },
+                                    {
+                                        prize : prize[j] * 0.05
+                                    },
+                                ]
+                                contest1.prizeDetails = prizeDetails;
                                 
                                 console.log(contest1.price +" "+contest1.totalSpots + contest1.spotsLeft +contest1.matchId);
                                 try{
@@ -118,11 +146,11 @@ module.exports.addMatchtoDb = async function(){
         } ).catch((err)=>{
             console.log("Error : " + err);
         })
-        // date = new Date(date.getTime() + (24 * 60 * 60 * 1000));
-        // var month = pad2(date.getMonth()+1);//months (0-11)
-        // var day = pad2(date.getDate());//day (1-31)
-        // var year= date.getFullYear();
-        day++;
+        date = new Date(date.getTime() + (24 * 60 * 60 * 1000));
+        var month = pad2(date.getMonth()+1);//months (0-11)
+        var day = pad2(date.getDate());//day (1-31)
+        var year= date.getFullYear();
+        // day++;
         formattedDate =  year+"-"+month+"-"+day;
     }
 }

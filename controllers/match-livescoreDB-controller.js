@@ -23,10 +23,10 @@ module.exports.addMatchLiveScoreDettoDb = async function(){
     try{
         endDate.setDate(endDate.getDate() + 1);
         let matchList = await MatchLiveDetail.find({
-            // "match_date": {
-            //     $gte: Date(date),
-            //     $lt: Date(endDate)
-            // }
+            "match_date": {
+                $gte: Date(date),
+                $lt: Date(endDate)
+            }
         });
         for(let i = 0; i < matchList.length; i++){
             let matchId = matchList[i].matchId;
@@ -57,7 +57,7 @@ module.exports.addMatchLiveScoreDettoDb = async function(){
             });
             promise.then( async (s)=>{
                 // Change to be done in if condition , this is only for code testing!!!
-                if(s.results.live_details.match_summary.in_play == "No"){
+                if(s.results.live_details.match_summary.in_play == "Yes"){
                     let inPlay = "Yes";
                     let status = s.results.live_details.match_summary.status;
                     let toss = s.results.live_details.match_summary.toss;
@@ -69,23 +69,34 @@ module.exports.addMatchLiveScoreDettoDb = async function(){
                     let wickets_fi = s.results.live_details.scorecard[0].wickets;
                     let fow_fi = s.results.live_details.scorecard[0].fow;
                     let extrasDetails_fi = s.results.live_details.scorecard[0].extras_detail;
+
+                    let title_si = "";
+                    let overs_si = 0;
+                    let runs_si = 0;
+                    let wickets_si = 0;
+                    let fow_si = "";
+                    let extrasDetails_si = "";
+                    let batting2 = [];
+                    let bowling2 = [];
                     
-                    let title_si = s.results.live_details.scorecard[1].title;
-                    let overs_si = s.results.live_details.scorecard[1].overs;
-                    let runs_si = s.results.live_details.scorecard[1].runs;
-                    let wickets_si = s.results.live_details.scorecard[1].wickets;
-                    let fow_si = s.results.live_details.scorecard[1].fow;
-                    let extrasDetails_si = s.results.live_details.scorecard[1].extras_detail;
+                    if(s.results.live_details.scorecard.length == 2){
+                        title_si = s.results.live_details.scorecard[1].title;
+                        overs_si = s.results.live_details.scorecard[1].overs;
+                        runs_si = s.results.live_details.scorecard[1].runs;
+                        wickets_si = s.results.live_details.scorecard[1].wickets;
+                        fow_si = s.results.live_details.scorecard[1].fow;
+                        extrasDetails_si = s.results.live_details.scorecard[1].extras_detail;
+                        batting2 = s.results.live_details.scorecard[1].batting;
+                        bowling2 = s.results.live_details.scorecard[1].bowling;
+                    }
                     
                     let teamHomePlayers = matchList[i].teamHomePlayers;
                     let teamAwayPlayers = matchList[i].teamAwayPlayers;
 
                     let batting1 = s.results.live_details.scorecard[0].batting;
-                    let batting2 = s.results.live_details.scorecard[1].batting;
                     let batting = batting1.concat(batting2);
 
                     let bowling1 = s.results.live_details.scorecard[0].bowling;
-                    let bowling2 = s.results.live_details.scorecard[1].bowling;
                     let bowling = bowling1.concat(bowling2);
 
                     for(let i=0;i<teamHomePlayers.length;i++){

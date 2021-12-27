@@ -87,18 +87,18 @@ async function addMatch(){
 async function addLiveMatch(){
     await LivematchdetController.addMatchLiveDettoDb();
 }
-async function addLiveScore(){
-    await LiveMatchScore.addMatchLiveScoreDettoDb();
-}
+// async function addLiveScore(){
+//     await LiveMatchScore.addMatchLiveScoreDettoDb();
+// }
 
-async function addUpdatedTeamScore(){
-    await TeamScoreUpdate.scoreUpdate();
-}
+// async function addUpdatedTeamScore(){
+//     await TeamScoreUpdate.scoreUpdate();
+// }
 
 addMatch();
 addLiveMatch();
-addLiveScore();
-addUpdatedTeamScore();
+// addLiveScore();
+// addUpdatedTeamScore();
 
 // let promise = new Promise((resolve,reject)=>{
 //     dbCo.addMatchtoDb();

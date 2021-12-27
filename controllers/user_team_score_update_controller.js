@@ -9,10 +9,10 @@ module.exports.scoreUpdate = async function(){
     try{
         endDate.setDate(endDate.getDate() + 1);
         let matchList = await MatchLiveDetail.find({
-            // "match_date": {
-            //     $gte: Date(date),
-            //     $lt: Date(endDate)
-            // }
+            "match_date": {
+                $gte: Date(date),
+                $lt: Date(endDate)
+            }
         });
         for(let i = 0; i < matchList.length; i++){
             let matchId = matchList[i].matchId;

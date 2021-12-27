@@ -9,10 +9,10 @@ module.exports.addMatchLiveDettoDb = async function(){
     try{
         endDate.setDate(endDate.getDate() + 1);
         let matchList = await Match.find({
-            // "match_date": {
-            //     $gte: Date(date),
-            //     $lt: Date(endDate)
-            // }
+            "match_date": {
+                $gte: Date(date),
+                $lt: Date(endDate)
+            }
         });
         for(let i = 0; i < matchList.length; i++){
             const matchId = matchList[i].matchId;

@@ -55,7 +55,8 @@ module.exports.contest = async function(req,res){
                             totalSpots: x.totalSpots,
                             spotsLeft : x.spotsLeft,
                             teamsId : x.teamsId,
-                            matchId : x.matchId
+                            matchId : x.matchId,
+                            prizeDetails : x.prizeDetails
                         }
                         contestsDetails.push(contestDet);
                     }
