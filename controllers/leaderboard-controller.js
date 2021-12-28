@@ -11,7 +11,6 @@ module.exports.leaderBoardUpdate = async function(req,res){
     const contestId = req.query.contestId;
     const userId = req.user.userId;
     let numberOfWinners;
-
     let results = [];
 
     try{

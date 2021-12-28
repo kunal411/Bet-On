@@ -5,9 +5,11 @@ module.exports.createTeam = async function(req, res){
     const teamArray = JSON.parse(req.query.teamArray);
     const matchId = req.query.id;
     const userId = req.user.userId;
+    console.log(teamArray);
     for(let x of teamArray){
         console.log(x.playerName);
         console.log(x.playerId);
+        console.log(x.position);
     }
     console.log(matchId);
     console.log(userId);
@@ -17,7 +19,9 @@ module.exports.createTeam = async function(req, res){
     for(let x of teamArray){
         let playerObj = {
             playerId: x.playerId,
-            playerName: x.playerName
+            playerName: x.playerName,
+            position: x.position,
+            points: x.points
         }
         team.players.push(playerObj);
     }

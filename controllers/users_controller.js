@@ -8,8 +8,8 @@ const messageBird = require('messagebird')('tkHcvInDskcXMVonVdf7aQKD9');
 const activatekey = 'accountactivatekey123';
 const clientURL = 'http://localhost:8000';
 
-const mailGunKey = process.env.mailGunKey;
-const domain = process.env.domain;
+const mailGunKey = '2369118d8afc76b7633587ac90dbb9d3-cac494aa-f03797ca';
+const domain = 'sandbox3ca088a06dd44d33a56243753edb1f64.mailgun.org';
 
 const mailgun = require("mailgun-js");
 const mg = mailgun({apiKey: mailGunKey , domain: domain});

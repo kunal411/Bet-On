@@ -84,10 +84,13 @@ for(let i = 0; i < addPlayer.length; i++){
     player.addEventListener('click', function(){
         const playerName = player.getAttribute('data-player-name');
         const playerId = player.getAttribute('data-player-id');
+        const position = player.getAttribute('data-player-position');
+        console.log(position);
         matchId = player.getAttribute('data-match-id');
         let playerObj = {
             playerName: playerName,
-            playerId: playerId
+            playerId: playerId,
+            position: position
         }
         console.log(playerObj);
         let obj = addedPlayers.find(x => x.playerName === playerObj.playerName);

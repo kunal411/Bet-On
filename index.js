@@ -97,8 +97,8 @@ async function addUpdatedTeamScore(){
 
 addMatch();
 addLiveMatch();
-addLiveScore();
-addUpdatedTeamScore();
+// addLiveScore();
+// addUpdatedTeamScore();
 
 // use express router
 app.use('/', require('./routes'));
