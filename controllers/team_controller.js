@@ -5,12 +5,19 @@ module.exports.createTeam = async function(req, res){
     const teamArray = JSON.parse(req.query.teamArray);
     const matchId = req.query.id;
     const userId = req.user.userId;
-    for(let x of teamArray){
-        console.log(x.playerName);
-        console.log(x.playerId);
-    }
-    console.log(matchId);
-    console.log(userId);
+
+    const captain = req.query.captainId;
+    const viceCaptain = req.query.viceCaptainId;
+
+    console.log("**************" + captain);
+    console.log("*-*******-******-----" + viceCaptain);
+
+    // for(let x of teamArray){
+    //     console.log(x.playerName);
+    //     console.log(x.playerId);
+    // }
+    // console.log(matchId);
+    // console.log(userId);
     let team = new Team();
     let teamId = matchId + userId;
     team.teamId = teamId;

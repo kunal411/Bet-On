@@ -11,8 +11,22 @@ module.exports.contest = async function(req,res){
     const match_id = req.query.id;
     const homeTeamName = req.query.homeTeamName;
     const awayTeamName = req.query.awayTeamName;
-    let contestsDetails = [];
 
+    let homePlayerDet = {
+        'wicketkeeper' : [],
+        'batsman' : [],
+        'bowler' : [],
+        'allRounder' : []
+    }
+
+    let awayPlayerDet = {
+        'wicketkeeper' : [],
+        'batsman' : [],
+        'bowler' : [],
+        'allRounder' : []
+    }
+    
+    let contestsDetails = [];
     let matchDet = {
         "results": []
     };
@@ -20,12 +34,43 @@ module.exports.contest = async function(req,res){
     try{
         let match = await MatchLiveDetail.findOne({matchId : match_id});  
         if(match){
+            for(let x of match.teamHomePlayers){
+                if(x.position == 'wicketkeeper'){
+                    homePlayerDet.wicketkeeper.push(x);
+                }else if(x.position == 'batsman'){
+                    homePlayerDet.batsman.push(x);
+                }else if(x.position == 'bowler'){
+                    homePlayerDet.bowler.push(x);
+                }else{
+                    homePlayerDet.allRounder.push(x);
+                }
+            }
+
+            for(let x of match.teamAwayPlayers){
+                if(x.position == 'wicketkeeper'){
+                    awayPlayerDet.wicketkeeper.push(x);
+                }else if(x.position == 'batsman'){
+                    awayPlayerDet.batsman.push(x);
+                }else if(x.position == 'bowler'){
+                    awayPlayerDet.bowler.push(x);
+                }else{
+                    awayPlayerDet.allRounder.push(x);
+                }
+            }
+
             lineOut=true;
             let s = {
                 live_details : {
                     teamsheets : {
-                        home : match.teamHomePlayers,
-                        away : match.teamAwayPlayers
+                        home : {
+                            playerListHome : match.teamHomePlayers,
+                            homePlayerDet : homePlayerDet
+                        },
+
+                        away : {
+                            playerListAway : match.teamAwayPlayers,
+                            awayPlayerDet : awayPlayerDet
+                        }
                     },
                     extrasDetailFI : match.extrasDetailFI,
                     extrasDetailSI : match.extrasDetailSI,

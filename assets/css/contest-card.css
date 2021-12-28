@@ -159,7 +159,18 @@ input::-webkit-inner-spin-button {
     display: flex;
     justify-content: space-around;
 }
+fieldset{
+    color: white;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 1%;
+    margin: 1%;
 
+}
+legend{
+    margin-bottom: 0;
+    width: auto;
+}
 
 #select-players-parent{
     display: none;
@@ -192,11 +203,62 @@ input::-webkit-inner-spin-button {
 }
 
 .player_name{
-    width: 40%;
+    width: 50%;
 }
 
 .player_position{
-    width: 40%;
+    width: 30%;
+}
+.captain{
+    width: 10%;
+    font-weight: 700;
+}
+.vice-captain{
+    width: 10%;
+    font-weight: 700;
+}
+.captain-i{
+    width: 30px;
+    height: 30px;
+    border: 2px solid white;
+    border-radius: 50%;
+    text-align: center;
+    z-index: 10;
+}
+.captain-i:hover{
+    background-color: white;
+    color: black;
+}
+.vice-captain-i:hover{
+    background-color: white;
+    color: black;
+}
+.vice-captain-i{
+    width: 30px;
+    height: 30px;
+    border: 2px solid white;
+    border-radius: 50%;
+    text-align: center;
+}
+.radio-btn-captain-label{
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+.radio-btn-captain-label > input{
+    visibility: hidden;
+    position: absolute;
+}
+.radio-btn-captain-label > input + div{
+    cursor:pointer;
+}
+.radio-btn-captain-label > input:checked + div{
+    background-color: red;
+}
+.radio-btn-captain-label[disabled]{
+    color: gray;
+    border : solid 2px gray;
+    
 }
 
 .player-add-icon{

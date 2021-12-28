@@ -95,10 +95,10 @@ async function addUpdatedTeamScore(){
     await TeamScoreUpdate.scoreUpdate();
 }
 
-addMatch();
-addLiveMatch();
-addLiveScore();
-addUpdatedTeamScore();
+// addMatch();
+// addLiveMatch();
+// addLiveScore();
+// addUpdatedTeamScore();
 
 // use express router
 app.use('/', require('./routes'));
