@@ -25,6 +25,19 @@ const teamSchema = new mongoose.Schema({
                 trim : true,
                 required : true,
                 lowercase : true
+            },
+
+            position: {
+                type : String,
+                trim : true,
+                required : true,
+                lowercase : true
+            },
+
+            point: {
+                type : Number,
+                required : true,
+                default: 4
             }
         }
     ],
@@ -42,6 +55,20 @@ const teamSchema = new mongoose.Schema({
     },
 
     matchId: {
+        type : String,
+        trim : true,
+        required : true,
+        lowercase : true
+    },
+
+    captainId: {
+        type : String,
+        trim : true,
+        required : true,
+        lowercase : true
+    },
+
+    viceCaptainId: {
         type : String,
         trim : true,
         required : true,

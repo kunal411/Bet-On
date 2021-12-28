@@ -4,28 +4,95 @@
     LEADERBOARD
 </h2>
 <div class="container">
-    <div class="grid-container">
+    <div class="grid-container1">
         <div class="grid-item grid-item-header">Player</div>
         <div class="grid-item grid-item-header">Points</div>
         <div class="grid-item grid-item-header">Ranking</div>
+    </div>
+    <div class="grid-container">
         <% result.sort(function(a, b){return b.userPoints - a.userPoints}); %>
+        
         <% for(let i = 0; i < result.length; i++) {%>
-            <% if(result[i].userName == userId) {%>
-                <div class="grid-item user-standing" data-rank="<%=i+1%>" data-totalWinner="<%= numberOfWinners %>">
-                    <%= result[i].userName%>
+            <% let wicketKeepers = [] %>
+            <% let batsmen = [] %>
+            <% let allRounders = [] %>
+            <% let bowlers = [] %>
+            <% for(let x of result[i].players) {%>
+                <% let playerNameArray = x.playerName.split(' ') %>
+                <% let playerName = playerNameArray[0][0].toUpperCase() + '. ' + playerNameArray[playerNameArray.length - 1].charAt(0).toUpperCase() + playerNameArray[playerNameArray.length - 1].slice(1); %>
+                <% if(x.playerId == result[i].captain) {%>
+                    <% playerName += "(c)" %>
+                <% } %>
+                <% if(x.playerId == result[i].vicecaptain) {%>
+                    <% let vc = "VC" %>
+                    <% playerName += "(vc)" %>
+                <% } %>
+                <% let playerPoint = x.point %>
+                <% let playerInfo = {playerName: playerName, playerPoint:playerPoint} %>
+                <% if(x.position == "wicketkeeper") {%>
+                    <% wicketKeepers.push(playerInfo); %>
+                <% } %>
+                <% if(x.position == "batsman") {%>
+                    <% batsmen.push(playerInfo); %>
+                <% } %>
+                <% if(x.position == "allrounder") {%>
+                    <% allRounders.push(playerInfo); %>
+                <% } %>
+                <% if(x.position == "bowler") {%>
+                    <% bowlers.push(playerInfo); %>
+                <% } %>
+            <% } %>
+            <div class="other-user-standing" data-team-count="<%= i %>">
+                <div class="grid-item"><%= result[i].userName%></div>
+                <div class="grid-item"><%= result[i].userPoints %></div>  
+                <div class="grid-item"><%= i+1 %></div>
+            </div>
+            <div class="user-team">
+                <i class="fa fa-window-close close-team"></i>
+                <p class="position-heading">WICKET-KEEPER</p>
+                <div class="user-team-wicketKeeper user-team-position">
+                    <% for(let x of wicketKeepers) {%>
+                        <div class="player-icon-name">
+                            <img class="player-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2048px-User_icon_2.svg.png" alt="??">
+                            <p class="playerName"><%= x.playerName %></p>
+                            <p class="playerPoints"><%= x.playerPoint %> Pts</p>
+                        </div>
+                    <% } %>
+                </div> 
+
+                <p class="position-heading"> BATSMEN</p>
+                <div class="user-team-batsman user-team-position">
+                    <% for(let x of batsmen) {%>
+                        <div class="player-icon-name">
+                            <img class="player-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2048px-User_icon_2.svg.png" alt="??">
+                            <p class="playerName"><%= x.playerName %></p>
+                            <p class="playerPoints"> <%= x.playerPoint %> Pts</p>
+                        </div>
+                    <% } %>
                 </div>
-                <div class="grid-item user-standing"><%= result[i].userPoints %></div>  
-                <div class="grid-item user-standing"><%= i+1 %></div>
-                <% break; %>
-            <% } %>
-        <% }%>  
-        <% for(let i = 0; i < result.length; i++) {%>
-            <% if(result[i].userName == userId) {%>
-                <% continue; %>
-            <% } %>
-            <div class="grid-item"><%= result[i].userName%></div>
-            <div class="grid-item"><%= result[i].userPoints %></div>  
-            <div class="grid-item"><%= i+1 %></div>
+
+                <p class="position-heading">ALL-ROUNDERS</p>
+                <div class="user-team-allRounder user-team-position">
+                    <% for(let x of allRounders) {%>
+                        <div class="player-icon-name">
+                            <img class="player-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2048px-User_icon_2.svg.png" alt="??">
+                            <p class="playerName"><%= x.playerName %></p>
+                            <p class="playerPoints"> <%= x.playerPoint %> Pts</p>
+                        </div>
+                    <% } %>
+                </div>
+
+                <p class="position-heading">BOWLERS</p>
+                <div class="user-team-bowler user-team-position">
+                    <% for(let x of bowlers) {%>
+                        <div class="player-icon-name">
+                            <img class="player-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2048px-User_icon_2.svg.png" alt="??">
+                            <p class="playerName"><%= x.playerName %></p>
+                            <p class="playerPoints"> <%= x.playerPoint %> Pts</p>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
         <% }%>  
     </div>
 </div>

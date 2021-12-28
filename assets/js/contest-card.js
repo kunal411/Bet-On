@@ -1,13 +1,21 @@
 const createBtn = document.getElementById('create-team-button');
 const createContestBtn = document.getElementById('create-contest-button');
 const contestCards = document.querySelectorAll('#money-to-join-contest');
-const backgrnd=document.getElementById('container');
+const backgrnd = document.getElementById('container');
+const allContainers = document.querySelectorAll('.extra-contanier');
+
+function closeContainers(){
+    for(let i = 0; i < allContainers.length; i++){
+        allContainers[i].style.display = "none";
+    }
+}
 
 let contestId;
 let matchId;
 createBtn.addEventListener('click',function(){
     console.log('Create team button clicked');
     const div=document.getElementById('select-players-parent');
+    closeContainers();
     backgrnd.style.opacity = "0.5";
     div.style.display="block";
 });
@@ -15,6 +23,7 @@ createBtn.addEventListener('click',function(){
 createContestBtn.addEventListener('click',function(){
     console.log('Create contest button clicked');
     const div=document.getElementById('create-contest-parent');
+    closeContainers();
     backgrnd.style.opacity = "0.5";
     div.style.display="block";
 })
@@ -23,6 +32,7 @@ for(let i = 0; i < contestCards.length; i++){
     contestCards[i].addEventListener('click', function(event){
         console.log('Contest card clicked');
         event.stopPropagation();
+        closeContainers();
         contestId = contestCards[i].getAttribute('data-contest-id');
         console.log(contestId);
         matchId = contestCards[i].getAttribute('data-match-id');
@@ -36,6 +46,7 @@ const winningBreakup = document.querySelectorAll('.contest-prize-pool');
 for(let i = 0;i < winningBreakup.length; i++){
     winningBreakup[i].addEventListener('click', function(event){
         event.stopPropagation();
+        closeContainers();
         const count = winningBreakup[i].getAttribute('data-count');
         const winningBreakupContainer = document.querySelectorAll('.winnings-breakdown-container');
         backgrnd.style.opacity = "1";
@@ -61,6 +72,7 @@ for(let i = 0; i < closeBreakup.length; i++){
 const scorecard = document.getElementById('scoreCard');
 const scorecardContainer = document.getElementById('scorecard-container');
 scorecard.addEventListener('click', function(){
+    closeContainers();
     backgrnd.style.opacity = "0.5";
     scorecardContainer.style.display="block";
 })
@@ -95,10 +107,13 @@ for(let i = 0; i < addPlayer.length; i++){
         let childLabelCaptain = player.children[2].children[0].children[0];
         let childLabelViceCaptain = player.children[3].children[0].children[0];
 
+        const position = player.getAttribute('data-player-position');
+        console.log(position);
         matchId = player.getAttribute('data-match-id');
         let playerObj = {
             playerName: playerName,
-            playerId: playerId
+            playerId: playerId,
+            position: position
         }
         console.log(playerObj);
         let obj = addedPlayers.find(x => x.playerName === playerObj.playerName);

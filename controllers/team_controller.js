@@ -12,25 +12,23 @@ module.exports.createTeam = async function(req, res){
     console.log("**************" + captain);
     console.log("*-*******-******-----" + viceCaptain);
 
-    // for(let x of teamArray){
-    //     console.log(x.playerName);
-    //     console.log(x.playerId);
-    // }
-    // console.log(matchId);
-    // console.log(userId);
     let team = new Team();
     let teamId = matchId + userId;
     team.teamId = teamId;
     for(let x of teamArray){
         let playerObj = {
             playerId: x.playerId,
-            playerName: x.playerName
+            playerName: x.playerName,
+            position: x.position,
+            points: x.points
         }
         team.players.push(playerObj);
     }
     team.points = 50;
     team.userId = userId;
     team.matchId = matchId;
+    team.captainId = captain;
+    team.viceCaptainId = viceCaptain;
 
     try{
         const team4 = await Team.findOne({teamId: teamId});

@@ -11,7 +11,6 @@ module.exports.leaderBoardUpdate = async function(req,res){
     const contestId = req.query.contestId;
     const userId = req.user.userId;
     let numberOfWinners;
-
     let results = [];
 
     try{
@@ -27,7 +26,9 @@ module.exports.leaderBoardUpdate = async function(req,res){
                         let teamInfo = {
                             userName : team.userId,
                             userPoints : team.points,
-                            players : team.players
+                            players : team.players,
+                            captain: team.captainId,
+                            vicecaptain: team.viceCaptainId
                         }
                         results.push(teamInfo);
                     }

@@ -34,7 +34,7 @@
             </div>
         </div>
 
-        <div class="winnings-breakdown-container">
+        <div class="winnings-breakdown-container extra-contanier">
             <i class="fa fa-window-close close-breakup" style="font-size:24px;color:white"></i>
             <h4>Winnings Breakdown</h4>
             <div class="grid-container1">
@@ -51,7 +51,7 @@
     <% } %>
 </div>
 
-<div id="scorecard-container">
+<div id="scorecard-container" class="extra-contanier">
 
     <div class="toss">
         <% if(details.inPlay == "Yes") {%>
@@ -194,7 +194,7 @@
       </div>
 </div>
 
-<div id="join-contest">
+<div id="join-contest" class="extra-contanier">
     <p>Do you want to join this contest?</p>
     <div id="join-noJoin-button">
         <button id="yes-contest-join-button" class="save-btn">
@@ -212,7 +212,7 @@
     <button id="create-contest-button" class="create-footer-button">CREATE  CONTEST</button>
 </div>
 
-<div id="select-players-parent">
+<div id="select-players-parent" class="extra-contanier">
 
     <% if(lineupsOut) { %>
         <div id="select-players">
@@ -410,7 +410,7 @@
     </div>
 </div>
 
-<div id="create-contest-parent">
+<div id="create-contest-parent" class="extra-contanier">
     <div class="create-player-container">
         <div class ="create-contest-details">
             <div class="entry">

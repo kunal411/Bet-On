@@ -98,8 +98,10 @@ input::-webkit-inner-spin-button {
     color: white;
     font-size: 2rem;
     text-align: center;
-    text-decoration: underline;
     display: block;
+    font-family: monospace;
+    font-weight: 300;
+    margin-bottom: -3%;
 }
 .pool-price p{
     font-size: large;
@@ -179,7 +181,7 @@ legend{
     position: fixed;
     top: 10%;
     left: 25%;
-    background-color: black;
+    background-image: url('https://media.istockphoto.com/photos/grass-field-ground-top-view-picture-id1192236248?k=20&m=1192236248&s=612x612&w=0&h=QcNPrNc_LLaUI5H1mmGpsIyT0mX-OHFTZk_redKHcUs=');
     border-radius: 10px;
 }
 #select-players{
@@ -224,6 +226,7 @@ legend{
     border-radius: 50%;
     text-align: center;
     z-index: 10;
+    font-size: 1rem;
 }
 .captain-i:hover{
     background-color: white;
@@ -253,7 +256,7 @@ legend{
     cursor:pointer;
 }
 .radio-btn-captain-label > input:checked + div{
-    background-color: red;
+    background-color: rgb(184, 19, 19);
 }
 .radio-btn-captain-label[disabled]{
     color: gray;
@@ -279,7 +282,7 @@ legend{
 }
 .save-btn{
     width: 45%;
-    background-color: black;
+    background-image: url('https://media.istockphoto.com/photos/grass-field-ground-top-view-picture-id1192236248?k=20&m=1192236248&s=612x612&w=0&h=QcNPrNc_LLaUI5H1mmGpsIyT0mX-OHFTZk_redKHcUs=');
     color: white;
     padding: 2%;
     margin: 2%;
@@ -289,7 +292,7 @@ legend{
 }
 .cancel-btn{
     width: 45%;
-    background-color: black;
+    background-image: url('https://media.istockphoto.com/photos/grass-field-ground-top-view-picture-id1192236248?k=20&m=1192236248&s=612x612&w=0&h=QcNPrNc_LLaUI5H1mmGpsIyT0mX-OHFTZk_redKHcUs=');
     color: white;
     padding: 2%;
     margin: 2%;
@@ -309,7 +312,7 @@ legend{
     position: fixed;
     top: 35%;
     left: 25%;
-    background-color: black;
+    background-image: url('https://media.istockphoto.com/photos/grass-field-ground-top-view-picture-id1192236248?k=20&m=1192236248&s=612x612&w=0&h=QcNPrNc_LLaUI5H1mmGpsIyT0mX-OHFTZk_redKHcUs=');
     border-radius: 10px;
 }
 .create-player-container{
@@ -336,7 +339,7 @@ legend{
 }
 input{
     width: 50%;
-    background-color: black;
+    background-image: url('https://media.istockphoto.com/photos/grass-field-ground-top-view-picture-id1192236248?k=20&m=1192236248&s=612x612&w=0&h=QcNPrNc_LLaUI5H1mmGpsIyT0mX-OHFTZk_redKHcUs=');
     border: none;
     border-bottom: solid 2px white;
     text-decoration: none;
@@ -354,7 +357,7 @@ label{
     width: 70%;
     top: 10%;
     left: 15%;
-    background-color: black;
+    background-image: url('https://media.istockphoto.com/photos/grass-field-ground-top-view-picture-id1192236248?k=20&m=1192236248&s=612x612&w=0&h=QcNPrNc_LLaUI5H1mmGpsIyT0mX-OHFTZk_redKHcUs=');
     border-radius: 10px;
     overflow-y: scroll;
 }
@@ -380,7 +383,6 @@ label{
     font-size: 15px;
     text-align: left;
     color: white;
-    background-color: black;
     border-bottom: 1px solid gray;
     padding-left: 5%;
 }
@@ -390,7 +392,7 @@ label{
 }
 
 #team-score{
-    background-color: rgb(74, 94, 44);
+    background-color: rgb(104, 134, 58);
     height: 5%;
     width: 97%;
     margin: auto;
@@ -469,7 +471,7 @@ label{
     width: 24%;
     top: 23%;
     left: 38%;
-    background-color: black;
+    background-image: url('https://media.istockphoto.com/photos/grass-field-ground-top-view-picture-id1192236248?k=20&m=1192236248&s=612x612&w=0&h=QcNPrNc_LLaUI5H1mmGpsIyT0mX-OHFTZk_redKHcUs=');
     border-radius: 10px;
     overflow-y: scroll;
     color: white;

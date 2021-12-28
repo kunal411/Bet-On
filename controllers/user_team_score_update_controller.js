@@ -1,5 +1,4 @@
 const MatchLiveDetail = require('../models/match_live_details');
-const Team = require('../models/team');
 const Teams = require('../models/team');
 
 module.exports.scoreUpdate = async function(){
@@ -34,12 +33,22 @@ module.exports.scoreUpdate = async function(){
                             for(let y of playersDetails){
                                 if(playerId == y.playerId){
                                     points += y.points;
+                                    players[x].point = y.points;
+                                    if(playerId == teams[a].captainId){
+                                        points += y.points;
+                                        players[x].point += y.points;
+                                    }
+                                    if(playerId == teams[a].captainId){
+                                        points += (0.5 * y.points);
+                                        players[x].point += (0.5 * y.points);
+                                    }
                                 }
                             }
                         }
                         try{
                             const updatedTeam = await Teams.updateOne({teamId:teams[a].teamId}, { $set : {
-                                points:points
+                                points:points,
+                                players:players
                             }})
                         }catch(err){
                             console.log('Error : ' + err);
