@@ -3,7 +3,9 @@ const createContestBtn = document.getElementById('create-contest-button');
 const contestCards = document.querySelectorAll('#money-to-join-contest');
 const backgrnd = document.getElementById('container');
 const allContainers = document.querySelectorAll('.extra-contanier');
+const myTeamBtn = document.getElementById('team-display-button');
 
+// To close all the container on contest-card pages.
 function closeContainers(){
     for(let i = 0; i < allContainers.length; i++){
         allContainers[i].style.display = "none";
@@ -14,6 +16,7 @@ let contestId;
 let matchId;
 createBtn.addEventListener('click',function(){
     console.log('Create team button clicked');
+    alert('Select the players according to the followings rule :\r\n1. Select 4-7 players from each team.\r\n2. Select 3-6 batsman\r\n3. Select 3-6 bowlers.\r\n4. Select 1-3 wicket-keeper(s).\r\n5. Select 1-3 all-rounder(s).')
     const div=document.getElementById('select-players-parent');
     closeContainers();
     backgrnd.style.opacity = "0.5";
@@ -96,6 +99,8 @@ let wkCount = 0;
 let batCount = 0;
 let bowlCount = 0;
 let allRCount = 0;
+let team1 = 0;
+let team2 = 0;
 
 for(let i = 0; i < addPlayer.length; i++){
     let player = addPlayer[i];
@@ -103,6 +108,7 @@ for(let i = 0; i < addPlayer.length; i++){
         const playerName = player.getAttribute('data-player-name');
         const playerId = player.getAttribute('data-player-id');
         const playerPosition = player.getAttribute('data-player-position');
+        const team = player.getAttribute('data-team');
 
         let childLabelCaptain = player.children[2].children[0].children[0];
         let childLabelViceCaptain = player.children[3].children[0].children[0];
@@ -121,6 +127,9 @@ for(let i = 0; i < addPlayer.length; i++){
         console.log(isPresent);
         if(isPresent > -1){
             addedPlayers.splice(isPresent, 1);
+            if(team == "0")team1--;
+            else team2--;
+
             if(playerPosition == "batsman"){
                 batCount--;
             }else if(playerPosition == "bowler"){
@@ -136,11 +145,19 @@ for(let i = 0; i < addPlayer.length; i++){
             childLabelCaptain.checked = false;
             childLabelViceCaptain.checked = false;
 
-            player.style.backgroundColor = "black";
+            player.style.backgroundColor = "inherit";
         }
         else{
             if(addedPlayers.length == 11){
                 alert('Cannot Add more than 11 players');
+                return;
+            }
+            if(team == "0")team1++;
+            else team2++;
+            if(team1 > 7 || team2 > 7){
+                alert('Cannot add more than 7 players form one team.');
+                if(team == "0")team1--;
+                else team2--;
                 return;
             }
             if(playerPosition == "batsman"){
@@ -194,6 +211,26 @@ for(let i = 0; i < addPlayer.length; i++){
     });
 }
 
+myTeamBtn.addEventListener('click', function(){
+    closeContainers();
+    const userteamContainer = document.getElementsByClassName('user-team')[0];
+    const isTeamPresent = userteamContainer.getAttribute("data-team");
+    if(isTeamPresent == "false"){
+        alert('Create Team First!!');
+        backgrnd.style.opacity = "1";
+        return;
+    }
+    backgrnd.style.opacity = "0.5";
+    userteamContainer.style.display = "block";
+});
+
+const closeTeam = document.getElementsByClassName('close-team')[0];
+closeTeam.addEventListener('click', function(){
+    const userteamContainer = document.getElementsByClassName('user-team')[0];
+    userteamContainer.style.display = "none";
+    backgrnd.style.opacity = "1";
+})
+
 const captainBtn = document.querySelectorAll('.radio-btn-captain-label');
 for(let i = 0;i < captainBtn.length; i++){
     captainBtn[i].addEventListener('click',function(event){
@@ -216,6 +253,19 @@ yesButton.addEventListener('click', function(){
 const saveButton = document.getElementById('select-player-save');
 saveButton.addEventListener('click',function(){
     console.log('Save button clicked');
+    if(wkCount < 1){
+        alert('Select 1-3 wicketkeepr');
+        return;
+    }else if(batCount < 3){
+        alert('Select 3-6 batsman');
+        return;
+    }else if(bowlCount < 3){
+        alert('Select 3-6 bowler');
+        return;
+    }else if(allRCount < 1){
+        alert('Select 1-3 all-rounder');
+        return;
+    }
     let captainRadio = document.querySelectorAll('input[name="captain-radio"]');
     let viceCaptainRadio = document.querySelectorAll('input[name="vice-captain-radio"]');
     let captainId;
@@ -257,7 +307,7 @@ cancelButton.addEventListener('click',function(){
     console.log('Cancel button clicked');
     const playersDivs = document.getElementsByClassName('player-block');
     for(let i=0;i<playersDivs.length;i++){
-        playersDivs[i].style.backgroundColor="black";
+        playersDivs[i].style.backgroundColor="inherit";
     }
     backgrnd.style.opacity = "1";
     const div=document.getElementById('select-players-parent');

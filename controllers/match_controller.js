@@ -1,6 +1,7 @@
 const alert = require('alert');
 const MatchLiveDetail = require('../models/match_live_details');
 const Contest = require('../models/contest');
+const Team = require('../models/team');
 
 module.exports.contest = async function(req,res){
 
@@ -8,9 +9,21 @@ module.exports.contest = async function(req,res){
         return res.redirect('http://localhost:8000/users/sign-in');
     } 
 
-    const match_id = req.query.id;
+    const matchId = req.query.id;
     const homeTeamName = req.query.homeTeamName;
     const awayTeamName = req.query.awayTeamName;
+    const userId = req.user.userId;
+    let teamDetail = "undefined";
+    // console.log(teamDetail);
+
+    try{
+        const team = await Team.findOne({matchId : matchId , userId : userId});
+        if(team){
+            teamDetail = team;
+        }
+    }catch(err){
+        console.log("Error : " + err);
+    }
 
     let homePlayerDet = {
         'wicketkeeper' : [],
@@ -32,7 +45,7 @@ module.exports.contest = async function(req,res){
     };
 
     try{
-        let match = await MatchLiveDetail.findOne({matchId : match_id});  
+        let match = await MatchLiveDetail.findOne({matchId : matchId});  
         if(match){
             for(let x of match.teamHomePlayers){
                 if(x.position == 'wicketkeeper'){
@@ -91,7 +104,7 @@ module.exports.contest = async function(req,res){
                 }
             }
             try{
-                let contests = await Contest.find({matchId : match_id});
+                let contests = await Contest.find({matchId : matchId});
                 if(contests){
                     for(let x of contests){
                         let contestDet = {
@@ -115,9 +128,10 @@ module.exports.contest = async function(req,res){
                 match_details: matchDet,
                 homeTeamName: homeTeamName,
                 awayTeamName: awayTeamName,
-                lineupsOut : lineOut,
-                matchId: match_id,
-                contests: contestsDetails
+                lineupsOut: lineOut,
+                matchId: matchId,
+                contests: contestsDetails,
+                teamDetail: teamDetail
             });
         }else{
             // console.log('Live details are not out yet..');

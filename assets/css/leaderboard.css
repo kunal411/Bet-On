@@ -48,6 +48,7 @@ body{
     color: white;
     overflow-y: scroll;
     border-radius: 10px;
+    z-index: 20;
 }
 
 .user-team::-webkit-scrollbar{

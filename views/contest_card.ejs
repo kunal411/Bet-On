@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="/css/contest-card.css">
+<link rel="stylesheet" href="/css/leaderboard.css">
 
 <div id="container">
     <% let playerListHome = match_details.results[0].live_details.teamsheets.home.playerListHome %>
@@ -207,9 +208,93 @@
     </div>
 </div>
 
+<% let wicketKeepers = [] %>
+<% let batsmen = [] %>
+<% let allRounders = [] %>
+<% let bowlers = [] %>
+<% let teamPresent = "false" %>
+
+
+<% if(teamDetail != "undefined") {%>
+    <% teamPresent = "true" %>
+    <% for(let x of teamDetail.players) {%>
+        <% let playerNameArray = x.playerName.split(' ') %>
+        <% let playerName = playerNameArray[0][0].toUpperCase() + '. ' + playerNameArray[playerNameArray.length - 1].charAt(0).toUpperCase() + playerNameArray[playerNameArray.length - 1].slice(1); %>
+        <% if(x.playerId == teamDetail.captain) {%>
+            <% playerName += "(c)" %>
+        <% } %>
+        <% if(x.playerId == teamDetail.viceCaptainId) {%>
+            <% let vc = "VC" %>
+            <% playerName += "(vc)" %>
+        <% } %>
+        <% let playerPoint = x.point %>
+        <% let playerInfo = {playerName: playerName, playerPoint:playerPoint} %>
+        <% if(x.position == "wicketkeeper") {%>
+            <% wicketKeepers.push(playerInfo); %>
+        <% } %>
+        <% if(x.position == "batsman") {%>
+            <% batsmen.push(playerInfo); %>
+        <% } %>
+        <% if(x.position == "allrounder") {%>
+            <% allRounders.push(playerInfo); %>
+        <% } %>
+        <% if(x.position == "bowler") {%>
+            <% bowlers.push(playerInfo); %>
+        <% } %>
+    <% } %>
+<% } %>
+<div class="user-team extra-contanier" data-team="<%= teamPresent %>">
+    <i class="fa fa-window-close close-team"></i>
+    <p class="position-heading">WICKET-KEEPER</p>
+    <div class="user-team-wicketKeeper user-team-position">
+        <% for(let x of wicketKeepers) {%>
+            <div class="player-icon-name">
+                <img class="player-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2048px-User_icon_2.svg.png" alt="??">
+                <p class="playerName"><%= x.playerName %></p>
+                <p class="playerPoints"><%= x.playerPoint %> Pts</p>
+            </div>
+        <% } %>
+    </div> 
+
+    <p class="position-heading"> BATSMEN</p>
+    <div class="user-team-batsman user-team-position">
+        <% for(let x of batsmen) {%>
+            <div class="player-icon-name">
+                <img class="player-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2048px-User_icon_2.svg.png" alt="??">
+                <p class="playerName"><%= x.playerName %></p>
+                <p class="playerPoints"> <%= x.playerPoint %> Pts</p>
+            </div>
+        <% } %>
+    </div>
+
+    <p class="position-heading">ALL-ROUNDERS</p>
+    <div class="user-team-allRounder user-team-position">
+        <% for(let x of allRounders) {%>
+            <div class="player-icon-name">
+                <img class="player-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2048px-User_icon_2.svg.png" alt="??">
+                <p class="playerName"><%= x.playerName %></p>
+                <p class="playerPoints"> <%= x.playerPoint %> Pts</p>
+            </div>
+        <% } %>
+    </div>
+
+    <p class="position-heading">BOWLERS</p>
+    <div class="user-team-bowler user-team-position">
+        <% for(let x of bowlers) {%>
+            <div class="player-icon-name">
+                <img class="player-icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2048px-User_icon_2.svg.png" alt="??">
+                <p class="playerName"><%= x.playerName %></p>
+                <p class="playerPoints"> <%= x.playerPoint %> Pts</p>
+            </div>
+        <% } %>
+    </div>
+</div>
+
+
 <div class="create-team-footer">
     <button id="create-team-button" class="create-footer-button">CREATE TEAM</button>
     <button id="create-contest-button" class="create-footer-button">CREATE  CONTEST</button>
+    <button id="team-display-button" class="create-footer-button">MY TEAM</button>
 </div>
 
 <div id="select-players-parent" class="extra-contanier">
@@ -223,7 +308,7 @@
                 <legend>&nbsp;Wicket-Keeper&nbsp;</legend>
                 <% for(let i = 0; i < homePlayerDet.wicketkeeper.length; i++){ %>
                     <% let playerDet = homePlayerDet.wicketkeeper[i]; %>
-                    <div class="player-block" data-player-name="<%= playerDet.playerName %>" data-player-id = "<%= playerDet.playerId %>" data-match-id = "<%= matchId %>" data-player-position = "<%= playerDet.position %>">
+                    <div class="player-block" data-player-name="<%= playerDet.playerName %>" data-player-id = "<%= playerDet.playerId %>" data-match-id = "<%= matchId %>" data-player-position = "<%= playerDet.position %>" data-team="0">
                         <div class="player_name" id=<%= playerDet.playerId %> ><%= playerDet.playerName.toUpperCase() %></div>
                         <div class="player_position"><%= playerDet.position.toUpperCase() %></div>
                         <div class="captain">
@@ -245,7 +330,7 @@
                 <legend>&nbsp;Batsman&nbsp;</legend>
                 <% for(let i = 0; i < homePlayerDet.batsman.length; i++){ %>
                     <% let playerDet = homePlayerDet.batsman[i]; %>
-                    <div class="player-block" data-player-name="<%= playerDet.playerName %>" data-player-id = "<%= playerDet.playerId %>" data-match-id = "<%= matchId %>" data-player-position = "<%= playerDet.position %>">
+                    <div class="player-block" data-player-name="<%= playerDet.playerName %>" data-player-id = "<%= playerDet.playerId %>" data-match-id = "<%= matchId %>" data-player-position = "<%= playerDet.position %>" data-team="0">
                         <div class="player_name" id=<%= playerDet.playerId %> ><%= playerDet.playerName.toUpperCase() %></div>
                         <div class="player_position"><%= playerDet.position.toUpperCase() %></div>
                         <div class="captain">
@@ -267,7 +352,7 @@
                 <legend>&nbsp;All-Rounder&nbsp;</legend>
                 <% for(let i = 0; i < homePlayerDet.allRounder.length; i++){ %>
                     <% let playerDet = homePlayerDet.allRounder[i]; %>
-                    <div class="player-block" data-player-name="<%= playerDet.playerName %>" data-player-id = "<%= playerDet.playerId %>" data-match-id = "<%= matchId %>" data-player-position = "<%= playerDet.position %>">
+                    <div class="player-block" data-player-name="<%= playerDet.playerName %>" data-player-id = "<%= playerDet.playerId %>" data-match-id = "<%= matchId %>" data-player-position = "<%= playerDet.position %>" data-team="0">
                         <div class="player_name" id=<%= playerDet.playerId %> ><%= playerDet.playerName.toUpperCase() %></div>
                         <div class="player_position"><%= playerDet.position.toUpperCase() %></div>
                         <div class="captain">
@@ -289,7 +374,7 @@
                 <legend>&nbsp;Bowler&nbsp;</legend>
                 <% for(let i = 0; i < homePlayerDet.bowler.length; i++){ %>
                     <% let playerDet = homePlayerDet.bowler[i]; %>
-                    <div class="player-block" data-player-name="<%= playerDet.playerName %>" data-player-id = "<%= playerDet.playerId %>" data-match-id = "<%= matchId %>" data-player-position = "<%= playerDet.position %>">
+                    <div class="player-block" data-player-name="<%= playerDet.playerName %>" data-player-id = "<%= playerDet.playerId %>" data-match-id = "<%= matchId %>" data-player-position = "<%= playerDet.position %>" data-team="0">
                         <div class="player_name" id=<%= playerDet.playerId %> ><%= playerDet.playerName.toUpperCase() %></div>
                         <div class="player_position"><%= playerDet.position.toUpperCase() %></div>
                         <div class="captain">
@@ -317,7 +402,7 @@
                 <legend>&nbsp;Wicket-Keeper&nbsp;</legend>
                 <% for(let i = 0; i < awayPlayerDet.wicketkeeper.length; i++){ %>
                     <% let playerDet = awayPlayerDet.wicketkeeper[i]; %>
-                    <div class="player-block" data-player-name="<%= playerDet.playerName %>" data-player-id = "<%= playerDet.playerId %>" data-match-id = "<%= matchId %>" data-player-position = "<%= playerDet.position %>">
+                    <div class="player-block" data-player-name="<%= playerDet.playerName %>" data-player-id = "<%= playerDet.playerId %>" data-match-id = "<%= matchId %>" data-player-position = "<%= playerDet.position %>" data-team="1">
                         <div class="player_name" id=<%= playerDet.playerId %> ><%= playerDet.playerName.toUpperCase() %></div>
                         <div class="player_position"><%= playerDet.position.toUpperCase() %></div>
                         <div class="captain">
@@ -339,7 +424,7 @@
                 <legend>&nbsp;Batsman&nbsp;</legend>
                 <% for(let i = 0; i < awayPlayerDet.batsman.length; i++){ %>
                     <% let playerDet = awayPlayerDet.batsman[i]; %>
-                    <div class="player-block" data-player-name="<%= playerDet.playerName %>" data-player-id = "<%= playerDet.playerId %>" data-match-id = "<%= matchId %>" data-player-position = "<%= playerDet.position %>">
+                    <div class="player-block" data-player-name="<%= playerDet.playerName %>" data-player-id = "<%= playerDet.playerId %>" data-match-id = "<%= matchId %>" data-player-position = "<%= playerDet.position %>" data-team="1">
                         <div class="player_name" id=<%= playerDet.playerId %> ><%= playerDet.playerName.toUpperCase() %></div>
                         <div class="player_position"><%= playerDet.position.toUpperCase() %></div>
                         <div class="captain">
@@ -361,7 +446,7 @@
                 <legend>&nbsp;All-Rounder&nbsp;</legend>
                 <% for(let i = 0; i < awayPlayerDet.allRounder.length; i++){ %>
                     <% let playerDet = awayPlayerDet.allRounder[i]; %>
-                    <div class="player-block" data-player-name="<%= playerDet.playerName %>" data-player-id = "<%= playerDet.playerId %>" data-match-id = "<%= matchId %>" data-player-position = "<%= playerDet.position %>">
+                    <div class="player-block" data-player-name="<%= playerDet.playerName %>" data-player-id = "<%= playerDet.playerId %>" data-match-id = "<%= matchId %>" data-player-position = "<%= playerDet.position %>" data-team="1">
                         <div class="player_name" id=<%= playerDet.playerId %> ><%= playerDet.playerName.toUpperCase() %></div>
                         <div class="player_position"><%= playerDet.position.toUpperCase() %></div>
                         <div class="captain">
@@ -383,7 +468,7 @@
                 <legend>&nbsp;Bowler&nbsp;</legend>
                 <% for(let i = 0; i < awayPlayerDet.bowler.length; i++){ %>
                     <% let playerDet = awayPlayerDet.bowler[i]; %>
-                    <div class="player-block" data-player-name="<%= playerDet.playerName %>" data-player-id = "<%= playerDet.playerId %>" data-match-id = "<%= matchId %>" data-player-position = "<%= playerDet.position %>">
+                    <div class="player-block" data-player-name="<%= playerDet.playerName %>" data-player-id = "<%= playerDet.playerId %>" data-match-id = "<%= matchId %>" data-player-position = "<%= playerDet.position %>" data-team="1">
                         <div class="player_name" id=<%= playerDet.playerId %> ><%= playerDet.playerName.toUpperCase() %></div>
                         <div class="player_position"><%= playerDet.position.toUpperCase() %></div>
                         <div class="captain">
