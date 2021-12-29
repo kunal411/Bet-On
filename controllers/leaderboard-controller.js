@@ -1,5 +1,6 @@
 const Contest = require('../models/contest');
 const Team = require('../models/team');
+const MatchLiveDet = require('../models/match_live_details');
 
 
 module.exports.leaderBoardUpdate = async function(req,res){
@@ -12,6 +13,17 @@ module.exports.leaderBoardUpdate = async function(req,res){
     const userId = req.user.userId;
     let numberOfWinners;
     let results = [];
+    let inPlay;
+    let mathcResult;
+    try{
+        let match = await MatchLiveDet.findOne({matchId : matchId});
+        if(match){
+            inPlay = match.inPlay;
+            mathcResult = match.result;
+        }
+    }catch(err){
+        console.log('Err : ' + err);
+    }
 
     try{
         const contest = await Contest.findOne({_id : contestId});
@@ -46,6 +58,8 @@ module.exports.leaderBoardUpdate = async function(req,res){
         title : "Leaderboard",
         result : results,
         userId : userId,
-        numberOfWinners : numberOfWinners
+        numberOfWinners : numberOfWinners,
+        inPlay: inPlay,
+        mathcResult: mathcResult
     })
 }   

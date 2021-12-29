@@ -195,13 +195,14 @@ legend{
 }
 
 .player-block{
-    color: white;
+    color: black;
     display: flex;
     justify-content: space-around;
     border: 1px solid white;
     border-radius: 20px;
     padding: 1%;
     margin: 2%;
+    background-color: rgba(255,255,255,0.8);
 }
 
 .player_name{
@@ -222,7 +223,7 @@ legend{
 .captain-i{
     width: 30px;
     height: 30px;
-    border: 2px solid white;
+    border: 2px solid black;
     border-radius: 50%;
     text-align: center;
     z-index: 10;
@@ -371,7 +372,7 @@ label{
     padding: 10px;
 }
 
-.grid-container1{
+.grid-container-winning{
     display: grid;
     grid-template-columns: 45% 45%;
     padding: 10px;

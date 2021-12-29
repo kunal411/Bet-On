@@ -17,8 +17,7 @@ module.exports.addMatchtoDb = async function(){
     let obj = {
         "results" : []
     };
-    var date = new Date(); 
-    const date1 = new Date();
+    var date = new Date();
     var month = pad2(date.getMonth()+1);//months (0-11)
     var day = pad2(date.getDate());//day (1-31)
     var year= date.getFullYear();

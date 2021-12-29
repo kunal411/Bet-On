@@ -145,7 +145,7 @@ for(let i = 0; i < addPlayer.length; i++){
             childLabelCaptain.checked = false;
             childLabelViceCaptain.checked = false;
 
-            player.style.backgroundColor = "inherit";
+            player.style.backgroundColor = "rgba(255, 255, 255, 0.8)";
         }
         else{
             if(addedPlayers.length == 11){
@@ -307,12 +307,29 @@ cancelButton.addEventListener('click',function(){
     console.log('Cancel button clicked');
     const playersDivs = document.getElementsByClassName('player-block');
     for(let i=0;i<playersDivs.length;i++){
-        playersDivs[i].style.backgroundColor="inherit";
+        playersDivs[i].style.backgroundColor="rgba(255, 255, 255, 0.8)";
     }
     backgrnd.style.opacity = "1";
     const div=document.getElementById('select-players-parent');
     div.style.display="none";
     addedPlayers = [];
+    wkCount = 0;
+    batCount = 0;
+    bowlCount = 0;
+    allRCount = 0;
+    team1 = 0;
+    team2 = 0;
+    let captainRadio = document.querySelectorAll('input[name="captain-radio"]');
+    let viceCaptainRadio = document.querySelectorAll('input[name="vice-captain-radio"]');
+    for(let i = 0; i < captainRadio.length; i++){
+        captainRadio[i].checked = false;
+        captainRadio[i].disabled = true;
+    }
+    
+    for(let i = 0; i < viceCaptainRadio.length; i++){
+        viceCaptainRadio[i].checked = false;
+        viceCaptainRadio[i].disabled = true;
+    }
 });
 
 const contestCard = document.querySelectorAll('.contest-card');

@@ -38,7 +38,7 @@
         <div class="winnings-breakdown-container extra-contanier">
             <i class="fa fa-window-close close-breakup" style="font-size:24px;color:white"></i>
             <h4>Winnings Breakdown</h4>
-            <div class="grid-container1">
+            <div class="grid-container-winning">
                 <div class="grid-item grid-item-header">Rank</div>
                 <div class="grid-item grid-item-header">Winnings</div>
                 <% for(let i = 0; i < x.prizeDetails.length; i++) { %>
@@ -220,7 +220,7 @@
     <% for(let x of teamDetail.players) {%>
         <% let playerNameArray = x.playerName.split(' ') %>
         <% let playerName = playerNameArray[0][0].toUpperCase() + '. ' + playerNameArray[playerNameArray.length - 1].charAt(0).toUpperCase() + playerNameArray[playerNameArray.length - 1].slice(1); %>
-        <% if(x.playerId == teamDetail.captain) {%>
+        <% if(x.playerId == teamDetail.captainId) {%>
             <% playerName += "(c)" %>
         <% } %>
         <% if(x.playerId == teamDetail.viceCaptainId) {%>
