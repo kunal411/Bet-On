@@ -9,16 +9,16 @@ module.exports.joinContest = async function(req,res){
     const contestCode = req.query.joinCode;
 
     try{
-        const contest = await Contest.findOne({_id:contestCode});
+        const contest = await Contest.findOne({_id:contestCode, matchId : matchId});
         if(contest){
             let userArray = contest.userIds;
-            userArray.push(userId);
             for(let x of userArray){
                 if(userId == x){
                     alert('User Already Registered!!!');
                     return res.redirect('back');
                 }
             }
+            userArray.push(userId);
             let teamsIdArray = contest.teamsId;
             let spotsLeft = contest.spotsLeft;
             if(spotsLeft == 0){
@@ -39,10 +39,15 @@ module.exports.joinContest = async function(req,res){
                     }catch(err){
                         console.log('Error : ' + err);
                     }
+                }else{
+                    alert('Create Team First!!');
+                    return res.redirect('back');
                 }
             } 
             catch(err){
                 console.log('Error : ' + err);
+                alert('Create Team First!!');
+                return res.redirect('back');
             }
             try{
                 let user = await User.findOne({userId : userId});

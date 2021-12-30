@@ -372,17 +372,25 @@ joinContestSaveButton.addEventListener('click',function(){
     window.location.href = `http://localhost:8000/match/contest/join-contest?joinCode=${joinCode}&matchId=${matchId}`;
 })
 
-const codeCopyBtn = document.getElementById('contest-code-copy');
-codeCopyBtn.addEventListener('click',function(event){
-    event.stopPropagation();
-    console.log('copy button has been clicked***********');
-    const contestCode = codeCopyBtn.getAttribute('data-contest-code');
-    navigator.clipboard.writeText(contestCode);
-    alert("Copied the text: " + contestCode);
-})
+const codeCopyBtn = document.querySelectorAll('#contest-code-copy');
+for(let i = 0; i < codeCopyBtn.length; i++){
+    codeCopyBtn[i].addEventListener('click',async function(event){
+        event.stopPropagation();
+        console.log('copy button has been clicked***********');
+        const contestCode = codeCopyBtn[i].getAttribute('data-contest-code');
+        try {
+            await navigator.clipboard.writeText(contestCode);
+            console.log('Page URL copied to clipboard');
+        } catch (err) {
+            console.error('Failed to copy: ', err);
+        }
+        alert("Copied the text: " + contestCode);
+    })
+}
 
 const cancelBtn = document.querySelectorAll('.cancel-btn');
 for(let x of cancelBtn){
+    console.log('Cancel button clicked');
     x.addEventListener('click', function(){
         backgrnd.style.opacity = "1";
         closeContainers();

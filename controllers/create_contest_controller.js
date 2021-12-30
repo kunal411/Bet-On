@@ -2,6 +2,7 @@ const Contest = require('../models/contest');
 const Match = require('../models/match');
 const User = require('../models/user');
 const Team = require('../models/team');
+const alert = require('alert');
 
 module.exports.createContest = async function(req, res){
     const userId = req.user.userId;
@@ -15,9 +16,14 @@ module.exports.createContest = async function(req, res){
         const team = await Team.findOne({matchId : matchId , userId : userId});
         if(team){
             userTeamId = team.teamId;
+        }else{
+            alert('Create Team First!!');
+            return res.redirect('back');
         }
     }catch(err){
+        alert('Create Team First!!')
         console.log("Error : " + err);
+        return res.redirect('back');
     }
 
     let contest = new Contest();
