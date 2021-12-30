@@ -25,7 +25,7 @@ module.exports.addMatchtoDb = async function(){
     // var month = "09";
     // var year = "2021"; 
     var formattedDate =  year+"-"+month+"-"+day;
-    const numberOfDays = 0;
+    const numberOfDays = 5;
 
     for (let i = 0; i < numberOfDays; i++){
         console.log(formattedDate);

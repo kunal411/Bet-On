@@ -107,7 +107,7 @@ module.exports.contest = async function(req,res){
                 let contests = await Contest.find({matchId : matchId});
                 if(contests){
                     for(let x of contests){
-                        if(x.admin == "Server-Domino-Beton"){
+                        if(x.admin == "server-domino-beton"){
                             let contestDet = {
                                 contestId: x._id,
                                 price : x.price,
@@ -121,7 +121,7 @@ module.exports.contest = async function(req,res){
                             contestsDetails.push(contestDet);
                             continue;
                         }
-                        for(let y of contests.userIds){
+                        for(let y of x.userIds){
                             if(y == userId){
                                 let contestDet = {
                                     contestId: x._id,
@@ -142,6 +142,8 @@ module.exports.contest = async function(req,res){
                 console.log("Error : " + err);
             }
             matchDet.results.push(s);
+            // console.log("******************************************************************************");
+            // console.log(contestsDetails);
             return res.render('contest_card', {
                 title: 'Contests',
                 match_details: matchDet,

@@ -363,3 +363,51 @@ createContestSaveButton.addEventListener('click', function(){
     }
     window.location.href = `http://localhost:8000/match/contest/create-contest?entryAmount=${entryAmount}&spots=${spots}&winners=${winners}&matchId=${matchId}`;
 })
+
+const joinContestSaveButton = document.getElementById('join-contest-save');
+joinContestSaveButton.addEventListener('click',function(){
+    const matchId = joinContestSaveButton.getAttribute('data-match-id');
+    const joinCode = document.getElementById('join-code').value;
+    console.log(matchId +" **************************//////////" + joinCode);
+    window.location.href = `http://localhost:8000/match/contest/join-contest?joinCode=${joinCode}&matchId=${matchId}`;
+})
+
+const codeCopyBtn = document.getElementById('contest-code-copy');
+codeCopyBtn.addEventListener('click',function(event){
+    event.stopPropagation();
+    console.log('copy button has been clicked***********');
+    const contestCode = codeCopyBtn.getAttribute('data-contest-code');
+    navigator.clipboard.writeText(contestCode);
+    alert("Copied the text: " + contestCode);
+})
+
+const cancelBtn = document.querySelectorAll('.cancel-btn');
+for(let x of cancelBtn){
+    x.addEventListener('click', function(){
+        backgrnd.style.opacity = "1";
+        closeContainers();
+    })
+}
+
+
+const createDiv = document.getElementById('create-div');
+const joinDiv = document.getElementById('join-div');
+const contestcreateContainer = document.getElementsByClassName('create-contest-container')[0];
+const contestjoinContainer = document.getElementsByClassName('join-contest-container')[0];
+const createDivBtn = document.getElementById('create-div');
+const joinDivBtn =  document.getElementById('join-div');
+
+createDiv.addEventListener('click',function(){
+    console.log('create contest');
+    contestjoinContainer.style.display = "none";
+    contestcreateContainer.style.display = "block";
+    createDivBtn.style.borderBottom = "solid 2px white";
+    joinDivBtn.style.borderBottom = "none";
+})
+
+joinDiv.addEventListener('click',function(){
+    contestjoinContainer.style.display = "block";
+    contestcreateContainer.style.display = "none";
+    createDivBtn.style.borderBottom = "none";
+    joinDivBtn.style.borderBottom = "solid 2px white";
+})

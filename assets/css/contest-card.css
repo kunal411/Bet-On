@@ -71,6 +71,36 @@ input::-webkit-inner-spin-button {
     padding: 1%;
 }
 
+.contest-code-p{
+    color: #00b137;
+    font-family: monospace;
+    font-weight: 700;
+}
+.btn-div{
+    margin-top: 1%;
+    width: 100%;
+    display: flex;
+    color: white;
+    z-index: 100;
+}
+#create-div {
+    width: 50%;
+    text-align: center;
+    border-bottom: solid 2px white;
+    margin: 2%;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+#join-div{
+    width: 50%;
+    text-align: center;
+    margin: 2%;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+
+
 .contest-prize-pool:hover{
     background-color: rgb(197, 188, 188);
     cursor: pointer;
@@ -308,18 +338,34 @@ legend{
 }
 #create-contest-parent{
     display: none;
-    height: 50%;
+    height: 60%;
     width: 50%;
     position: fixed;
-    top: 25%;
+    top: 20%;
     left: 25%;
     background-image: url('https://media.istockphoto.com/photos/grass-field-ground-top-view-picture-id1192236248?k=20&m=1192236248&s=612x612&w=0&h=QcNPrNc_LLaUI5H1mmGpsIyT0mX-OHFTZk_redKHcUs=');
     border-radius: 10px;
 }
-.create-player-container{
+.create-join-contest{
+    display: flex;
+    width: 100%;
+}
+.create-contest-container{
     margin: 3%;
     padding: 3%;
     color: white;
+    width: 100%;
+    /* display: none; */
+}
+.join-contest-container{
+    margin: 3%;
+    padding: 3%;
+    color: white;
+    width: 100%;
+    display: none;
+}
+.join-contest-footer{
+    margin-top: 10%;
 }
 .create-contest-details{
     display: flex;

@@ -23,6 +23,10 @@
         <div class="contest-card"  data-contest-id = "<%= x.contestId%>" data-match-id="<%= matchId %>">
             <div class="card-header">
                 <p>Prize Pool</p>
+                <% if(x.contestCode != "") {%>
+                    <p class = "contest-code-p">Contest Code : <span id="contest-code"><%= x.contestCode %></span> &nbsp;&nbsp;&nbsp;<i class="far fa-copy" id="contest-code-copy" data-contest-code="<%= x.contestCode%>"></i></p>
+
+                 <% } %>   
                 <p>Entry</p>
             </div>
             <div class="pool-price">
@@ -293,7 +297,7 @@
 
 <div class="create-team-footer">
     <button id="create-team-button" class="create-footer-button">CREATE TEAM</button>
-    <button id="create-contest-button" class="create-footer-button">CREATE  CONTEST</button>
+    <button id="create-contest-button" class="create-footer-button">CREATE / JOIN  CONTEST</button>
     <button id="team-display-button" class="create-footer-button">MY TEAM</button>
 </div>
 
@@ -496,35 +500,58 @@
 </div>
 
 <div id="create-contest-parent" class="extra-contanier">
-    <div class="create-player-container">
-        <div class ="create-contest-details">
-            <div class="entry">
-                <label for="entry">Entry Amount : </label>
-                <div>
-                    ₹&nbsp;<input id ="entry" type="number" required>
-                </div>
-                
-            </div>
-            <div class="spots">
-                <label for="spots">Total Spots : </label>
-                <div>
-                    &nbsp;&nbsp;<input id ="spots" type="number" required>
-                </div>
-            </div>
-
-            <div class="numWinners">
-                <label for="winners">Total Winners : </label>
-                <div>
-                    &nbsp;&nbsp;<input id ="winners" type="number" required>
-                </div>
-            </div>
+    <div class="btn-div">
+        <div id="create-div">
+            CREATE
         </div>
-    
-        <div class="create-contest-footer">
-            <button id="create-contest-save" class="save-btn" type="submit" data-match-id = "<%= matchId %>">SAVE</button>
-            <button id="create-contest-cancel" class="cancel-btn">CANCEL</button>
+        <div id="join-div">
+            JOIN
         </div>
     </div>
-
+    <div class="create-join-contest">
+        <div class="create-contest-container">
+            <div class ="create-contest-details">
+                <div class="entry">
+                    <label for="entry">Entry Amount : </label>
+                    <div>
+                        ₹&nbsp;<input id ="entry" type="number" required>
+                    </div>
+                    
+                </div>
+                <div class="spots">
+                    <label for="spots">Total Spots : </label>
+                    <div>
+                        &nbsp;&nbsp;<input id ="spots" type="number" required>
+                    </div>
+                </div>
+    
+                <div class="numWinners">
+                    <label for="winners">Total Winners : </label>
+                    <div>
+                        &nbsp;&nbsp;<input id ="winners" type="number" required>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="create-contest-footer">
+                <button id="create-contest-save" class="save-btn" data-match-id = "<%= matchId %>">CREATE</button>
+                <button id="create-contest-cancel" class="cancel-btn">CANCEL</button>
+            </div>
+        </div>
+        <div class="join-contest-container">
+            <div class ="join-contest-details">
+                <div class="entry">
+                    <label for="join-code">Enter Code : </label>
+                    <div>
+                        <input id ="join-code" type="string" required>
+                    </div>
+                </div>
+            </div>
+            <div class="join-contest-footer">
+                <button id="join-contest-save" class="save-btn" data-match-id = "<%= matchId %>">JOIN</button>
+                <button id="create-contest-cancel" class="cancel-btn">CANCEL</button>
+            </div>
+        </div>
+    </div>
 </div>
 <script src="/js/contest-card.js"></script>
