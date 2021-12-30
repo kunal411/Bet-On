@@ -342,4 +342,24 @@ for(let i = 0; i < contestCard.length; i++){
     })
 }
 
-
+const createContestSaveButton = document.getElementById('create-contest-save');
+createContestSaveButton.addEventListener('click', function(){
+    const entryAmount = document.getElementById('entry').value;
+    const spots = document.getElementById('spots').value;
+    const winners = document.getElementById('winners').value;
+    const matchId = createContestSaveButton.getAttribute('data-match-id');
+    console.log(entryAmount + " " + spots + " " + winners);
+    if(entryAmount < 10){
+        alert('Entry Amount cannot be less than 10');
+        return;
+    }
+    if(spots < 2 || spots > 100){
+        alert('Spots cannot be greater than 100 and less than 2');
+        return;
+    }
+    if(winners < 1 || winners > spots/2){
+        alert('winners cannot be greater than ' + spots/2 + ' and less than 1');
+        return;
+    }
+    window.location.href = `http://localhost:8000/match/contest/create-contest?entryAmount=${entryAmount}&spots=${spots}&winners=${winners}&matchId=${matchId}`;
+})

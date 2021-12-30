@@ -107,16 +107,35 @@ module.exports.contest = async function(req,res){
                 let contests = await Contest.find({matchId : matchId});
                 if(contests){
                     for(let x of contests){
-                        let contestDet = {
-                            contestId: x._id,
-                            price : x.price,
-                            totalSpots: x.totalSpots,
-                            spotsLeft : x.spotsLeft,
-                            teamsId : x.teamsId,
-                            matchId : x.matchId,
-                            prizeDetails : x.prizeDetails
+                        if(x.admin == "Server-Domino-Beton"){
+                            let contestDet = {
+                                contestId: x._id,
+                                price : x.price,
+                                totalSpots: x.totalSpots,
+                                spotsLeft : x.spotsLeft,
+                                teamsId : x.teamsId,
+                                matchId : x.matchId,
+                                prizeDetails : x.prizeDetails,
+                                contestCode : ""
+                            }
+                            contestsDetails.push(contestDet);
+                            continue;
                         }
-                        contestsDetails.push(contestDet);
+                        for(let y of contests.userIds){
+                            if(y == userId){
+                                let contestDet = {
+                                    contestId: x._id,
+                                    price : x.price,
+                                    totalSpots: x.totalSpots,
+                                    spotsLeft : x.spotsLeft,
+                                    teamsId : x.teamsId,
+                                    matchId : x.matchId,
+                                    prizeDetails : x.prizeDetails,
+                                    contestCode : x.id
+                                }
+                                contestsDetails.push(contestDet);
+                            }
+                        }
                     }
                 }
             }catch(err){

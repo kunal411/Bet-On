@@ -5,12 +5,13 @@ const matchController=require('../controllers/match_controller');
 const teamController = require('../controllers/team_controller');
 const joinTeamController = require('../controllers/join-team-controller');
 const leaderBoardController = require('../controllers/leaderboard-controller');
+const createContestController = require('../controllers/create_contest_controller');
 
 router.get('/contest',matchController.contest);
 router.get('/contest/team', teamController.createTeam);
 router.get('/contest/join', joinTeamController.joinTeam);
 router.get('/contest/leaderboard', leaderBoardController.leaderBoardUpdate);
-
+router.get('/contest/create-contest', createContestController.createContest);
 
 
 module.exports = router;

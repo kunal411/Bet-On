@@ -17,6 +17,7 @@ module.exports.joinTeam = async function(req, res){
                 let contest = await Contest.findOne({_id: contestId});
                 let teamsId = contest.teamsId;
                 let spotsLeft = contest.spotsLeft;
+                let userIdsArray = contest.userIds;
                 function checkTeam(teamId) {
                     return teamId == team.teamId;
                 }
@@ -33,7 +34,13 @@ module.exports.joinTeam = async function(req, res){
                 }
                 teamsId.push(team.teamId);
                 try{
-                    let contest1 = await Contest.updateOne({_id: contestId}, {$set:{teamsId:teamsId , spotsLeft:spotsLeft-1}});
+                    userIdsArray.push(userId);
+                    let contest1 = await Contest.updateOne({_id: contestId}, {$set:{
+                        teamsId:teamsId,
+                        spotsLeft:spotsLeft-1,
+                        userIds : userIdsArray
+
+                    }});
                     if(contest1){
                         alert('Contest joined successfully!');
                         try{

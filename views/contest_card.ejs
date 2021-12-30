@@ -501,20 +501,27 @@
             <div class="entry">
                 <label for="entry">Entry Amount : </label>
                 <div>
-                    ₹&nbsp;<input id ="entry" type="number">
+                    ₹&nbsp;<input id ="entry" type="number" required>
                 </div>
                 
             </div>
             <div class="spots">
                 <label for="spots">Total Spots : </label>
                 <div>
-                    &nbsp;&nbsp;<input id ="spots" type="number">
+                    &nbsp;&nbsp;<input id ="spots" type="number" required>
+                </div>
+            </div>
+
+            <div class="numWinners">
+                <label for="winners">Total Winners : </label>
+                <div>
+                    &nbsp;&nbsp;<input id ="winners" type="number" required>
                 </div>
             </div>
         </div>
     
         <div class="create-contest-footer">
-            <button id="create-contest-save" class="save-btn">SAVE</button>
+            <button id="create-contest-save" class="save-btn" type="submit" data-match-id = "<%= matchId %>">SAVE</button>
             <button id="create-contest-cancel" class="cancel-btn">CANCEL</button>
         </div>
     </div>

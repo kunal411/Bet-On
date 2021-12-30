@@ -289,7 +289,7 @@ legend{
     margin: 2%;
     border: solid 1px white;
     border-radius: 10px;
-
+    z-index: 1;
 }
 .cancel-btn{
     width: 45%;
@@ -308,10 +308,10 @@ legend{
 }
 #create-contest-parent{
     display: none;
-    height: 40%;
+    height: 50%;
     width: 50%;
     position: fixed;
-    top: 35%;
+    top: 25%;
     left: 25%;
     background-image: url('https://media.istockphoto.com/photos/grass-field-ground-top-view-picture-id1192236248?k=20&m=1192236248&s=612x612&w=0&h=QcNPrNc_LLaUI5H1mmGpsIyT0mX-OHFTZk_redKHcUs=');
     border-radius: 10px;
@@ -336,7 +336,7 @@ legend{
     margin-bottom: 3%;
 }
 .create-contest-footer{
-    margin-top: 2%;
+    margin-top: 5%;
 }
 input{
     width: 50%;

@@ -111,7 +111,7 @@ module.exports.addMatchtoDb = async function(){
                                     },
                                 ]
                                 contest1.prizeDetails = prizeDetails;
-                                
+                                contest1.numWinners = 5;
                                 console.log(contest1.price +" "+contest1.totalSpots + contest1.spotsLeft +contest1.matchId);
                                 try{
                                     let contest2 = await Contest.create(contest1);

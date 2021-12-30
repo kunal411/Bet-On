@@ -11,6 +11,11 @@ const contestSchema = new mongoose.Schema({
         required : true,
     },
 
+    numWinners:{
+        type : Number,
+        required : true,
+    },
+
     spotsLeft: {
         type : Number,
         required : true,
@@ -35,11 +40,26 @@ const contestSchema = new mongoose.Schema({
         {
             prize : {
                 type : Number,
-                required: true
             },
             prizeHolder : {
                 type : String
             }
+        }
+    ],
+
+    admin: {
+        type : String,
+        trim : true,
+        required : true,
+        lowercase : true,
+        default: "Server-Domino-Beton"
+    },
+
+    userIds : [
+        {
+            type : String,
+            trim : true,
+            lowercase : true
         }
     ]
 },{
