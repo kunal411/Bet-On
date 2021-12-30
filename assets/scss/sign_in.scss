@@ -50,7 +50,14 @@ body{
             color: white;
             cursor: pointer;
         }
-
+        .forget-password{
+            color: #576d80;
+            margin-top: 2%;
+            cursor: pointer;
+        }
+        .forget-password:hover{
+            text-decoration: underline;
+        }
         #submit:active{
             background-color: #576d80;
         }

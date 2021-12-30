@@ -31,9 +31,9 @@ module.exports.addMatchLiveScoreDettoDb = async function(){
         for(let i = 0; i < matchList.length; i++){
             let matchId = matchList[i].matchId;
 
-            // if(matchList[i].inPlay == "No"){
-            //     continue;
-            // }
+            if(matchList[i].inPlay == "No"){
+                continue;
+            }
             const options = {
                 method: 'GET',
                 url: `https://cricket-live-data.p.rapidapi.com/match/${matchId}`,
@@ -57,7 +57,7 @@ module.exports.addMatchLiveScoreDettoDb = async function(){
             });
             promise.then( async (s)=>{
                 // Change to be done in if condition , this is only for code testing!!!
-                if(s.results.live_details.match_summary.in_play == "No"){
+                if(s.results.live_details.match_summary.in_play == "Yes"){
                     let inPlay = "Yes";
                     let status = s.results.live_details.match_summary.status;
                     let toss = s.results.live_details.match_summary.toss;

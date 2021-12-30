@@ -35,7 +35,9 @@ module.exports.home = async function (req, res){
 
     for(let x of userMatches){
         let match = await Matches.findOne({matchId : x});
-        if(match){
+        let match_det = await LiveMatches.findOne({matchId : x});
+
+        if(match_det){
             let mat = {
                 match_title : match.matchTitle,
                 home: {
@@ -47,7 +49,21 @@ module.exports.home = async function (req, res){
                     code: match.teamAwayCode.toUpperCase()
                 },
                 date: match.date,
-                id: match.matchId
+                id: match.matchId,
+                livestatus : "",
+                result: "",
+                status: "",
+                inPlay: ""
+            }
+            mat.status = match_det.status;
+            mat.inPlay = match_det.inPlay;
+            liveStatus = "Line-ups are out!";
+            mat.livestatus = liveStatus;
+            if(match_det.result == "No"){
+                mat.result = "No";
+            }
+            else{
+                mat.result = "Yes";
             }
             userMatcesDetails.results.push(mat);
         }
