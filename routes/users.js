@@ -13,8 +13,8 @@ router.post('/create', usersController.create);
 
 // use passport as a middleware to authenticate
 router.post('/create-session', passport.authenticate(
-    'local',
-    {failureRedirect: '/users/sign-in'},
+'local',
+{failureRedirect: '/users/sign-in'},
 ), usersController.createSession);
 
 
@@ -24,6 +24,7 @@ router.get('/auth/google', passport.authenticate('google', {scope: ['profile', '
 router.get('/auth/google/callback', passport.authenticate('google', {failureRedirect: '/users/sign-in'}), usersController.createSession);
 router.get('/forget-password',forgetPasswordController.forgetPassword);
 router.post('/reset-password',forgetPasswordController.resetPassword);
-router.get('/reset-password-db',forgetPasswordController.restPasswordIndb);
-
+router.post('/reset-password-db',forgetPasswordController.restPasswordIndb);
+router.post('/otp-auth-forget-password', forgetPasswordController.otp);
+    
 module.exports = router;

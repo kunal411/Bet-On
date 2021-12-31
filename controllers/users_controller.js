@@ -4,12 +4,12 @@ const path = require('path');
 
 const jwt = require('jsonwebtoken');
 let alert = require('alert'); 
-const messageBird = require('messagebird')('tkHcvInDskcXMVonVdf7aQKD9');
+const messageBird = require('messagebird')('W2tTRdqV8xxNjMYhIXSX3eEY6');
 const activatekey = 'accountactivatekey123';
 const clientURL = 'http://localhost:8000';
 
-const mailGunKey = '2369118d8afc76b7633587ac90dbb9d3-cac494aa-f03797ca';
-const domain = 'sandbox3ca088a06dd44d33a56243753edb1f64.mailgun.org';
+const mailGunKey = '5d5399a434023a5c229e7a1e1a80d493-cac494aa-586b59e2';
+const domain = 'sandbox11a51a4bfd9245d587c2b8a6d188b1fd.mailgun.org';
 
 const mailgun = require("mailgun-js");
 const mg = mailgun({apiKey: mailGunKey , domain: domain});
@@ -58,7 +58,7 @@ module.exports.create = function(req,res){
         if(!user){ 
 
             if(verify == 'EMAIL'){
-                const token = jwt.sign({name, email, password, confirmPassword, phone},activatekey,{expiresIn : '20m'});
+                const token = jwt.sign({name, email, password, confirmPassword, phone},activatekey,{expiresIn : '5m'});
 
                 const data = {
                     from: 'noreply@student.com',
@@ -73,7 +73,7 @@ module.exports.create = function(req,res){
                     if(error){
                         alert('Something went wrong, please sign-up again');
                         console.log(error.message);
-                        return res.redirect('/sign-up');
+                        return res.redirect('http://localhost:8000/users/sign-up');
                     }
                     console.log('Email has been sent for verification');
                     alert('Email has been sent for verification, please veirfy');
