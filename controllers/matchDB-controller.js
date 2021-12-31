@@ -17,15 +17,15 @@ module.exports.addMatchtoDb = async function(){
     let obj = {
         "results" : []
     };
-    var date = new Date();
-    var month = pad2(date.getMonth()+1);//months (0-11)
-    var day = pad2(date.getDate());//day (1-31)
-    var year= date.getFullYear();
-    // var day = 23;
-    // var month = "09";
-    // var year = "2021"; 
+    // var date = new Date();
+    // var month = pad2(date.getMonth()+1);//months (0-11)
+    // var day = pad2(date.getDate());//day (1-31)
+    // var year= date.getFullYear();
+    var day = 30;
+    var month = "12";
+    var year = "2021"; 
     var formattedDate =  year+"-"+month+"-"+day;
-    const numberOfDays = 5;
+    const numberOfDays = 1;
 
     for (let i = 0; i < numberOfDays; i++){
         console.log(formattedDate);
