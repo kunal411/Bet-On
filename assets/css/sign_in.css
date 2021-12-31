@@ -40,6 +40,12 @@ body {
     background-color: #5f82a0;
     color: white;
     cursor: pointer; }
+  .container #login-form .forget-password {
+    color: #576d80;
+    margin-top: 2%;
+    cursor: pointer; }
+  .container #login-form .forget-password:hover {
+    text-decoration: underline; }
   .container #login-form #submit:active {
     background-color: #576d80; }
   .container #login-form #horizontal-line {

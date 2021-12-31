@@ -52,7 +52,11 @@
                     <% } %>
                     <% if(mat.result == "Yes") {%>
                         <% ans = mat.status %>
-                    <% }else { %>
+                    <% }else if(mat.inPlay == "Yes"){ %>
+                        <p class="match-status-lineup" data-status = "<%= mat.livestatus %>">
+                            Live
+                        </p>
+                    <% }else{ %>
                         <p class="match-status-lineup" data-status = "<%= mat.livestatus %>">
                             <%= mat.livestatus %>
                         </p>
