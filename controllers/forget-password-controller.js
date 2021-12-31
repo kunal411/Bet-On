@@ -101,12 +101,31 @@ module.exports.resetAccount = function(req,res){
             });
         });
     }else{
-        alert('Something went wrong, please sign-up again');
+        alert('Something went wrong, please try again');
         console.log('Something went wrong!!');
         return res.redirect('http://localhost:8000/users/sign-in');
     }
 }
 
-module.exports.restPasswordIndb = function(req,res){
-    
+module.exports.restPasswordIndb = async function(req,res){
+    const email = req.body.email;   
+    const password = req.body.password;   
+    const confirmPassword = req.body.confirmPassword;   
+    const phone = req.body.phone;   
+
+    if(confirmPassword != password){
+        alert('Password and confrim-password should be same!');
+        return res.redirect('back');
+    }
+    try{
+        const user = await User.updateOne({email : email},{$set : {
+            password : password
+        }});
+        alert('Password reset successfully!!');
+        return res.redirect('http://localhost:8000/users/sign-in');
+    }catch(err){
+        console.log("Error : " + err); 
+    }
+    return res.redirect('back');
+
 }
