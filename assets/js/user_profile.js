@@ -9,3 +9,28 @@ stats.addEventListener('click', function(){
         contestDetails.style.display = "block";
     }
 })
+
+const referCodeCopyBtn = document.getElementById('refer-code-copy');
+referCodeCopyBtn.addEventListener('click', async function(event){
+    event.stopPropagation();
+    const referCode = referCodeCopyBtn.getAttribute('data-refer-code');
+    try {
+        await navigator.clipboard.writeText(referCode);
+        console.log('Page URL copied to clipboard');
+    } catch (err) {
+        console.error('Failed to copy: ', err);
+    }
+    alert("Copied the text: " + referCode);
+})
+
+const referAndEarn = document.getElementById('refer-div');
+referAndEarn.addEventListener('click', function(){
+    console.log('Refer and Earn button clicked');
+    const referAndEarn = document.getElementById('referAndEarn');
+    if(referAndEarn.style.display == "block"){
+        referAndEarn.style.display = "none";
+    }
+    else{
+        referAndEarn.style.display = "block";
+    }
+})

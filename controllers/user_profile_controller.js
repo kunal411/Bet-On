@@ -13,6 +13,7 @@ module.exports.profile = async function(req, res){
     return res.render('user_profile',{
         title: 'My profile',
         userId: userId,
+        userIdDB: user._id,
         numberOfContestJoined: user.numberOfContestJoined,
         totalAmountWon: user.totalAmountWon,
         numberOfContestWon: user.numberOfContestWon,

@@ -60,9 +60,20 @@
     </div>
 
     <div class="refer-earn profile-sections">
-        <div class="logo-name">
+        <div class="logo-name" id="refer-div">
             <i class="fas fa-gift"></i>
             <p>Refer & Earn</p>
+        </div>
+        <div id="referAndEarn">
+            <p class="get-upto">GET UPTO</p>
+            <p class="refer-earn-price">₹ 100</p>
+            <p class="referral-msg">on every referral</p>
+            <fieldset>
+                <legend>Your Code</legend>
+                <% let referCode = Buffer.from(userIdDB).toString('base64'); %>
+                <p id="refer-code">  <%= referCode  %> </p>
+                <i class="far fa-copy" id="refer-code-copy" data-refer-code="<%= referCode %>"></i></p>
+            </fieldset>
         </div>
     </div>
 </div>

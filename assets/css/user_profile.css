@@ -4,7 +4,8 @@ p {
 
 .container {
   width: 75%;
-  height: auto; }
+  height: auto;
+  margin-bottom: 5%; }
 
 .user-details {
   display: flex;
@@ -69,3 +70,43 @@ i {
   color: black;
   margin: 2%;
   padding-bottom: 1%; }
+
+#referAndEarn {
+  padding: 3%;
+  margin: 2% 4%;
+  align-items: center;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  display: none;
+  background-color: #e2e2e2;
+  border-radius: 20px; }
+
+fieldset {
+  border: 1px dashed black;
+  border-radius: 10px;
+  padding: 2%;
+  width: 50%;
+  margin: auto; }
+
+legend {
+  font-size: 0.8rem;
+  width: auto;
+  text-align: left; }
+
+#refer-code {
+  width: auto;
+  overflow-wrap: break-word; }
+
+.get-upto {
+  font-size: 1.2rem;
+  font-weight: 700; }
+
+.refer-earn-price {
+  font-size: 2rem;
+  color: green;
+  font-weight: 800; }
+
+.referral-msg {
+  font-size: 1.1rem;
+  font-weight: 600; }
