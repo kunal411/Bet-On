@@ -38,10 +38,10 @@ module.exports.signIn = function(req, res){
 }
 
 // get the sign up data
-module.exports.create = function(req,res){
+module.exports.create = async function(req,res){
 
-    const {name, email, password, confirmPassword, phone, verify} = req.body;
-    console.log(name , email, password, confirmPassword, phone, verify);
+    const {name, email, password, confirmPassword, phone, verify,referCode} = req.body;
+    console.log(name , email, password, confirmPassword, phone, verify,referCode);
     console.log(req.body);
     if( password != confirmPassword){
         alert("Password and Confirm Password should be same");
@@ -58,7 +58,7 @@ module.exports.create = function(req,res){
         if(!user){ 
 
             if(verify == 'EMAIL'){
-                const token = jwt.sign({name, email, password, confirmPassword, phone},activatekey,{expiresIn : '5m'});
+                const token = jwt.sign({name, email, password, confirmPassword, phone, referCode},activatekey,{expiresIn : '5m'});
 
                 const data = {
                     from: 'noreply@student.com',
@@ -92,11 +92,13 @@ module.exports.create = function(req,res){
                         return res.redirect('http://localhost:8000/users/sign-up');
                     }
                     else{
-                        var n, pa, ph, em;
+                        var n, pa, ph, em, rc;
                         n = Buffer.from(name).toString('base64');
                         em = Buffer.from(email).toString('base64');
                         pa = Buffer.from(password).toString('base64');
                         ph = Buffer.from(phone).toString('base64');
+                        rc = referCode
+                        
                         console.log(resp);
                         return res.render('otp-auth', {
                             title: "Verify OTP",
@@ -104,6 +106,7 @@ module.exports.create = function(req,res){
                             email: em,
                             password: pa,
                             phone: ph,
+                            referCode: rc,
                             id: resp.id
                         });
                     }
@@ -118,22 +121,23 @@ module.exports.create = function(req,res){
     });
 }
 
-module.exports.otp = function(req, res){
+module.exports.otp = async function(req, res){
     var id = req.body.id;
     var token = req.body.token;
     var email = Buffer.from(req.body.email, 'base64').toString();
     var name = Buffer.from(req.body.name, 'base64').toString();
     var password = Buffer.from(req.body.password, 'base64').toString();
     var phone = Buffer.from(req.body.phone, 'base64').toString();
-    console.log(email, name, password, phone);
+    var referCode = Buffer.from(req.body.referCode, 'base64').toString();
+    console.log(email, name, password, phone, referCode);
 
-    messageBird.verify.verify(id, token, function(err, response){
+    messageBird.verify.verify(id, token, async function(err, response){
         if(err){
-            var n, pa, ph, em;
-            n = Buffer.from(name).toString('base64');
-            em = Buffer.from(email).toString('base64');
-            pa = Buffer.from(password).toString('base64');
-            ph = Buffer.from(phone).toString('base64');
+            // var n, pa, ph, em, rc;
+            // n = Buffer.from(name).toString('base64');
+            // em = Buffer.from(email).toString('base64');
+            // pa = Buffer.from(password).toString('base64');
+            // ph = Buffer.from(phone).toString('base64');
             console.log(err);
             console.log("id is ", id);
             console.log("token is ", token);
@@ -142,13 +146,21 @@ module.exports.otp = function(req, res){
         }
         else{
             var user1 = new User();
+            let amount = 0;
+            const userRefer = await User.findOne({_id:referCode});
+
+            if(userRefer){
+                user1.wallet = 100;
+                amount = userRefer.wallet;
+            }
+
             const userId = email.split("@")[0];
             user1.userId = userId;
             user1.name = name;
             user1.email = email;
             user1.password = Buffer.from(password).toString('base64');
             user1.phone = phone;
-            User.findOne({email : email}, function(err , user){
+            User.findOne({email : email}, async function(err , user){
                 if(err){
                     alert('Something went wrong, please sign-up again');
                     console.log('Error in finding user in Sign-in ');
@@ -156,11 +168,14 @@ module.exports.otp = function(req, res){
                 }
                 
                 if(!user){
-                    User.create(user1,function(err,user){
+                    User.create(user1,async function(err,user){
                         if(err){
                             console.log('Error in creating a user while account activation', err);
                             return res.redirect('back');
                         }
+                        const userRefer = await User.updateOne({_id:referCode},{$set : {
+                            wallet : amount + 100
+                        }})
                         console.log("SignUp successfully!!");
                         return res.redirect('http://localhost:8000/');
                     });
@@ -172,17 +187,26 @@ module.exports.otp = function(req, res){
     });
 }
 
-module.exports.activateAccount = function(req,res){
+module.exports.activateAccount = async function(req,res){
     const token = req.query.token;
     console.log(token);
     if(token){
-        jwt.verify(token,activatekey, function(err, decodedToken){
+        jwt.verify(token,activatekey, async function(err, decodedToken){
             if(err){
                 console.log('Incorrect or expire link');
                 return res.redirect('http://localhost:8000/users/sign-up');
             }
-            const{name , email , password, confirmPassword, phone} = decodedToken;
+            const{name , email , password, confirmPassword, phone, referCode} = decodedToken;
+
             var user1 = new User();
+            let amount=0;
+            var userIdRefer = Buffer.from(referCode, 'base64').toString();
+            const userRefer = await User.findOne({_id:userIdRefer});
+            if(userRefer){
+                user1.wallet = 100;
+                amount = userRefer.wallet;
+            }
+
             const userId = email.split("@")[0];
             user1.userId = userId;
             user1.name = name;
@@ -196,11 +220,14 @@ module.exports.activateAccount = function(req,res){
                 }
                 
                 if(!user){
-                    User.create(user1,function(err,user){
+                    User.create(user1, async function(err,user){
                         if(err){
                             console.log('Error in creating a user while account activation', err);
                             return res.redirect('back');
                         }
+                        const userRefer = await User.updateOne({_id:userIdRefer},{$set : {
+                            wallet : amount + 100
+                        }})
                         return res.redirect('http://localhost:8000/users/sign-in');
                     });
                 }else{

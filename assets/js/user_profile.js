@@ -34,3 +34,15 @@ referAndEarn.addEventListener('click', function(){
         referAndEarn.style.display = "block";
     }
 })
+
+const wallet = document.getElementById('wallet-icon-name');
+wallet.addEventListener('click', function(){
+    console.log('Refer and Earn button clicked');
+    const walletDetails = document.getElementById('wallet-details');
+    if(walletDetails.style.display == "block"){
+        walletDetails.style.display = "none";
+    }
+    else{
+        walletDetails.style.display = "block";
+    }
+})

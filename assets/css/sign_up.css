@@ -55,6 +55,11 @@ body {
     border-bottom: 1px solid black;
     padding-left: 5px;
     padding-top: 17px; }
+  .container #login-form #refer-code {
+    border: none;
+    border-bottom: 1px solid black;
+    padding-left: 5px;
+    padding-top: 17px; }
   .container #login-form .radioButton {
     display: flex;
     justify-content: space-between;
