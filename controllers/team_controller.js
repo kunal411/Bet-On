@@ -1,5 +1,6 @@
 const alert = require('alert');
 const Team = require('../models/team');
+const User = require('../models/user');
 
 module.exports.createTeam = async function(req, res){
     const teamArray = JSON.parse(req.query.teamArray);
@@ -46,6 +47,13 @@ module.exports.createTeam = async function(req, res){
             try{
                 const team2 = await Team.create(team);
                 if(team2){
+                    let user = await User.findOne({userId : userId});
+                    if(user){
+                        let numberOfTeamsCreated = user.numberOfTeamsCreated + 1;
+                        let userUpdate = await User.updateOne({userId: userId}, { $set : {
+                            numberOfTeamsCreated: numberOfTeamsCreated
+                        }});
+                    }
                     console.log('team is successfully added in db! ');
                 }
             }catch(err){

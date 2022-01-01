@@ -48,7 +48,7 @@ module.exports.joinTeam = async function(req, res){
                             if(user){
                                 let matchIdsArray = user.matchIds;
                                 let isMatchPresent = false;
-                                let numberOfTeamsCreated = numberOfTeamsCreated + 1;
+                                let numberOfContestJoined = user.numberOfContestJoined + 1;
                                 for(let x of matchIdsArray){
                                     if(x == matchId){
                                         isMatchPresent = true;
@@ -57,15 +57,15 @@ module.exports.joinTeam = async function(req, res){
                                 }
                                 if(!isMatchPresent){
                                     matchIdsArray.push(matchId);
-                                    try{
-                                        let userUpdate = await User.updateOne({userId: userId}, { $set : {
-                                            matchIds : matchIdsArray,
-                                            numberOfTeamsCreated: numberOfTeamsCreated
-                                        }});
-                                        console.log('Match Successfully added in user database');
-                                    }catch(err){
-                                        console.log('Error : ' + err);
-                                    }
+                                }
+                                try{
+                                    let userUpdate = await User.updateOne({userId: userId}, { $set : {
+                                        matchIds : matchIdsArray,
+                                        numberOfContestJoined: numberOfContestJoined
+                                    }});
+                                    console.log('Match Successfully added in user database');
+                                }catch(err){
+                                    console.log('Error : ' + err);
                                 }
                             }
                         }
