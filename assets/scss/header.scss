@@ -24,13 +24,19 @@
 
         .auth-links{
             ul{
-                margin: 5% 5px;
+                margin: -7% -25%;
                 display: flex;
                 list-style: none;
                 li{
-                    margin-right: 15px;
-                    margin-top: 20px;
+                    margin-right: 1%;
+                    margin-top: 20%;
                     font-size: larger;
+
+                    .fa-user{
+                        color: black;
+                        font-size: 20px;
+                        margin-left: 20px;
+                    }
                 }
             }
         }

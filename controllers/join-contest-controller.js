@@ -54,6 +54,7 @@ module.exports.joinContest = async function(req,res){
                 if(user){
                     let matchIdsArray = user.matchIds;
                     let isMatchPresent = false;
+                    let numberOfContestJoined = user.numberOfContestJoined + 1;
                     for(let x of matchIdsArray){
                         if(x == matchId){
                             isMatchPresent = true;
@@ -64,7 +65,8 @@ module.exports.joinContest = async function(req,res){
                         matchIdsArray.push(matchId);
                         try{
                             let userUpdate = await User.updateOne({userId: userId}, { $set : {
-                                matchIds : matchIdsArray
+                                matchIds : matchIdsArray,
+                                numberOfContestJoined: numberOfContestJoined
                             }});
                             console.log('Match Successfully added in user database');
                         }catch(err){

@@ -48,6 +48,7 @@ module.exports.joinTeam = async function(req, res){
                             if(user){
                                 let matchIdsArray = user.matchIds;
                                 let isMatchPresent = false;
+                                let numberOfTeamsCreated = numberOfTeamsCreated + 1;
                                 for(let x of matchIdsArray){
                                     if(x == matchId){
                                         isMatchPresent = true;
@@ -58,7 +59,8 @@ module.exports.joinTeam = async function(req, res){
                                     matchIdsArray.push(matchId);
                                     try{
                                         let userUpdate = await User.updateOne({userId: userId}, { $set : {
-                                            matchIds : matchIdsArray
+                                            matchIds : matchIdsArray,
+                                            numberOfTeamsCreated: numberOfTeamsCreated
                                         }});
                                         console.log('Match Successfully added in user database');
                                     }catch(err){

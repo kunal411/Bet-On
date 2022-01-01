@@ -1,0 +1,70 @@
+<link rel="stylesheet" href="/css/user_profile.css">
+
+<div class="container">
+    <div class="user-details profile-sections">
+        <div>
+            <img src="https://images.fanfight.com/avatars/avatar20.png" alt="User Avatar" id="user-image">
+        </div>
+
+        <div class="user-name-hello">
+            <p>Hello,</p>
+            <p id="user-name"><%= userId %></p>
+        </div>
+    </div>
+
+    <div class="my-stats profile-sections">
+        <div id="stat-icon-name" class="logo-name">
+            <i class="fas fa-chart-bar" ></i>
+            <p>
+                My Stats
+            </p>
+        </div>
+        <div id="contest-details">
+            <div id="winning-amount">
+                <p>Total Winnings</p>
+                <p>₹ <%= totalAmountWon %> </p>
+            </div>
+            <div id="general-stats">
+                <div>
+                    <p>Contest Joined </p>
+                    <p class="general-stats-value">
+                        <%= numberOfContestJoined %>
+                    </p>
+                </div>
+
+                <div>
+                    <p>Team Created</p>
+                    <p class="general-stats-value">
+                        <%= numberOfTeamsCreated  %>
+                    </p>
+                </div>
+
+                <div>
+                    <p>Total Wins</p>
+                    <p class="general-stats-value">
+                        <%= numberOfContestWon %>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="my-transaction profile-sections">
+        <div class="logo-name">
+            <i class="fas fa-money-bill"></i>
+            <p>
+                My Transaction
+            </p>
+        </div>
+    </div>
+
+    <div class="refer-earn profile-sections">
+        <div class="logo-name">
+            <i class="fas fa-gift"></i>
+            <p>Refer & Earn</p>
+        </div>
+    </div>
+</div>
+
+<script src="/js/user_profile.js"></script>

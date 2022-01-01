@@ -36,9 +36,39 @@ const userSchema = new mongoose.Schema({
         {
             type : String,
             trim : true,
-            lowercase : true,
+            lowercase : true
         }
-    ]
+    ],
+
+    numberOfContestJoined : {
+        type: Number,
+        required: true,
+        default: 0
+    },
+
+    numberOfContestWon : {
+        type: Number,
+        required: true,
+        default: 0
+    },
+
+    numberOfTeamsCreated : {
+        type: Number,
+        required: true,
+        default: 0
+    },
+
+    totalAmountWon : {
+        type: Number,
+        required: true,
+        default: 0
+    },
+
+    wallet : {
+        type: Number,
+        required: true,
+        default: 0
+    }
 },{
     timestamps : true
 });

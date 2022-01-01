@@ -4,6 +4,7 @@ const passport = require('passport');
 
 const usersController = require('../controllers/users_controller');
 const forgetPasswordController = require('../controllers/forget-password-controller');
+const userProfileController = require('../controllers/user_profile_controller');
 
 router.get('/sign-up', usersController.signUp);
 router.get('/sign-in', usersController.signIn);
@@ -19,6 +20,7 @@ router.post('/create-session', passport.authenticate(
 
 
 router.get('/sign-out', usersController.destroySession);
+router.get('/profile', userProfileController.profile);
 
 router.get('/auth/google', passport.authenticate('google', {scope: ['profile', 'email']}));
 router.get('/auth/google/callback', passport.authenticate('google', {failureRedirect: '/users/sign-in'}), usersController.createSession);

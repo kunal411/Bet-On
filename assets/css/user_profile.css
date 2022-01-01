@@ -1,0 +1,71 @@
+p {
+  padding: 0;
+  margin: 0; }
+
+.container {
+  width: 75%;
+  height: auto; }
+
+.user-details {
+  display: flex;
+  justify-content: space-between;
+  text-align: right;
+  padding: 1.5% 3%; }
+
+#user-image {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%; }
+
+#user-name {
+  font-size: 1.5rem;
+  font-family: sans-serif;
+  font-weight: bold; }
+
+.user-name-hello {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; }
+
+#contest-details {
+  display: none; }
+  #contest-details #winning-amount {
+    padding: 3%;
+    margin: 2% 4%;
+    text-align: center;
+    background-color: #e2e2e2;
+    border-radius: 10px; }
+    #contest-details #winning-amount p {
+      font-size: 1.2rem;
+      font-weight: bold; }
+  #contest-details #general-stats {
+    padding: 3%;
+    margin: 2% 4%;
+    background-color: #e2e2e2;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2%;
+    text-align: center; }
+    #contest-details #general-stats .general-stats-value {
+      font-weight: bold;
+      font-size: 1.2rem; }
+
+i {
+  margin-left: -1%;
+  color: gray;
+  font-size: 22px; }
+
+.logo-name {
+  display: flex;
+  flex-direction: row;
+  padding: 1.5% 3%; }
+  .logo-name p {
+    margin-left: 2%;
+    margin-top: -0.2%;
+    font-weight: 600; }
+
+.profile-sections {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: black;
+  margin: 2%;
+  padding-bottom: 1%; }
