@@ -107,6 +107,75 @@ i{
     color: green;
 }
 
+#add-money-button, #withdraw-money-button{
+    padding: 0.7%;
+    font-weight: 500;
+    width: 20%;
+    border-radius: 10px;
+    border: 1px solid black;
+    background-color: rgb(136, 136, 136);
+    cursor: pointer;
+    margin-left: 2%;
+    margin-right: 2%;
+    font-size: 1.2rem;
+    margin-top: 2%;
+}
+
+#add-money-button:hover, #withdraw-money-button:hover{
+    background-color: rgb(3, 141, 3);
+    transition: 0.2s ease-in;
+}
+
+#enter-amount-div{
+    display: none;
+    background-color: rgb(226, 226, 226);
+    border-radius: 20px;
+    padding: 3%;
+    margin: 2% 4%;
+    p{
+        margin-left: 18%;
+        font-size: 1.2rem;
+        margin-bottom: 1%;
+    }
+
+    #add-cash-button{
+        width: 15%;
+        padding: 0.6%;
+        border-radius: 10px;
+        background-color: rgb(139, 139, 139);
+        margin-left: 42.5%;
+        margin-top: 3%;
+        font-weight: 600;
+    }
+}
+
+#rupee-amount-input{
+    display: flex;
+}
+
+#rupee-icon{
+    width: 15%;
+    background-color: rgb(190, 221, 159);
+    text-align: center;
+    margin-left: 17.5%;
+    padding: 1% 0%;
+    border: 1px solid green;
+    font-size: 1.5rem;
+    border-right: 0px;
+    border-radius: 10px 0 0 10px;
+}
+
+#enter-amount-input{
+    width: 50%;
+    border: 1px solid green;
+    border-left: 0;
+    padding-left: 2%;
+    outline: none;
+    font-size: 1.2rem;
+    font-weight: 400;
+    border-radius: 0 10px 10px 0;
+}
+
 #my-balance-title{
     font-size: 1.5rem;
 }

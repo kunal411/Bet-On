@@ -39,7 +39,8 @@
     "passport": "^0.4.1",
     "passport-google-oauth": "^2.0.0",
     "passport-jwt": "^4.0.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "razorpay": "^2.8.0"
   },
   "bugs": {
     "url": "https://github.com/kunal411/Bet-On/issues"

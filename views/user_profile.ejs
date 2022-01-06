@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="/css/user_profile.css">
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 <div class="container">
     <div class="user-details profile-sections">
@@ -23,6 +25,27 @@
             <p ><i class="fas fa-wallet fa-5x" id="wallet-logo"></i></p>
             <p id="my-balance-title">MY BALANCE</p>
             <p id="wallet-balance">₹ <%= wallet %></p>
+            <button id="add-money-button">
+                Add Cash
+            </button>
+            <button id="withdraw-money-button">
+                Withdraw Cash
+            </button>
+        </div>
+
+        <div id="enter-amount-div">
+            <p>
+                Enter Amount
+            </p>
+            <div id="rupee-amount-input">
+                <div id="rupee-icon">
+                    ₹
+                </div>
+                <input type="tel" name="amount" maxlength="8" placeholder="Enter amount (₹20 to ₹100000)" id="enter-amount-input" value="">
+            </div>
+            <button id="add-cash-button">
+                ADD CASH
+            </button>
         </div>
     </div>
     <div class="my-stats profile-sections">
