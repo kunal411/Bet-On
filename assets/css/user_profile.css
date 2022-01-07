@@ -69,7 +69,8 @@ i {
   background-color: rgba(255, 255, 255, 0.9);
   color: black;
   margin: 2%;
-  padding-bottom: 1%; }
+  padding-bottom: 1%;
+  border-radius: 10px; }
 
 #referAndEarn, #wallet-details {
   padding: 3%;
@@ -99,8 +100,12 @@ i {
   font-size: 1.2rem;
   margin-top: 2%; }
 
-#add-money-button:hover, #withdraw-money-button:hover {
+#add-money-button:hover {
   background-color: #038d03;
+  transition: 0.2s ease-in; }
+
+#withdraw-money-button:hover {
+  background-color: #b80505;
   transition: 0.2s ease-in; }
 
 #enter-amount-div {

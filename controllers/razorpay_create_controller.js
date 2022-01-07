@@ -3,8 +3,8 @@ const alert = require('alert');
 const User = require('../models/user');
 
 const razorpay = new Razorpay({
-    key_id: '****',
-    key_secret: '****'
+    key_id: 'rzp_test_OCt10FxjnXTNWK',
+    key_secret: 'FZr5oXB1BZqml0aRTawB0IHu'
 })
 
 var cashAdded;

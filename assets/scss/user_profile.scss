@@ -88,6 +88,7 @@ i{
     color: black;
     margin: 2%;
     padding-bottom: 1%;
+    border-radius: 10px;
 }
 
 #referAndEarn,#wallet-details{
@@ -121,8 +122,13 @@ i{
     margin-top: 2%;
 }
 
-#add-money-button:hover, #withdraw-money-button:hover{
+#add-money-button:hover{
     background-color: rgb(3, 141, 3);
+    transition: 0.2s ease-in;
+}
+
+#withdraw-money-button:hover{
+    background-color: rgb(184, 5, 5);
     transition: 0.2s ease-in;
 }
 

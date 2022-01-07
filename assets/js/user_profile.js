@@ -84,7 +84,7 @@ addMonetTextArea.onkeyup = function(){
     axios.post(`/users/profile/details?amount=${Number(addMonetTextArea.value)}`).then((info) => {
         console.log(info);
         var options = {
-            "key": "***",
+            "key": "rzp_test_OCt10FxjnXTNWK",
             "name": "Domino Beton",
             "description": "Test Transaction",
             "image": "https://www.iconbunny.com/icons/media/catalog/product/3/4/341.10-cricket-helmet-icon-iconbunny.jpg",
@@ -97,11 +97,13 @@ addMonetTextArea.onkeyup = function(){
                 "color": "#3399cc"
             }
         };
-    
-        var rzp1 = new Razorpay(options);
-        addCash.onclick = function(e){
-            rzp1.open();
-            e.preventDefault();
+
+        if(info.data.amount >= 2000){
+            var rzp1 = new Razorpay(options);
+            addCash.onclick = function(e){
+                rzp1.open();
+                e.preventDefault();
+            }
         }
     })
 }

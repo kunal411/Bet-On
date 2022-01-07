@@ -22,7 +22,7 @@ module.exports.addMatchtoDb = async function(){
     var day = pad2(date.getDate());//day (1-31)
     var year= date.getFullYear();
     var formattedDate =  year+"-"+month+"-"+day;
-    const numberOfDays = 1;
+    const numberOfDays = 5;
 
     for (let i = 0; i < numberOfDays; i++){
         console.log(formattedDate);

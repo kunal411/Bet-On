@@ -5,8 +5,8 @@
 body{
     background-image: url('https://images.unsplash.com/photo-1559579313-021b6ec9f6d6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c3RhZGl1bXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80');
     background-repeat: no-repeat;
-    background-attachment: fixed;
     background-size: 100% 100%;
+    background-attachment: fixed;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -213,6 +213,8 @@ legend{
     left: 25%;
     background-image: url('https://media.istockphoto.com/photos/grass-field-ground-top-view-picture-id1192236248?k=20&m=1192236248&s=612x612&w=0&h=QcNPrNc_LLaUI5H1mmGpsIyT0mX-OHFTZk_redKHcUs=');
     border-radius: 10px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 #select-players{
     height: 88%;    
@@ -320,6 +322,8 @@ legend{
     border: solid 1px white;
     border-radius: 10px;
     z-index: 1;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 .cancel-btn{
     width: 45%;
@@ -329,6 +333,8 @@ legend{
     margin: 2%;
     border: solid 1px white;
     border-radius: 10px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 .save-btn:hover{
     background-color: #00b137;
@@ -345,6 +351,8 @@ legend{
     left: 25%;
     background-image: url('https://media.istockphoto.com/photos/grass-field-ground-top-view-picture-id1192236248?k=20&m=1192236248&s=612x612&w=0&h=QcNPrNc_LLaUI5H1mmGpsIyT0mX-OHFTZk_redKHcUs=');
     border-radius: 10px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 .create-join-contest{
     display: flex;
@@ -391,6 +399,8 @@ input{
     border-bottom: solid 2px white;
     text-decoration: none;
     color: white;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     outline: none;
 }
 label{
@@ -407,6 +417,8 @@ label{
     background-image: url('https://media.istockphoto.com/photos/grass-field-ground-top-view-picture-id1192236248?k=20&m=1192236248&s=612x612&w=0&h=QcNPrNc_LLaUI5H1mmGpsIyT0mX-OHFTZk_redKHcUs=');
     border-radius: 10px;
     overflow-y: scroll;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 #scorecard-container::-webkit-scrollbar{
     display: none;
@@ -521,6 +533,8 @@ label{
     background-image: url('https://media.istockphoto.com/photos/grass-field-ground-top-view-picture-id1192236248?k=20&m=1192236248&s=612x612&w=0&h=QcNPrNc_LLaUI5H1mmGpsIyT0mX-OHFTZk_redKHcUs=');
     border-radius: 10px;
     overflow-y: scroll;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     color: white;
     text-align: center;
 }
