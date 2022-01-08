@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const fs = require('fs');
 const path = require('path');
+var request = require('request');
 
 const jwt = require('jsonwebtoken');
 let alert = require('alert'); 
@@ -147,7 +148,10 @@ module.exports.otp = async function(req, res){
         else{
             var user1 = new User();
             let amount = 0;
-            const userRefer = await User.findOne({_id:referCode});
+            const userRefer = "";
+            if(referCode != ""){
+                userRefer = await User.findOne({_id:referCode});
+            }
 
             if(userRefer){
                 user1.wallet = 100;
@@ -160,29 +164,68 @@ module.exports.otp = async function(req, res){
             user1.email = email;
             user1.password = Buffer.from(password).toString('base64');
             user1.phone = phone;
-            User.findOne({email : email}, async function(err , user){
-                if(err){
-                    alert('Something went wrong, please sign-up again');
-                    console.log('Error in finding user in Sign-in ');
-                    return res.redirect('/sign-up');
-                }
-                
-                if(!user){
-                    User.create(user1,async function(err,user){
-                        if(err){
-                            console.log('Error in creating a user while account activation', err);
-                            return res.redirect('back');
-                        }
-                        const userRefer = await User.updateOne({_id:referCode},{$set : {
-                            wallet : amount + 100
-                        }})
-                        console.log("SignUp successfully!!");
-                        return res.redirect('http://localhost:8000/');
-                    });
-                }else{
-                    return res.redirect('/sign-in');
-                }
+
+            var options = {
+                'method': 'POST',
+                'url': 'https://api.razorpay.com/v1/contacts',
+                'headers': {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Basic cnpwX3Rlc3RfT0N0MTBGeGpuWFROV0s6RlpyNW9YQjFCWnFtbDBhUlRhd0IwSUh1'
+                },
+                body: JSON.stringify({
+                  "name": user1.name,
+                  "email": user1.email,
+                  "contact": user1.phone,
+                  "type": "employee",
+                  "reference_id": "Domino Contact ID 12345",
+                  "notes": {
+                    "random_key_1": "Make it so.",
+                    "random_key_2": "Tea. Earl Grey. Hot."
+                  }
+                })
+              
+            };
+
+            let contact_id = "";
+            let promise = new Promise((resolve,reject) =>{
+                request(options, function (error, response) {
+                    if (error) reject(error);
+                    let s = JSON.parse(response.body);
+                    console.log(s.id);
+                    contact_id = s.id;
+                    user1.contact_id = contact_id;
+                    resolve();
+                });
             });
+            promise.then( async ()=>{
+                User.findOne({email : email}, async function(err , user){
+                    if(err){
+                        alert('Something went wrong, please sign-up again');
+                        console.log('Error in finding user in Sign-in ');
+                        return res.redirect('/sign-up');
+                    }
+                    
+                    if(!user){
+                        User.create(user1,async function(err,user){
+                            if(err){
+                                console.log('Error in creating a user while account activation', err);
+                                return res.redirect('back');
+                            }
+                            if(referCode != ""){
+                                const userRefer = await User.updateOne({_id:referCode},{$set : {
+                                    wallet : amount + 100
+                                }})
+                            }
+                            console.log("SignUp successfully!!");
+                            return res.redirect('http://localhost:8000/');
+                        });
+                    }else{
+                        return res.redirect('/sign-in');
+                    }
+                });
+            }).catch((err)=>{
+                console.log("Error : " + err);
+            })
         }
     });
 }
@@ -201,7 +244,10 @@ module.exports.activateAccount = async function(req,res){
             var user1 = new User();
             let amount=0;
             var userIdRefer = Buffer.from(referCode, 'base64').toString();
-            const userRefer = await User.findOne({_id:userIdRefer});
+            const userRefer = "";
+            if(userIdRefer != ""){
+                userRefer = await User.findOne({_id:userIdRefer});
+            }
             if(userRefer){
                 user1.wallet = 100;
                 amount = userRefer.wallet;
@@ -213,28 +259,69 @@ module.exports.activateAccount = async function(req,res){
             user1.email = email;
             user1.password = Buffer.from(password).toString('base64');
             user1.phone = phone;
-            User.findOne({email : email}, function(err , user){
-                if(err){
-                    console.log('Error in finding user in Sign-in ');
-                    return res.redirect('http://localhost:8000/users/sign-up');
-                }
-                
-                if(!user){
-                    User.create(user1, async function(err,user){
-                        if(err){
-                            console.log('Error in creating a user while account activation', err);
-                            return res.redirect('back');
-                        }
-                        const userRefer = await User.updateOne({_id:userIdRefer},{$set : {
-                            wallet : amount + 100
-                        }})
-                        return res.redirect('http://localhost:8000/users/sign-in');
-                    });
-                }else{
-                    // alert('Email id already exists')
-                    return res.redirect('http://localhost:8000/users/sign-in');
-                }
+
+
+            var options = {
+                'method': 'POST',
+                'url': 'https://api.razorpay.com/v1/contacts',
+                'headers': {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Basic cnpwX3Rlc3RfT0N0MTBGeGpuWFROV0s6RlpyNW9YQjFCWnFtbDBhUlRhd0IwSUh1'
+                },
+                body: JSON.stringify({
+                  "name": user1.name,
+                  "email": user1.email,
+                  "contact": user1.phone,
+                  "type": "employee",
+                  "reference_id": "Domino Contact ID 12345",
+                  "notes": {
+                    "random_key_1": "Make it so.",
+                    "random_key_2": "Tea. Earl Grey. Hot."
+                  }
+                })
+              
+            };
+
+            let contact_id = "";
+            let promise = new Promise((resolve,reject) =>{
+                request(options, function (error, response) {
+                    if (error) reject(error);
+                    let s = JSON.parse(response.body);
+                    console.log(s.id);
+                    contact_id = s.id;
+                    user1.contact_id = contact_id;
+                    resolve();
+                });
             });
+
+            promise.then( async ()=>{
+                User.findOne({email : email}, function(err , user){
+                    if(err){
+                        console.log('Error in finding user in Sign-in ');
+                        return res.redirect('http://localhost:8000/users/sign-up');
+                    }
+                    
+                    if(!user){
+                        User.create(user1, async function(err,user){
+                            if(err){
+                                console.log('Error in creating a user while account activation', err);
+                                return res.redirect('back');
+                            }
+                            if(userIdRefer != ""){
+                                const userRefer = await User.updateOne({_id:userIdRefer},{$set : {
+                                    wallet : amount + 100
+                                }})
+                            }
+                            return res.redirect('http://localhost:8000/users/sign-in');
+                        });
+                    }else{
+                        // alert('Email id already exists')
+                        return res.redirect('http://localhost:8000/users/sign-in');
+                    }
+                });
+            }).catch((err)=>{
+                console.log("Error : " + err);
+            })
         });
     }else{
         alert('Something went wrong, please sign-up again');

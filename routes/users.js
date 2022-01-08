@@ -23,6 +23,8 @@ router.post('/create-session', passport.authenticate(
 router.get('/sign-out', usersController.destroySession);
 router.get('/profile', userProfileController.profile);
 router.post('/profile/details', razorpayController.addCashInfo);
+router.post('/profile/withdraw', razorpayController.withdrawCash);
+router.post('/profile/addAccount', userProfileController.addAccount);
 router.post('/profile/is-order-completed', razorpayController.checkTransaction);
 
 router.get('/auth/google', passport.authenticate('google', {scope: ['profile', 'email']}));

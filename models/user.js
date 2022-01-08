@@ -68,7 +68,26 @@ const userSchema = new mongoose.Schema({
         type: Number,
         required: true,
         default: 0
+    },
+
+    contact_id : {
+        type : String,
+        required : true,
+        unique : true,
+    },
+
+    ifsc : {
+        type : String
+    }, 
+
+    accountNumber:{
+        type : String
+    },
+
+    fundId:{
+        type: String
     }
+
 },{
     timestamps : true
 });

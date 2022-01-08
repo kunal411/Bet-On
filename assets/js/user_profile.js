@@ -39,19 +39,21 @@ const wallet = document.getElementById('wallet-icon-name');
 wallet.addEventListener('click', function(){
     console.log('Refer and Earn button clicked');
     const walletDetails = document.getElementById('wallet-details');
-    const enterAmount = document.getElementById('enter-amount-div');
+    const enterAddAmount = document.getElementById('enter-add-amount-div');
+    const enterwihdrawAmount = document.getElementById('enter-withdraw-amount-div');
     if(walletDetails.style.display == "block"){
         walletDetails.style.display = "none";
     }
     else{
-        enterAmount.style.display = "none";
+        enterAddAmount.style.display = "none";
+        enterwihdrawAmount.style.display = "none";
         walletDetails.style.display = "block";
     }
 })
 
 const addMoney = document.getElementById('add-money-button');
 const addCash = document.getElementById('add-cash-button');
-const addMonetTextArea = document.getElementById('enter-amount-input');
+const addMonetTextArea = document.getElementById('enter-add-amount-input');
 addMoney.addEventListener('click', function(event){
     event.stopPropagation();
     const amount = Number(addMonetTextArea.value);
@@ -61,7 +63,32 @@ addMoney.addEventListener('click', function(event){
     else{
         addCash.disabled = true;
     }
-    const enterAmount = document.getElementById('enter-amount-div');
+    const enterAmount = document.getElementById('enter-add-amount-div');
+    const walletDetails = document.getElementById('wallet-details');
+    if(enterAmount.style.display == "block"){
+        enterAmount.style.display = "none";
+    }
+    else{
+        walletDetails.style.display = "none";
+        enterAmount.style.display = "block";
+    }
+})
+
+const withdrawMoney = document.getElementById('withdraw-money-button');
+const withdrawCash = document.getElementById('withdraw-cash-button');
+const withdrawMonetTextArea = document.getElementById('enter-withdraw-amount-input');
+const walletdiv = document.getElementById('wallet-balance');
+withdrawMoney.addEventListener('click', function(event){
+    event.stopPropagation();
+    const amount = Number(withdrawMonetTextArea.value);
+    const walletBalance = Number(walletdiv.getAttribute('data-wallet-balance'));
+    if((!isNaN(amount) && amount >= 100) && (amount <= walletBalance)){
+        withdrawCash.disabled = false;
+    }
+    else{
+        withdrawCash.disabled = true;
+    }
+    const enterAmount = document.getElementById('enter-withdraw-amount-div');
     const walletDetails = document.getElementById('wallet-details');
     if(enterAmount.style.display == "block"){
         enterAmount.style.display = "none";
@@ -107,3 +134,38 @@ addMonetTextArea.onkeyup = function(){
         }
     })
 }
+
+withdrawMonetTextArea.onkeyup = function(){
+    const amount = Number(withdrawMonetTextArea.value);
+    const walletBalance = Number(walletdiv.getAttribute('data-wallet-balance'));
+    if((!isNaN(amount) && amount >= 100) && (amount <= walletBalance)){
+        withdrawCash.disabled = false;
+    }
+    else{
+        withdrawCash.disabled = true;
+    }
+}
+
+const withdrawCashButton = document.getElementById('withdraw-cash-button');
+withdrawCashButton.addEventListener('click', function(){
+    axios.post(`/users/profile/withdraw?amount=${Number(withdrawMonetTextArea.value)}`);
+    alert('Withdrawal Successful');
+    location.reload();
+})
+
+
+const bankAccountDiv = document.getElementById('bank-account-div');
+bankAccountDiv.addEventListener('click', function(){
+    const enterAccountDiv = document.getElementById('enter-account-div');
+    if(enterAccountDiv.style.display == "block"){
+        enterAccountDiv.style.display = "none";
+    }
+    else{
+        enterAccountDiv.style.display = "block";
+    }
+})
+
+// const addAccountButton = document.getElementById('add-account-button');
+// addAccountButton.addEventListener('click', function(){
+//     axios.post('/users/profile/addAccount');
+// })

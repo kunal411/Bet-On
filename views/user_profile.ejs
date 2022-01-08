@@ -24,7 +24,7 @@
         <div id="wallet-details">
             <p ><i class="fas fa-wallet fa-5x" id="wallet-logo"></i></p>
             <p id="my-balance-title">MY BALANCE</p>
-            <p id="wallet-balance">₹ <%= wallet %></p>
+            <p id="wallet-balance" data-wallet-balance = "<%= wallet %>">₹ <%= wallet %></p>
             <button id="add-money-button">
                 Add Cash
             </button>
@@ -33,7 +33,7 @@
             </button>
         </div>
 
-        <div id="enter-amount-div">
+        <div id="enter-add-amount-div">
             <p>
                 Enter Amount
             </p>
@@ -41,10 +41,25 @@
                 <div id="rupee-icon">
                     ₹
                 </div>
-                <input type="tel" name="amount" maxlength="8" placeholder="Enter amount (₹20 to ₹100000)" id="enter-amount-input" value="">
+                <input type="tel" name="amount" maxlength="8" placeholder="Enter amount (₹20 to ₹100000)" id="enter-add-amount-input" value="" required>
             </div>
             <button id="add-cash-button">
                 ADD CASH
+            </button>
+        </div>
+
+        <div id="enter-withdraw-amount-div">
+            <p>
+                Enter Amount
+            </p>
+            <div id="rupee-amount-input">
+                <div id="rupee-icon">
+                    ₹
+                </div>
+                <input type="tel" name="amount" maxlength="8" placeholder="Enter amount (₹20 to ₹100000)" id="enter-withdraw-amount-input" value="" required>
+            </div>
+            <button id="withdraw-cash-button">
+                WITHDRAW CASH
             </button>
         </div>
     </div>
@@ -111,6 +126,42 @@
                 <i class="far fa-copy" id="refer-code-copy" data-refer-code="<%= referCode %>"></i></p>
             </fieldset>
         </div>
+    </div>
+
+    <div class="bank-accounts profile-sections">
+        <div class="logo-name" id="bank-account-div">
+            <i class="fas fa-university"></i>
+            <p>Bank Account</p>
+        </div>
+
+        <% if(!accountNumber) {%>
+            <div id="enter-account-div">
+                <p>
+                    Enter Account Details
+                </p>
+                <form action="/users/profile/addAccount" method="POST">
+                    <div id="ifsc-account-div">
+                        <input type="text" name="ifsc" placeholder="Enter IFSC" id="enter-ifsc-code" value="">
+                        <br>
+                        <input type="text" name="accountNumber" placeholder="Enter Account Number" id="enter-account-number" value="">
+                    </div>
+                    <button id="add-account-button" type="submit">
+                        ADD ACCOUNT
+                    </button>
+                </form>
+            </div>
+        <% }else{ %>
+            <div id="enter-account-div">
+                <p>
+                    Account Details
+                </p>
+                <div id="ifsc-account-div">
+                    <input type="text" name="ifsc" placeholder="Enter IFSC" id="enter-ifsc-code" value="<%= ifsc %>" readonly>
+                    <br>
+                    <input type="text" name="accountNumber" placeholder="Enter Account Number" id="enter-account-number" value="<%= accountNumber %>" readonly>
+                </div>
+            </div>
+        <% } %>
     </div>
 </div>
 

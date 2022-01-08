@@ -108,7 +108,7 @@ i{
     color: green;
 }
 
-#add-money-button, #withdraw-money-button{
+#add-money-button, #withdraw-money-button, #add-account-button{
     padding: 0.7%;
     font-weight: 500;
     width: 20%;
@@ -132,7 +132,7 @@ i{
     transition: 0.2s ease-in;
 }
 
-#enter-amount-div{
+#enter-add-amount-div, #enter-withdraw-amount-div{
     display: none;
     background-color: rgb(226, 226, 226);
     border-radius: 20px;
@@ -144,7 +144,7 @@ i{
         margin-bottom: 1%;
     }
 
-    #add-cash-button{
+    #add-cash-button, #withdraw-cash-button{
         width: 15%;
         padding: 0.6%;
         border-radius: 10px;
@@ -171,7 +171,7 @@ i{
     border-radius: 10px 0 0 10px;
 }
 
-#enter-amount-input{
+#enter-add-amount-input, #enter-withdraw-amount-input{
     width: 50%;
     border: 1px solid green;
     border-left: 0;
@@ -226,4 +226,35 @@ legend{
     font-weight: 600;
 }
 
+#enter-account-div{
+    background-color: rgb(226, 226, 226);
+    border-radius: 20px;
+    padding: 3%;
+    margin: 2% 4%;
+    display: none;
+    p{
+        margin-left: 30%;
+        font-size: 1.1rem;
+    }
+}
 
+
+#ifsc-account-div{
+    input{
+        width:40%;
+        margin-left: 30%;
+        border: 1px solid green;
+        padding: 1%;
+        margin-top: 1%;
+        outline: none;
+        font-size: 1.2rem;
+        font-weight: 400;
+        border-radius: 10px;
+    }
+}
+
+#add-account-button{
+    width: 20%;
+    margin-left: 40%;
+    font-size: 1.1rem;
+}
