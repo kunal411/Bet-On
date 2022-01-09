@@ -95,7 +95,7 @@ async function addUpdatedTeamScore(){
     await TeamScoreUpdate.scoreUpdate();
 }
 
-// addMatch(); 
+// addMatch();
 // addLiveMatch();
 // addLiveScore();
 // addUpdatedTeamScore();

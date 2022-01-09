@@ -242,7 +242,7 @@ const matchDetailsSchema = new mongoose.Schema({
     },
 
     wicketsFI : {
-        type : Number
+        type : String
     },
 
     fowFI : {
@@ -266,7 +266,7 @@ const matchDetailsSchema = new mongoose.Schema({
     },
 
     wicketsSI : {
-        type : Number
+        type : String
     },
 
     fowSI : {

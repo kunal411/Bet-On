@@ -8,7 +8,7 @@
   width: 100%;
   top: 0;
   z-index: 2;
-  background-image: url("https://images.unsplash.com/photo-1559579313-021b6ec9f6d6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c3RhZGl1bXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80");
+  background-color: #c9c9c9;
   background-repeat: no-repeat;
   background-size: 100% auto; }
   #layout-header nav .mini-logo #logo-img {
@@ -23,7 +23,8 @@
     #layout-header nav .auth-links ul li {
       margin-right: 1%;
       margin-top: 20%;
-      font-size: larger; }
+      font-size: larger;
+      margin-left: 7%; }
       #layout-header nav .auth-links ul li .fa-user {
         color: black;
         font-size: 20px;

@@ -244,7 +244,7 @@ module.exports.activateAccount = async function(req,res){
             var user1 = new User();
             let amount=0;
             var userIdRefer = Buffer.from(referCode, 'base64').toString();
-            const userRefer = "";
+            let userRefer = "";
             if(userIdRefer != ""){
                 userRefer = await User.findOne({_id:userIdRefer});
             }

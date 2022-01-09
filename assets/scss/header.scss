@@ -9,7 +9,9 @@
         width: 100%;
         top : 0;
         z-index: 2;
-        background-image: url('https://images.unsplash.com/photo-1559579313-021b6ec9f6d6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c3RhZGl1bXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80');
+        // background-image: url('https://images.unsplash.com/photo-1559579313-021b6ec9f6d6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c3RhZGl1bXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80');
+        // background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSS5Yc4NbLPmI0oPtLpiZwxGpRdzWB7BVPfog&usqp=CAU');
+        background-color: rgb(201, 201, 201);
         background-repeat: no-repeat;
         background-size: 100% auto;
 
@@ -31,6 +33,7 @@
                     margin-right: 1%;
                     margin-top: 20%;
                     font-size: larger;
+                    margin-left: 7%;
 
                     .fa-user{
                         color: black;
