@@ -26,6 +26,7 @@ router.post('/profile/details', razorpayController.addCashInfo);
 router.post('/profile/withdraw', razorpayController.withdrawCash);
 router.post('/profile/addAccount', userProfileController.addAccount);
 router.post('/profile/is-order-completed', razorpayController.checkTransaction);
+router.post('/profile/follow', passport.checkAuthentication, userProfileController.followUpdate);
 
 router.get('/auth/google', passport.authenticate('google', {scope: ['profile', 'email']}));
 router.get('/auth/google/callback', passport.authenticate('google', {failureRedirect: '/users/sign-in'}), usersController.createSession);

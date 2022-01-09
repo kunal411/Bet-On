@@ -86,7 +86,21 @@ const userSchema = new mongoose.Schema({
 
     fundId:{
         type: String
-    }
+    },
+
+    followers : [
+        {
+            type : String,
+            trim : true,
+        }
+    ],
+    
+    following : [
+        {
+            type : String,
+            trim : true,
+        }
+    ]
 
 },{
     timestamps : true

@@ -18,6 +18,18 @@ p {
   width: 100px;
   border-radius: 50%; }
 
+#follow-button-div button {
+  border-radius: 10px;
+  font-size: 0.8rem;
+  padding: 3% 6%;
+  background-color: #6ea8b3;
+  font-weight: 600;
+  cursor: pointer; }
+
+#follow-button-div button:hover {
+  transform: scale(1.1);
+  transition: 0.1s ease-in; }
+
 #user-name {
   font-size: 1.5rem;
   font-family: sans-serif;
@@ -27,6 +39,11 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: space-around; }
+
+.followers, .following {
+  text-align: center;
+  padding: 1.5% 1%;
+  cursor: pointer; }
 
 #contest-details {
   display: none; }
@@ -212,3 +229,39 @@ legend {
   width: 20%;
   margin-left: 40%;
   font-size: 1.1rem; }
+
+#followers-list, #following-list {
+  display: none;
+  position: absolute;
+  background-image: url("https://media.istockphoto.com/photos/grass-field-ground-top-view-picture-id1192236248?k=20&m=1192236248&s=612x612&w=0&h=QcNPrNc_LLaUI5H1mmGpsIyT0mX-OHFTZk_redKHcUs=");
+  width: 26%;
+  height: 50%;
+  top: 25%;
+  left: 37%;
+  border-radius: 10px;
+  overflow: scroll; }
+  #followers-list #followers-list-heading, #followers-list #following-list-heading, #following-list #followers-list-heading, #following-list #following-list-heading {
+    color: white;
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 1%;
+    border-bottom: 0.5px solid gray;
+    padding-bottom: 2%; }
+  #followers-list #close-followers-list, #followers-list #close-following-list, #following-list #close-followers-list, #following-list #close-following-list {
+    position: absolute;
+    color: white;
+    top: 2%;
+    right: 1.5%;
+    cursor: pointer; }
+  #followers-list #following-userNames, #followers-list #followers-userNames, #following-list #following-userNames, #following-list #followers-userNames {
+    color: white;
+    padding: 1.5% 5%;
+    font-size: 1.1rem; }
+  #followers-list #following-image, #followers-list #follower-image, #following-list #following-image, #following-list #follower-image {
+    height: 30px;
+    width: 33px;
+    border-radius: 50%;
+    margin-right: 3%; }
+
+#followers-list::-webkit-scrollbar, #following-list::-webkit-scrollbar {
+  display: none; }

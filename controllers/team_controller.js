@@ -35,7 +35,11 @@ module.exports.createTeam = async function(req, res){
         const team4 = await Team.findOne({teamId: teamId});
         if(team4){
             try{
-                const team1 = await Team.updateOne({teamId: teamId},{$set:{players:team.players}});
+                const team1 = await Team.updateOne({teamId: teamId},{$set:{
+                    players:team.players,
+                    captainId: captain,
+                    viceCaptainId: viceCaptain
+                }});
                 if(team1){
                     alert('Team Succesfully Updated!!');
                 }

@@ -9,6 +9,10 @@ const Contest = require('../models/contest');
 //     }
 // }
 
+function compare(a, b){
+    return a.date < b.date;
+}
+
 module.exports.addMatchtoDb = async function(){
     function pad2(n) { 
         return (n < 10 ? '0' : '') + n;
@@ -22,7 +26,7 @@ module.exports.addMatchtoDb = async function(){
     var day = pad2(date.getDate());//day (1-31)
     var year= date.getFullYear();
     var formattedDate =  year+"-"+month+"-"+day;
-    const numberOfDays = 5;
+    const numberOfDays = 2;
 
     for (let i = 0; i < numberOfDays; i++){
         console.log(formattedDate);
@@ -55,6 +59,7 @@ module.exports.addMatchtoDb = async function(){
             }
 
             if(i == numberOfDays-1){
+                obj.results.sort(compare);
                 for(let i=0;i<obj.results.length;i++){
                     let match1 = new Match();
                     const matchId = obj.results[i].id;
@@ -112,8 +117,7 @@ module.exports.addMatchtoDb = async function(){
                                 console.log(contest1.price +" "+contest1.totalSpots + contest1.spotsLeft +contest1.matchId);
                                 try{
                                     let contest2 = await Contest.create(contest1);
-                                    console.log("***************************************************************************");
-                                    console.log(contest2);
+                                    console.log(obj.results[i].match_subtitle);
                                     if(contest2){
                                         match1.contestId.push(contest2.id);
                                         console.log('Succesfully created the contest');

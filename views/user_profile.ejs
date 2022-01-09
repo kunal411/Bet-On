@@ -8,9 +8,40 @@
             <img src="https://images.fanfight.com/avatars/avatar20.png" alt="User Avatar" id="user-image">
         </div>
 
+        <div class="followers">
+            <p>
+                <%= followers.length %>
+            </p>
+            <p>
+                followers
+            </p>
+        </div>
+
+        <div class="following">
+            <p>
+                <%= following.length %>
+            </p>
+            <p>
+                following
+            </p>
+        </div>
+
         <div class="user-name-hello">
             <p>Hello,</p>
             <p id="user-name"><%= userId %></p>
+            <% if(user.userId != userId){ %>
+                <div id="follow-button-div">
+                    <% if(!isUserPresent){ %>
+                        <button id="follow-button" data-follow-userId = "<%= userId%>">
+                            FOLLOW
+                        </button>
+                    <% }else{ %>
+                        <button id="following-div">
+                            Following
+                        </button>
+                    <% } %>
+                </div>
+            <% } %>
         </div>
     </div>
 
@@ -151,9 +182,9 @@
                     </p>
                     <form action="/users/profile/addAccount" method="POST">
                         <div id="ifsc-account-div">
-                            <input type="text" name="ifsc" placeholder="Enter IFSC" id="enter-ifsc-code" value="">
+                            <input type="text" name="ifsc" placeholder="Enter IFSC" id="enter-ifsc-code" value="" required>
                             <br>
-                            <input type="text" name="accountNumber" placeholder="Enter Account Number" id="enter-account-number" value="">
+                            <input type="text" name="accountNumber" placeholder="Enter Account Number" id="enter-account-number" value="" required>
                         </div>
                         <button id="add-account-button" type="submit">
                             ADD ACCOUNT
@@ -176,5 +207,34 @@
     <% } %>
 
 </div>
+
+<div id="following-list" data-following-length = "<%= following.length %>">
+    <div id="following-list-heading">
+        Following
+    </div>
+    <i class="fa fa-window-close" id="close-following-list" style="font-size:24px;color:white"></i>
+    <br>
+    <% for(i of following){ %>
+        <div id="following-userNames">
+            <img src="https://images.fanfight.com/avatars/avatar20.png" alt="" id="following-image">
+            <%= i %>
+        </div>
+    <% } %>
+</div>
+
+<div id="followers-list" data-followers-length = "<%= followers.length %>">
+    <div id="followers-list-heading">
+        Followers
+    </div>
+    <i class="fa fa-window-close" id="close-followers-list" style="font-size:24px;color:white"></i>
+    <br>
+    <% for(i of followers){ %>
+        <div id="followers-userNames">
+            <img src="https://images.fanfight.com/avatars/avatar20.png" alt="" id="follower-image">
+            <%= i %>
+        </div>
+    <% } %>
+</div>
+
 
 <script src="/js/user_profile.js"></script>
