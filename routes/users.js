@@ -21,7 +21,7 @@ router.post('/create-session', passport.authenticate(
 
 
 router.get('/sign-out', usersController.destroySession);
-router.get('/profile', userProfileController.profile);
+router.get('/profile/:userId', passport.checkAuthentication, userProfileController.profile);
 router.post('/profile/details', razorpayController.addCashInfo);
 router.post('/profile/withdraw', razorpayController.withdrawCash);
 router.post('/profile/addAccount', userProfileController.addAccount);

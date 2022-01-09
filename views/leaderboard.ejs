@@ -42,7 +42,9 @@
                 <% } %>
             <% } %>
             <div class="other-user-standing" data-team-count="<%= i %>">
-                <div class="grid-item"><%= result[i].userName%></div>
+                <div class="grid-item">
+                    <a href="/users/profile/<%= result[i].userName %>" id="userId"><%= result[i].userName%></a>
+                </div>
                 <div class="grid-item"><%= result[i].userPoints %></div>  
                 <div class="grid-item"><%= i+1 %></div>
             </div>

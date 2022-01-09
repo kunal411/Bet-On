@@ -49,7 +49,7 @@ module.exports.checkTransaction = async function(req, res){
     }catch(err){
         console.log('Error : ' + err);
     }
-    res.redirect('http://localhost:8000/users/profile');
+    res.redirect(`http://localhost:8000/users/profile/${req.user.userId}`);
 }
 
 module.exports.withdrawCash = async function(req, res){

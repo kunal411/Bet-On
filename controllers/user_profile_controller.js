@@ -3,7 +3,7 @@ var request = require('request');
 const alert = require('alert');
 
 module.exports.profile = async function(req, res){
-    const userId = req.user.userId;
+    const userId = req.params.userId;
     let user;
     try{
         user = await User.findOne({userId: userId});

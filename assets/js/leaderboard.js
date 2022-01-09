@@ -35,3 +35,8 @@ for(let i = 0; i < closeTeam.length; i++){
         }
     })
 }
+
+const user = document.getElementById('userId');
+user.addEventListener('click', function(event){
+    event.stopPropagation();
+})

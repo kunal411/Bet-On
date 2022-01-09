@@ -14,67 +14,77 @@
         </div>
     </div>
 
-    <div class="user-wallet profile-sections">
-        <div id="wallet-icon-name" class="logo-name">
-            <i class="fas fa-wallet"></i>
-            <p>
-                My Balance
-            </p>
-        </div>
-        <div id="wallet-details">
-            <p ><i class="fas fa-wallet fa-5x" id="wallet-logo"></i></p>
-            <p id="my-balance-title">MY BALANCE</p>
-            <p id="wallet-balance" data-wallet-balance = "<%= wallet %>">₹ <%= wallet %></p>
-            <button id="add-money-button">
-                Add Cash
-            </button>
-            <button id="withdraw-money-button">
-                Withdraw Cash
-            </button>
-        </div>
-
-        <div id="enter-add-amount-div">
-            <p>
-                Enter Amount
-            </p>
-            <div id="rupee-amount-input">
-                <div id="rupee-icon">
-                    ₹
-                </div>
-                <input type="tel" name="amount" maxlength="8" placeholder="Enter amount (₹20 to ₹100000)" id="enter-add-amount-input" value="" required>
+    <% if(user.userId == userId){ %>
+        <div class="user-wallet profile-sections">
+            <div id="wallet-icon-name" class="logo-name">
+                <i class="fas fa-wallet"></i>
+                <p>
+                    My Balance
+                </p>
             </div>
-            <button id="add-cash-button">
-                ADD CASH
-            </button>
-        </div>
-
-        <div id="enter-withdraw-amount-div">
-            <p>
-                Enter Amount
-            </p>
-            <div id="rupee-amount-input">
-                <div id="rupee-icon">
-                    ₹
-                </div>
-                <input type="tel" name="amount" maxlength="8" placeholder="Enter amount (₹20 to ₹100000)" id="enter-withdraw-amount-input" value="" required>
+            <div id="wallet-details">
+                <p ><i class="fas fa-wallet fa-5x" id="wallet-logo"></i></p>
+                <p id="my-balance-title">MY BALANCE</p>
+                <p id="wallet-balance" data-wallet-balance = "<%= wallet %>">₹ <%= wallet %></p>
+                <button id="add-money-button">
+                    Add Cash
+                </button>
+                <button id="withdraw-money-button">
+                    Withdraw Cash
+                </button>
             </div>
-            <button id="withdraw-cash-button">
-                WITHDRAW CASH
-            </button>
+    
+            <div id="enter-add-amount-div">
+                <p>
+                    Enter Amount
+                </p>
+                <div id="rupee-amount-input">
+                    <div id="rupee-icon">
+                        ₹
+                    </div>
+                    <input type="tel" name="amount" maxlength="8" placeholder="Enter amount (₹20 to ₹100000)" id="enter-add-amount-input" value="" required>
+                </div>
+                <button id="add-cash-button">
+                    ADD CASH
+                </button>
+            </div>
+    
+            <div id="enter-withdraw-amount-div">
+                <p>
+                    Enter Amount
+                </p>
+                <div id="rupee-amount-input">
+                    <div id="rupee-icon">
+                        ₹
+                    </div>
+                    <input type="tel" name="amount" maxlength="8" placeholder="Enter amount (₹20 to ₹100000)" id="enter-withdraw-amount-input" value="" required>
+                </div>
+                <button id="withdraw-cash-button">
+                    WITHDRAW CASH
+                </button>
+            </div>
         </div>
-    </div>
+    <% } %>
     <div class="my-stats profile-sections">
         <div id="stat-icon-name" class="logo-name">
             <i class="fas fa-chart-bar" ></i>
-            <p>
-                My Stats
-            </p>
+            <% if(user.userId == userId){ %>
+                <p>
+                    My Stats
+                </p>
+            <% }else{ %>
+                <p>
+                    Stats
+                </p>
+            <% } %>
         </div>
         <div id="contest-details">
-            <div id="winning-amount">
-                <p>Total Winnings</p>
-                <p>₹ <%= totalAmountWon %> </p>
-            </div>
+            <% if(user.userId == userId){ %>
+                <div id="winning-amount">
+                    <p>Total Winnings</p>
+                    <p>₹ <%= totalAmountWon %> </p>
+                </div>
+            <% } %>
             <div id="general-stats">
                 <div>
                     <p>Contest Joined </p>
@@ -89,7 +99,7 @@
                         <%= numberOfTeamsCreated  %>
                     </p>
                 </div>
-
+                
                 <div>
                     <p>Total Wins</p>
                     <p class="general-stats-value">
@@ -101,68 +111,70 @@
 
     </div>
 
-    <div class="my-transaction profile-sections">
-        <div class="logo-name">
-            <i class="fas fa-money-bill"></i>
-            <p>
-                My Transaction
-            </p>
-        </div>
-    </div>
-
-    <div class="refer-earn profile-sections">
-        <div class="logo-name" id="refer-div">
-            <i class="fas fa-gift"></i>
-            <p>Refer & Earn</p>
-        </div>
-        <div id="referAndEarn">
-            <p class="get-upto">GET UPTO</p>
-            <p class="refer-earn-price">₹ 100</p>
-            <p class="referral-msg">on every referral</p>
-            <fieldset>
-                <legend>Your Code</legend>
-                <% let referCode = Buffer.from(userIdDB).toString('base64'); %>
-                <p id="refer-code">  <%= referCode  %> </p>
-                <i class="far fa-copy" id="refer-code-copy" data-refer-code="<%= referCode %>"></i></p>
-            </fieldset>
-        </div>
-    </div>
-
-    <div class="bank-accounts profile-sections">
-        <div class="logo-name" id="bank-account-div">
-            <i class="fas fa-university"></i>
-            <p>Bank Account</p>
-        </div>
-
-        <% if(!accountNumber) {%>
-            <div id="enter-account-div">
+    <% if(user.userId == userId){ %>
+        <div class="my-transaction profile-sections">
+            <div class="logo-name">
+                <i class="fas fa-money-bill"></i>
                 <p>
-                    Enter Account Details
+                    My Transaction
                 </p>
-                <form action="/users/profile/addAccount" method="POST">
-                    <div id="ifsc-account-div">
-                        <input type="text" name="ifsc" placeholder="Enter IFSC" id="enter-ifsc-code" value="">
-                        <br>
-                        <input type="text" name="accountNumber" placeholder="Enter Account Number" id="enter-account-number" value="">
-                    </div>
-                    <button id="add-account-button" type="submit">
-                        ADD ACCOUNT
-                    </button>
-                </form>
             </div>
-        <% }else{ %>
-            <div id="enter-account-div">
-                <p>
-                    Account Details
-                </p>
-                <div id="ifsc-account-div">
-                    <input type="text" name="ifsc" placeholder="Enter IFSC" id="enter-ifsc-code" value="<%= ifsc %>" readonly>
-                    <br>
-                    <input type="text" name="accountNumber" placeholder="Enter Account Number" id="enter-account-number" value="<%= accountNumber %>" readonly>
+        </div>
+        <div class="refer-earn profile-sections">
+            <div class="logo-name" id="refer-div">
+                <i class="fas fa-gift"></i>
+                <p>Refer & Earn</p>
+            </div>
+            <div id="referAndEarn">
+                <p class="get-upto">GET UPTO</p>
+                <p class="refer-earn-price">₹ 100</p>
+                <p class="referral-msg">on every referral</p>
+                <fieldset>
+                    <legend>Your Code</legend>
+                    <% let referCode = Buffer.from(userIdDB).toString('base64'); %>
+                    <p id="refer-code">  <%= referCode  %> </p>
+                    <i class="far fa-copy" id="refer-code-copy" data-refer-code="<%= referCode %>"></i></p>
+                </fieldset>
+            </div>
+        </div>
+    
+        <div class="bank-accounts profile-sections">
+            <div class="logo-name" id="bank-account-div">
+                <i class="fas fa-university"></i>
+                <p>Bank Account</p>
+            </div>
+    
+            <% if(!accountNumber) {%>
+                <div id="enter-account-div">
+                    <p>
+                        Enter Account Details
+                    </p>
+                    <form action="/users/profile/addAccount" method="POST">
+                        <div id="ifsc-account-div">
+                            <input type="text" name="ifsc" placeholder="Enter IFSC" id="enter-ifsc-code" value="">
+                            <br>
+                            <input type="text" name="accountNumber" placeholder="Enter Account Number" id="enter-account-number" value="">
+                        </div>
+                        <button id="add-account-button" type="submit">
+                            ADD ACCOUNT
+                        </button>
+                    </form>
                 </div>
-            </div>
-        <% } %>
-    </div>
+            <% }else{ %>
+                <div id="enter-account-div">
+                    <p>
+                        Account Details
+                    </p>
+                    <div id="ifsc-account-div">
+                        <input type="text" name="ifsc" placeholder="Enter IFSC" id="enter-ifsc-code" value="<%= ifsc %>" readonly>
+                        <br>
+                        <input type="text" name="accountNumber" placeholder="Enter Account Number" id="enter-account-number" value="<%= accountNumber %>" readonly>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    <% } %>
+
 </div>
 
 <script src="/js/user_profile.js"></script>
