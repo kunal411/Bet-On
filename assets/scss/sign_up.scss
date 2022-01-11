@@ -1,5 +1,5 @@
 body{
-    overflow: hidden;
+    // overflow: hidden;
     // background-image: url('https://images.unsplash.com/photo-1559579313-021b6ec9f6d6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c3RhZGl1bXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80');
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -137,6 +137,7 @@ body{
         border: 1px solid rgb(156, 154, 154);
         margin: auto;
         padding-top: 2%;
+        padding-bottom: 2%;
         font-size: 19px;
         border-radius: 50px;
         margin-top: 1%;

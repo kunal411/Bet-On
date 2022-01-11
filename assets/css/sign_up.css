@@ -1,5 +1,4 @@
 body {
-  overflow: hidden;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 100% 100%;
@@ -97,6 +96,7 @@ body {
     border: 1px solid #9c9a9a;
     margin: auto;
     padding-top: 2%;
+    padding-bottom: 2%;
     font-size: 19px;
     border-radius: 50px;
     margin-top: 1%;

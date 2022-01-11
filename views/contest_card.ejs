@@ -31,7 +31,7 @@
             </div>
             <div class="pool-price">
                 <p class="contest-prize-pool" data-count = "<%= count %>">₹ <%= x.price %> ↓</p>
-                <button id="money-to-join-contest" data-contest-id = "<%= x.contestId%>" data-match-id="<%= matchId %>">₹<%= x.price/x.totalSpots %></button>
+                <button id="money-to-join-contest" data-contest-id = "<%= x.contestId%>" data-price = "<%=x.price/x.totalSpots %>" data-wallet="<%= wallet %>" data-match-id="<%= matchId %>">₹<%= x.price/x.totalSpots %></button>
             </div>
             <div class="contest-participation">
                 <p> <%= x.spotsLeft %> Spots Left</p>
@@ -534,7 +534,7 @@
             </div>
         
             <div class="create-contest-footer">
-                <button id="create-contest-save" class="save-btn" data-match-id = "<%= matchId %>">CREATE</button>
+                <button id="create-contest-save" class="save-btn" data-match-id = "<%= matchId %>" data-wallet="<%= wallet %>">CREATE</button>
                 <button id="create-contest-cancel" class="cancel-btn">CANCEL</button>
             </div>
         </div>

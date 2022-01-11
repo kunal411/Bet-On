@@ -2,6 +2,7 @@ const alert = require('alert');
 const MatchLiveDetail = require('../models/match_live_details');
 const Contest = require('../models/contest');
 const Team = require('../models/team');
+const User = require('../models/user');
 
 module.exports.contest = async function(req,res){
 
@@ -141,9 +142,15 @@ module.exports.contest = async function(req,res){
             }catch(err){
                 console.log("Error : " + err);
             }
+            let user;
+            try{
+                user = await User.findOne({userId : userId});
+
+            }catch(err){
+                console.log("Error : " + err);
+            }
             matchDet.results.push(s);
-            // console.log("******************************************************************************");
-            // console.log(contestsDetails);
+
             return res.render('contest_card', {
                 title: 'Contests',
                 match_details: matchDet,
@@ -152,10 +159,11 @@ module.exports.contest = async function(req,res){
                 lineupsOut: lineOut,
                 matchId: matchId,
                 contests: contestsDetails,
-                teamDetail: teamDetail
+                teamDetail: teamDetail,
+                userDetail:user,
+                wallet : user.wallet
             });
         }else{
-            // console.log('Live details are not out yet..');
             alert('LineUps are not out yet!!');
             return res.redirect('back');
         }

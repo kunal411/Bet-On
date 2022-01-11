@@ -10,7 +10,14 @@ module.exports.joinContest = async function(req,res){
 
     try{
         const contest = await Contest.findOne({_id:contestCode, matchId : matchId});
+        const user = await User.findOne({userId : userId});
         if(contest){
+            const contestPrice = contest.price / contest.totalSpots;
+            const userWallet = user.wallet;
+            if(contestPrice > userWallet){
+                alert(`Not enough balance. Add ${contestPrice - userWallet} in wallet`);
+                return res.redirect('back');
+            }
             let userArray = contest.userIds;
             for(let x of userArray){
                 if(userId == x){
@@ -49,34 +56,29 @@ module.exports.joinContest = async function(req,res){
                 alert('Create Team First!!');
                 return res.redirect('back');
             }
-            try{
-                let user = await User.findOne({userId : userId});
-                if(user){
-                    let matchIdsArray = user.matchIds;
-                    let isMatchPresent = false;
-                    let numberOfContestJoined = user.numberOfContestJoined + 1;
-                    for(let x of matchIdsArray){
-                        if(x == matchId){
-                            isMatchPresent = true;
-                            break;
-                        }
-                    }
-                    if(!isMatchPresent){
-                        matchIdsArray.push(matchId);
-                    }
-                    try{
-                        let userUpdate = await User.updateOne({userId: userId}, { $set : {
-                            matchIds : matchIdsArray,
-                            numberOfContestJoined: numberOfContestJoined
-                        }});
-                        console.log('Match Successfully added in user database');
-                    }catch(err){
-                        console.log('Error : ' + err);
+            if(user){
+                let matchIdsArray = user.matchIds;
+                let isMatchPresent = false;
+                let numberOfContestJoined = user.numberOfContestJoined + 1;
+                for(let x of matchIdsArray){
+                    if(x == matchId){
+                        isMatchPresent = true;
+                        break;
                     }
                 }
-            }
-            catch(err){
-                console.log('Error : ' + err);
+                if(!isMatchPresent){
+                    matchIdsArray.push(matchId);
+                }
+                try{
+                    let userUpdate = await User.updateOne({userId: userId}, { $set : {
+                        matchIds : matchIdsArray,
+                        numberOfContestJoined: numberOfContestJoined,
+                        wallet : user.wallet - contestPrice
+                    }});
+                    console.log('Match Successfully added in user database');
+                }catch(err){
+                    console.log('Error : ' + err);
+                }
             }
         }else{
             alert('Invalid Contest Code!')

@@ -1,5 +1,9 @@
 const request = require('request');
 const MatchLiveDetail = require('../models/match_live_details');
+const Contest = require('../models/contest');
+const Teams = require('../models/team');
+const User = require('../models/user');
+const Match = require('../models/match');
 
 function pointCalculator(runs, fours, sixes, strikeRate, wicket, economy){
     let totalPoints = runs + fours*1 + sixes*2 + 25*wicket;
@@ -19,6 +23,7 @@ function pointCalculator(runs, fours, sixes, strikeRate, wicket, economy){
 module.exports.addMatchLiveScoreDettoDb = async function(){
     let date= new Date();
     let endDate = date;
+    let result;
 
     try{
         endDate.setDate(endDate.getDate() + 1);
@@ -31,9 +36,43 @@ module.exports.addMatchLiveScoreDettoDb = async function(){
         for(let i = 0; i < matchList.length; i++){
             let matchId = matchList[i].matchId;
 
-            if(matchList[i].inPlay == "No"){
-                continue;
+            // if(matchList[i].inPlay == "No"){
+            //     continue;
+            // }
+            
+            if(matchList[i].result == "Yes"){
+                // We can give reference in the model and then populate it, it will save much time!!
+                let matchDet = await Match.findOne({matchId : matchId});
+
+                let contestIdList = matchDet.contestId;
+                for(let contestId of contestIdList){
+                    const contest = await Contest.findOne({_id : contestId});
+                    
+                    if(contest){
+                        if(!contest.prizeDetails[0].prizeHolder){
+                            const numWinners = contest.numWinners;
+                            const teamIds = contest.teamsId;
+                            let teamsArray = [];
+                            for(let teamId of teamIds){
+                                const team = await Teams.findOne({teamId : teamId});
+                                teamsArray.push(team);
+                            }
+                            teamsArray.sort(function(a, b){return b.points - a.points});
+                            for(let i = 0; i < numWinners && i < teamsArray.length; i++){
+                                contest.prizeDetails[i].prizeHolder = teamsArray[i].userId;
+                                const user = await User.findOneAndUpdate({userId : teamsArray[i].userId},
+                                    {$inc:{
+                                        wallet : contest.prizeDetails[i].prize
+                                    }});
+                            }
+                            const updatedContest = await Contest.updateOne({_id : contestId}, {$set:{
+                                prizeDetails : contest.prizeDetails
+                            }})
+                        }
+                    }
+                }
             }
+
             const options = {
                 method: 'GET',
                 url: `https://cricket-live-data.p.rapidapi.com/match/${matchId}`,
@@ -62,14 +101,28 @@ module.exports.addMatchLiveScoreDettoDb = async function(){
                     let status = s.results.live_details.match_summary.status;
                     let toss = s.results.live_details.match_summary.toss;
                     let result = s.results.live_details.match_summary.result;
-
-                    let title_fi = s.results.live_details.scorecard[0].title;
-                    let overs_fi = s.results.live_details.scorecard[0].overs;
-                    let runs_fi = s.results.live_details.scorecard[0].runs;
-                    let wickets_fi = s.results.live_details.scorecard[0].wickets;
-                    let fow_fi = s.results.live_details.scorecard[0].fow;
-                    let extrasDetails_fi = s.results.live_details.scorecard[0].extras_detail;
-
+                    console.log('**********' + result);
+                    
+                    let title_fi = "";
+                    let overs_fi = 0;
+                    let runs_fi = 0;
+                    let wickets_fi = 0;
+                    let fow_fi = "";
+                    let extrasDetails_fi = "";
+                    let batting1 = [];
+                    let bowling1 = [];
+                    
+                    if(s.results.live_details.scorecard.length > 0){
+                        batting1 = s.results.live_details.scorecard[0].batting;
+                        bowling1 = s.results.live_details.scorecard[0].bowling;
+                        title_fi = s.results.live_details.scorecard[0].title;
+                        overs_fi = s.results.live_details.scorecard[0].overs;
+                        runs_fi = s.results.live_details.scorecard[0].runs;
+                        wickets_fi = s.results.live_details.scorecard[0].wickets;
+                        fow_fi = s.results.live_details.scorecard[0].fow;
+                        extrasDetails_fi = s.results.live_details.scorecard[0].extras_detail;
+                    }
+                    
                     let title_si = "";
                     let overs_si = 0;
                     let runs_si = 0;
@@ -90,15 +143,54 @@ module.exports.addMatchLiveScoreDettoDb = async function(){
                         bowling2 = s.results.live_details.scorecard[1].bowling;
                     }
                     
+                    let title_ti = "";
+                    let overs_ti = 0;
+                    let runs_ti = 0;
+                    let wickets_ti = 0;
+                    let fow_ti = "";
+                    let extrasDetails_ti = "";
+                    let batting3 = [];
+                    let bowling3 = [];
+                    
+                    if(s.results.live_details.scorecard.length > 2){
+                        batting3 = s.results.live_details.scorecard[2].batting;
+                        bowling3 = s.results.live_details.scorecard[2].bowling;
+                        title_ti = s.results.live_details.scorecard[2].title;
+                        overs_ti = s.results.live_details.scorecard[2].overs;
+                        runs_ti = s.results.live_details.scorecard[2].runs;
+                        wickets_ti = s.results.live_details.scorecard[2].wickets;
+                        fow_ti = s.results.live_details.scorecard[2].fow;
+                        extrasDetails_ti = s.results.live_details.scorecard[2].extras_detail;
+                    }
+                    
+                    let title_fouri = "";
+                    let overs_fouri = 0;
+                    let runs_fouri = 0;
+                    let wickets_fouri = 0;
+                    let fow_fouri = "";
+                    let extrasDetails_fouri = "";
+                    let batting4 = [];
+                    let bowling4 = [];
+                    
+                    if(s.results.live_details.scorecard.length > 3){
+                        batting4 = s.results.live_details.scorecard[3].batting;
+                        bowling4 = s.results.live_details.scorecard[3].bowling;
+                        title_fouri = s.results.live_details.scorecard[3].title;
+                        overs_fouri = s.results.live_details.scorecard[3].overs;
+                        runs_fouri = s.results.live_details.scorecard[3].runs;
+                        wickets_fouri = s.results.live_details.scorecard[3].wickets;
+                        fow_fouri = s.results.live_details.scorecard[3].fow;
+                        extrasDetails_fouri = s.results.live_details.scorecard[3].extras_detail;
+                    }
+                    
+                    
+                    
                     let teamHomePlayers = matchList[i].teamHomePlayers;
                     let teamAwayPlayers = matchList[i].teamAwayPlayers;
-
-                    let batting1 = s.results.live_details.scorecard[0].batting;
+                    
                     let batting = batting1.concat(batting2);
-
-                    let bowling1 = s.results.live_details.scorecard[0].bowling;
                     let bowling = bowling1.concat(bowling2);
-
+                    
                     for(let i=0;i<teamHomePlayers.length;i++){
                         let player = teamHomePlayers[i];
                         let playerId = player.playerId;
@@ -123,7 +215,7 @@ module.exports.addMatchLiveScoreDettoDb = async function(){
                             }
                         }
                     }
-
+                    
                     for(let i=0;i<teamAwayPlayers.length;i++){
                         let player = teamAwayPlayers[i];
                         let playerId = player.playerId;
@@ -151,7 +243,7 @@ module.exports.addMatchLiveScoreDettoDb = async function(){
                         // Function to be written to calculate the points
                         teamHomePlayers[i].points = pointCalculator(teamHomePlayers[i].runs, teamHomePlayers[i].fours, teamHomePlayers[i].sixes, teamHomePlayers[i].sixes, teamHomePlayers[i].wickets, teamHomePlayers[i].economy);
                         teamAwayPlayers[i].points = pointCalculator(teamAwayPlayers[i].runs, teamAwayPlayers[i].fours, teamAwayPlayers[i].sixes, teamAwayPlayers[i].sixes, teamAwayPlayers[i].wickets, teamAwayPlayers[i].economy);
-
+                        
                         try{
                             const matchUpdate = await MatchLiveDetail.updateOne({matchId:matchId}, { $set : {
                                 inPlay : inPlay,

@@ -77,7 +77,8 @@ module.exports.createContest = async function(req, res){
                     try{
                         let userUpdate = await User.updateOne({userId: userId}, { $set : {
                             matchIds : matchIdsArray,
-                            numberOfContestJoined: numberOfContestJoined
+                            numberOfContestJoined: numberOfContestJoined,
+                            wallet : user.wallet - entryAmount
                         }});
                         console.log('Match Successfully added in user database');
                     }catch(err){

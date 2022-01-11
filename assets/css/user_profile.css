@@ -69,7 +69,8 @@ a:hover {
     display: flex;
     justify-content: space-between;
     margin-bottom: 2%;
-    text-align: center; }
+    text-align: center;
+    border-radius: 10px; }
     #contest-details #general-stats .general-stats-value {
       font-weight: bold;
       font-size: 1.2rem; }

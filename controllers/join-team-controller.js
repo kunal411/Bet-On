@@ -18,6 +18,10 @@ module.exports.joinTeam = async function(req, res){
                 let teamsId = contest.teamsId;
                 let spotsLeft = contest.spotsLeft;
                 let userIdsArray = contest.userIds;
+                let price = contest.price;
+                let totalSpots = contest.totalSpots;
+
+                const contestPrice = price / totalSpots;
                 function checkTeam(teamId) {
                     return teamId == team.teamId;
                 }
@@ -61,7 +65,8 @@ module.exports.joinTeam = async function(req, res){
                                 try{
                                     let userUpdate = await User.updateOne({userId: userId}, { $set : {
                                         matchIds : matchIdsArray,
-                                        numberOfContestJoined: numberOfContestJoined
+                                        numberOfContestJoined: numberOfContestJoined,
+                                        wallet : user.wallet - contestPrice
                                     }});
                                     console.log('Match Successfully added in user database');
                                 }catch(err){

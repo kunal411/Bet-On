@@ -16,9 +16,9 @@ module.exports.scoreUpdate = async function(){
         for(let i = 0; i < matchList.length; i++){
             let matchId = matchList[i].matchId;
 
-            if(matchList[i].inPlay == "No"){
-                continue;
-            }
+            // if(matchList[i].inPlay == "No"){
+            //     continue;
+            // }
             try{
                 let teams = await Teams.find({matchId: matchId});
                 for(let a = 0; a < teams.length; a++){

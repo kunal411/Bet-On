@@ -39,6 +39,15 @@ for(let i = 0; i < contestCards.length; i++){
         contestId = contestCards[i].getAttribute('data-contest-id');
         console.log(contestId);
         matchId = contestCards[i].getAttribute('data-match-id');
+
+        const wallet =  Number(contestCards[i].getAttribute('data-wallet'));
+        const contestPrice =  Number(contestCards[i].getAttribute('data-price'));
+
+        if(contestPrice > wallet){
+            alert(`Not enough balance. Add ₹${contestPrice-wallet} in wallet`);
+            return;
+        }
+
         const div=document.getElementById('join-contest');
         backgrnd.style.opacity = "0.5";
         div.style.display="block";
@@ -344,9 +353,10 @@ for(let i = 0; i < contestCard.length; i++){
 
 const createContestSaveButton = document.getElementById('create-contest-save');
 createContestSaveButton.addEventListener('click', function(){
-    const entryAmount = document.getElementById('entry').value;
+    const entryAmount = Number(document.getElementById('entry').value);
     const spots = document.getElementById('spots').value;
     const winners = document.getElementById('winners').value;
+    const wallet = Number(createContestSaveButton.getAttribute('data-wallet'));
     const matchId = createContestSaveButton.getAttribute('data-match-id');
     console.log(entryAmount + " " + spots + " " + winners);
     if(entryAmount < 10){
@@ -359,6 +369,10 @@ createContestSaveButton.addEventListener('click', function(){
     }
     if(winners < 1 || winners > spots/2){
         alert('winners cannot be greater than ' + spots/2 + ' and less than 1');
+        return;
+    }
+    if(wallet < entryAmount){
+        alert(`Not enough balance. Add ₹${entryAmount-wallet} in wallet`);
         return;
     }
     window.location.href = `http://localhost:8000/match/contest/create-contest?entryAmount=${entryAmount}&spots=${spots}&winners=${winners}&matchId=${matchId}`;
