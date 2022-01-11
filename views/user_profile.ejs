@@ -217,7 +217,9 @@
     <% for(i of following){ %>
         <div id="following-userNames">
             <img src="https://images.fanfight.com/avatars/avatar20.png" alt="" id="following-image">
-            <%= i %>
+            <a href="/users/profile/<%= i %>">
+                <%= i %>
+            </a>
         </div>
     <% } %>
 </div>
@@ -231,7 +233,9 @@
     <% for(i of followers){ %>
         <div id="followers-userNames">
             <img src="https://images.fanfight.com/avatars/avatar20.png" alt="" id="follower-image">
-            <%= i %>
+            <a href="/users/profile/<%= i %>">
+                <%= i %>
+            </a>
         </div>
     <% } %>
 </div>
