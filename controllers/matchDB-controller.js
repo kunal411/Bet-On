@@ -22,11 +22,14 @@ module.exports.addMatchtoDb = async function(){
         "results" : []
     };
     var date = new Date();
-    var month = pad2(date.getMonth()+1);//months (0-11)
-    var day = pad2(date.getDate());//day (1-31)
-    var year= date.getFullYear();
+    // var month = pad2(date.getMonth()+1);//months (0-11)
+    // var day = pad2(date.getDate());//day (1-31)
+    // var year= date.getFullYear();
+    var year = "2021";
+    var month = "09";
+    var day = 25;
     var formattedDate =  year+"-"+month+"-"+day;
-    const numberOfDays = 2;
+    const numberOfDays = 4;
 
     for (let i = 0; i < numberOfDays; i++){
         console.log(formattedDate);
@@ -146,11 +149,11 @@ module.exports.addMatchtoDb = async function(){
         } ).catch((err)=>{
             console.log("Error : " + err);
         })
-        date = new Date(date.getTime() + (24 * 60 * 60 * 1000));
-        var month = pad2(date.getMonth()+1);//months (0-11)
-        var day = pad2(date.getDate());//day (1-31)
-        var year= date.getFullYear();
-        // day++;
+        // date = new Date(date.getTime() + (24 * 60 * 60 * 1000));
+        // var month = pad2(date.getMonth()+1);//months (0-11)
+        // var day = pad2(date.getDate());//day (1-31)
+        // var year= date.getFullYear();
+        day++;
         formattedDate =  year+"-"+month+"-"+day;
     }
 }

@@ -97,7 +97,7 @@ async function addUpdatedTeamScore(){
 
 // addMatch();
 // addLiveMatch();
-addLiveScore();
+// addLiveScore();
 // addUpdatedTeamScore();
 
 // use express router
