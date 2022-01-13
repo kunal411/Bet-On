@@ -3,6 +3,7 @@ const Contest = require('../models/contest');
 const Match = require('../models/match');
 const User = require('../models/user');
 const Team = require('../models/team');
+const transaction = require('../controllers/transaction_details_controller');
 
 // function to create new user contest 
 module.exports.createContest = async function(req, res){
@@ -22,20 +23,10 @@ module.exports.createContest = async function(req, res){
             userTeamId = team.teamId;
         }else{
             // team not found
-            if (req.xhr){
-                return res.status(200).json({
-                    message: "Create Team First!');"
-                });
-            }
             req.flash('error','Create Team First!');
             return res.redirect('back');
         }
     }catch(err){
-        if (req.xhr){
-            return res.status(200).json({
-                message: "Create Team First!');"
-            });
-        }
         req.flash('error','Create Team First!');
         console.log("Error : " + err);
         return res.redirect('back');
@@ -85,6 +76,7 @@ module.exports.createContest = async function(req, res){
                     matchIdsArray.push(matchId);
                 }
                 
+                transaction.createTransaction(userId, "", entryAmount, "joined contest");
                 // Adding matchId and updating  number of contest joined and user wallet.
                 let userUpdate = await User.updateOne({userId: userId}, { $set : {
                     matchIds : matchIdsArray,
@@ -92,6 +84,8 @@ module.exports.createContest = async function(req, res){
                     wallet : user.wallet - entryAmount
                 }});
                 console.log('Match Successfully added in user database');
+                req.flash('success','Contest Joined and Created Successfully!');
+                return res.redirect('back');
             }
         }
     }catch(err){

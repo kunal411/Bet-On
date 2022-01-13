@@ -150,7 +150,19 @@
                     My Transaction
                 </p>
             </div>
+            <div id="transaction-details">
+                <% for(let i = 0; i < transactions.length; i++){ %>
+                    <div>
+                        <%= transactions[i].amount %>
+                        <%= transactions[i].action %>
+                        <%= transactions[i].transactionId %>
+                        <%= transactions[i].createdAt %>
+                    </div>
+                <% } %>
+            </div>
         </div>
+
+    
         <div class="refer-earn profile-sections">
             <div class="logo-name" id="refer-div">
                 <i class="fas fa-gift"></i>

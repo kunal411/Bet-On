@@ -1,7 +1,8 @@
 const User = require('../models/user');
-
 const Razorpay = require('razorpay');
 var request = require('request');
+
+const transaction = require('../controllers/transaction_details_controller');
 
 const razorpay = new Razorpay({
     key_id: 'rzp_test_OCt10FxjnXTNWK',
@@ -19,7 +20,6 @@ module.exports.addCashInfo = function(req, res){
     }
 
     razorpay.orders.create(options, (err, order) =>{
-        console.log(order);
         res.json(order);
     })
 }
@@ -28,19 +28,14 @@ module.exports.checkTransaction = async function(req, res){
     console.log(req.body);
     const userId = req.user.userId;
     try{
-        let user = await User.findOne({userId : userId});
         razorpay.payments.fetch(req.body.razorpay_payment_id).then(async (paymentDocumentation) => {
             if(paymentDocumentation.status == 'captured'){
-                if(user){
-                    let walletAmount = Number(user.wallet);
-                    walletAmount += cashAdded;
-                    console.log('Wallet Amount is : ' + walletAmount);
-                    let updatedUser = await User.updateOne({userId : userId}, {$set:{
-                        wallet : walletAmount
-                    }})
-                    console.log(updatedUser);
-                }
+                let updatedUser = await User.updateOne({userId : userId}, {$inc:{
+                    wallet : cashAdded
+                }})
+                transaction.createTransaction(userId, req.body.razorpay_payment_id, cashAdded, "cash added");
                 req.flash('success','Transaction successfull');
+                res.redirect(`http://localhost:8000/users/profile/${req.user.userId}`);
             }
             else{
                 req.flash('error','Transaction failed please try again')
@@ -49,7 +44,6 @@ module.exports.checkTransaction = async function(req, res){
     }catch(err){
         console.log('Error : ' + err);
     }
-    res.redirect(`http://localhost:8000/users/profile/${req.user.userId}`);
 }
 
 module.exports.withdrawCash = async function(req, res){
@@ -102,6 +96,7 @@ module.exports.withdrawCash = async function(req, res){
             promise.then( async (s)=>{
                 if(s.failure_reason == null){
                     console.log(leftAmount);
+                    transaction.createTransaction(userId, s.utr, amount, "cash withdraw");
                     await User.updateOne({userId : userId}, {$set :{
                         wallet : leftAmount
                     }})

@@ -1,12 +1,14 @@
 const User = require('../models/user');
-
+const Transaction = require('../models/transaction');
 var request = require('request');
 
 module.exports.profile = async function(req, res){
     const userId = req.params.userId;
     let user;
+    let transaction;
     try{
         user = await User.findOne({userId: userId});
+        transaction = await Transaction.find({userId: userId});
     }catch(err){
         console.log('Error : ' + err);
     }
@@ -32,7 +34,8 @@ module.exports.profile = async function(req, res){
         ifsc: user.ifsc,
         followers: user.followers,
         following: user.following,
-        isUserPresent: isUserPresent
+        isUserPresent: isUserPresent,
+        transactions : transaction
     });
 }
 

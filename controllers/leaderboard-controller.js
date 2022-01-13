@@ -5,6 +5,7 @@ const MatchLiveDet = require('../models/match_live_details');
 
 module.exports.leaderBoardUpdate = async function(req,res){
     if (!req.isAuthenticated()) {
+        req.flash('error','Please login');
         return res.redirect('http://localhost:8000/users/sign-in');
     } 
 
@@ -29,7 +30,6 @@ module.exports.leaderBoardUpdate = async function(req,res){
         const contest = await Contest.findOne({_id : contestId});
         if(contest){
             const teamsArray = contest.teamsId;
-            console.log('**************'+teamsArray);
             numberOfWinners = contest.prizeDetails.length;
             for(let teamId of teamsArray){
                 try{
@@ -52,8 +52,6 @@ module.exports.leaderBoardUpdate = async function(req,res){
     }catch(err){
         console.log('Error : ' + err);
     }
-    console.log('**************************************');
-    console.log(results);
     return res.render('leaderboard',{
         title : "Leaderboard",
         result : results,

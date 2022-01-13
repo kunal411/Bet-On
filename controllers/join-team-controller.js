@@ -2,6 +2,7 @@
 const Contest = require('../models/contest');
 const Team = require('../models/team');
 const User = require('../models/user');
+const transaction = require('../controllers/transaction_details_controller');
 
 module.exports.joinTeam = async function(req, res){
 
@@ -28,12 +29,12 @@ module.exports.joinTeam = async function(req, res){
 
             let isPresent = contest.teamsId.find(checkTeam);
             if(isPresent == team.teamId){
-                req.flash('warning','Already registered in this contest!');
+                req.flash('error','Already registered in this contest!');
                 return res.redirect('back');
             }
 
             if(spotsLeft == 0){
-                req.flash('warning','Contest is already full!!');
+                req.flash('error','Contest is already full!!');
                 return res.redirect('back');
             }
 
@@ -47,7 +48,6 @@ module.exports.joinTeam = async function(req, res){
             }});
             
             if(contest1){
-                req.flash('success','Contest joined successfully!');
                 let user = await User.findOne({userId : userId});
                 if(user){
                     let matchIdsArray = user.matchIds;
@@ -64,18 +64,19 @@ module.exports.joinTeam = async function(req, res){
                     if(!isMatchPresent){
                         matchIdsArray.push(matchId);
                     }
-
+                    transaction.createTransaction(userId, "", contestPrice, "joined contest");
                     let userUpdate = await User.updateOne({userId: userId}, { $set : {
                         matchIds : matchIdsArray,
                         numberOfContestJoined: numberOfContestJoined,
                         wallet : user.wallet - contestPrice
                     }});
-                    
+                    req.flash('success','Contest joined successfully!');
                     console.log('Match Successfully added in user database');
                 }
             }
         }else{
-            req.flash('warning','Create team first!');
+            req.flash('error','Create team first!');
+            return res.redirect('back');
         }
     }catch(err){
         console.log('Error : ' + err);

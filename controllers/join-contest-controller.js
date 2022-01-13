@@ -1,11 +1,18 @@
+const { isValidObjectId } = require('mongoose');
 const Contest = require('../models/contest');
 const Team = require('../models/team');
 const User = require('../models/user');
+const transaction = require('../controllers/transaction_details_controller');
 
 module.exports.joinContest = async function(req,res){
     const matchId = req.query.matchId;
     const userId = req.user.userId;
     const contestCode = req.query.joinCode;
+    if(!isValidObjectId(contestCode)){
+        console.log('Invalid code');
+        req.flash('error','Invalid Contest Code!');
+        return res.redirect('back');
+    }
 
     try{
         const contest = await Contest.findOne({_id:contestCode, matchId : matchId});
@@ -14,7 +21,7 @@ module.exports.joinContest = async function(req,res){
             const contestPrice = contest.price / contest.totalSpots;
             const userWallet = user.wallet;
             if(contestPrice > userWallet){
-                req.flash('warning',`Not enough balance. Add ${contestPrice - userWallet} in wallet`);
+                req.flash('error',`Not enough balance. Add ${contestPrice - userWallet} in wallet`);
                 return res.redirect('back');
             }
             let userArray = contest.userIds;
@@ -46,13 +53,14 @@ module.exports.joinContest = async function(req,res){
                         console.log('Error : ' + err);
                     }
                 }else{
-                    req.flash('error','Create Team First!!');
+                    console.log('Create Team First!');
+                    req.flash('error','Create Team First!');
                     return res.redirect('back');
                 }
             } 
             catch(err){
                 console.log('Error : ' + err);
-                req.flash('error','Create Team First!!');
+                req.flash('error','Create Team First!');
                 return res.redirect('back');
             }
             if(user){
@@ -69,18 +77,23 @@ module.exports.joinContest = async function(req,res){
                     matchIdsArray.push(matchId);
                 }
                 try{
+                    transaction.createTransaction(userId, "", contestPrice, "joined contest");
                     let userUpdate = await User.updateOne({userId: userId}, { $set : {
                         matchIds : matchIdsArray,
                         numberOfContestJoined: numberOfContestJoined,
                         wallet : user.wallet - contestPrice
                     }});
                     console.log('Match Successfully added in user database');
+                    req.flash('success','Contest Joined Successfully!');
+                    return res.redirect('back');
                 }catch(err){
                     console.log('Error : ' + err);
                 }
             }
         }else{
+            console.log('Invalid code');
             req.flash('error','Invalid Contest Code!');
+            return res.redirect('back');
         }
     }catch(err){
         console.log('Error : ' + err);

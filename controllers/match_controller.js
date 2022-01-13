@@ -7,6 +7,7 @@ const User = require('../models/user');
 module.exports.contest = async function(req,res){
 
     if (!req.isAuthenticated()) {
+        req.flash('error','Please login');
         return res.redirect('http://localhost:8000/users/sign-in');
     } 
 
@@ -15,7 +16,6 @@ module.exports.contest = async function(req,res){
     const awayTeamName = req.query.awayTeamName;
     const userId = req.user.userId;
     let teamDetail = "undefined";
-    // console.log(teamDetail);
 
     try{
         const team = await Team.findOne({matchId : matchId , userId : userId});

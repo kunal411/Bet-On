@@ -13,6 +13,7 @@ const domain = 'sandbox11a51a4bfd9245d587c2b8a6d188b1fd.mailgun.org';
 
 const mailgun = require("mailgun-js");
 const mg = mailgun({apiKey: mailGunKey , domain: domain});
+const transaction = require('../controllers/transaction_details_controller');
 
 
 // render the sign up page
@@ -196,16 +197,19 @@ module.exports.otp = async function(req, res){
                     }
                     
                     if(!user){
+                        transaction.createTransaction(userId, "", 100, "extra cash");
                         User.create(user1,async function(err,user){
                             if(err){
                                 console.log('Error in creating a user while account activation', err);
                                 req.flash('error','Something went wrong!');
                                 return res.redirect('back');
                             }
+
                             if(referCode != ""){
-                                const userRefer = await User.updateOne({_id:referCode},{$set : {
+                                const userRefer = await User.findOneAndUpdate({_id:referCode},{$set : {
                                     wallet : amount + 100
                                 }})
+                                transaction.createTransaction(userRefer.userId, "", 100, "extra cash");
                             }
                             console.log("SignUp successfull!");
                             req.flash('success','SignUp successfull!')
@@ -297,6 +301,7 @@ module.exports.activateAccount = async function(req,res){
                     }
                     
                     if(!user){
+                        transaction.createTransaction(userId, "", 100, "extra cash");
                         User.create(user1, async function(err,user){
                             if(err){
                                 console.log('Error in creating a user while account activation', err);
@@ -307,6 +312,7 @@ module.exports.activateAccount = async function(req,res){
                                 const userRefer = await User.updateOne({_id:userIdRefer},{$set : {
                                     wallet : amount + 100
                                 }})
+                                transaction.createTransaction(userRefer.userId, "", 100, "extra cash");
                             }
                             return res.redirect('http://localhost:8000/users/sign-in');
                         });

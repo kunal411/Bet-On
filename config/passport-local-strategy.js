@@ -19,9 +19,11 @@ passport.use(new LocalStrategy({
 
             const userPassword = Buffer.from(user.password, 'base64').toString();
             if (!user || userPassword != password){
+                req.flash('error', 'Email or Password incorrect');
                 return done(null, false);
             }
 
+            req.flash('success', 'Logged in successfull');
             return done(null, user);
         });
     }

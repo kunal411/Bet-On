@@ -131,7 +131,6 @@ if(addMonetTextArea){
         }
     
         axios.post(`/users/profile/details?amount=${Number(addMonetTextArea.value)}`).then((info) => {
-            console.log(info);
             var options = {
                 "key": "rzp_test_OCt10FxjnXTNWK",
                 "name": "Domino Beton",

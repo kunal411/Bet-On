@@ -58,7 +58,6 @@ module.exports.createTeam = async function(req, res){
                 let userUpdate = await User.findOneAndUpdate({userId: userId}, { $inc : {
                     numberOfTeamsCreated: 1
                 }});
-
                 console.log('team is successfully added in db! ');
                 req.flash('success','Team Succesfully Created!!');
                 return res.redirect('back');

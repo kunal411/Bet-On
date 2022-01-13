@@ -4,6 +4,7 @@ const Contest = require('../models/contest');
 const Teams = require('../models/team');
 const User = require('../models/user');
 const Match = require('../models/match');
+const transaction = require('../controllers/transaction_details_controller');
 
 function pointCalculator(runs, fours, sixes, strikeRate, wicket, economy){
     let totalPoints = runs + fours*1 + sixes*2 + 25*wicket;
@@ -60,6 +61,7 @@ module.exports.addMatchLiveScoreDettoDb = async function(){
                             teamsArray.sort(function(a, b){return b.points - a.points});
                             for(let i = 0; i < numWinners && i < teamsArray.length; i++){
                                 contest.prizeDetails[i].prizeHolder = teamsArray[i].userId;
+                                transaction.createTransaction(teamsArray[i].userId, "", contest.prizeDetails[i].prize, "won contest");
                                 const user = await User.findOneAndUpdate({userId : teamsArray[i].userId},
                                     {$inc:{
                                         wallet : contest.prizeDetails[i].prize
