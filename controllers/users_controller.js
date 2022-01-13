@@ -1,10 +1,9 @@
+
 const User = require('../models/user');
-const fs = require('fs');
-const path = require('path');
+
 var request = require('request');
 
 const jwt = require('jsonwebtoken');
-let alert = require('alert'); 
 const messageBird = require('messagebird')('W2tTRdqV8xxNjMYhIXSX3eEY6');
 const activatekey = 'accountactivatekey123';
 const clientURL = 'http://localhost:8000';
@@ -19,6 +18,7 @@ const mg = mailgun({apiKey: mailGunKey , domain: domain});
 // render the sign up page
 module.exports.signUp = function(req, res){
     if (req.isAuthenticated()){
+        req.flash('error','Already Signed-In!')
         return res.redirect('http://localhost:8000/');
     }
     return res.render('user_sign_up', {
@@ -31,6 +31,7 @@ module.exports.signUp = function(req, res){
 module.exports.signIn = function(req, res){
 
     if (req.isAuthenticated()){
+        req.flash('error','Already Signed-In!')
         return res.redirect('http://localhost:8000/');
     }
     return res.render('user_sign_in', {
@@ -45,14 +46,13 @@ module.exports.create = async function(req,res){
     console.log(name , email, password, confirmPassword, phone, verify,referCode);
     console.log(req.body);
     if( password != confirmPassword){
-        alert("Password and Confirm Password should be same");
+        req.flash('error',"Password and Confirm Password should be same");
         return res.redirect('http://localhost:8000/users/sign-up');
     }
     
     User.findOne({email : email}, function(err , user){
         if(err){
-            alert('Something went wrong, please sign-up again');
-            console.log(err);
+            req.flash('error','Something went wrong, please sign-up again');
             return res.redirect('http://localhost:8000/users/sign-up');
         }
 
@@ -72,12 +72,11 @@ module.exports.create = async function(req,res){
                 };
                 mg.messages().send(data, function (error, body) {
                     if(error){
-                        alert('Something went wrong, please sign-up again');
-                        console.log(error.message);
+                        req.flash('error','Something went wrong, please sign-up again');
                         return res.redirect('http://localhost:8000/users/sign-up');
                     }
                     console.log('Email has been sent for verification');
-                    alert('Email has been sent for verification, please veirfy');
+                    req.flash('success','Email has been sent for verification, please veirfy');
                     return res.redirect('sign-in');    
                 });
     
@@ -88,8 +87,7 @@ module.exports.create = async function(req,res){
                     template: "Your Verification code is %token."
                 }, function(err, resp){
                     if(err){
-                        alert('Something went wrong, please sign-up again');
-                        console.log(err);
+                        req.flash('error','Something went wrong, please sign-up again');
                         return res.redirect('http://localhost:8000/users/sign-up');
                     }
                     else{
@@ -100,7 +98,7 @@ module.exports.create = async function(req,res){
                         ph = Buffer.from(phone).toString('base64');
                         rc = referCode
                         
-                        console.log(resp);
+                        req.flash('success','OTP has been sent on your mobile number!');
                         return res.render('otp-auth', {
                             title: "Verify OTP",
                             name: n,
@@ -115,7 +113,7 @@ module.exports.create = async function(req,res){
             }
         }
         else{
-            alert('Email id already exists');
+            req.flash('warning','Email id already exists');
             console.log('User with this email already exist!!');
             return res.redirect('sign-in');
         }
@@ -134,15 +132,7 @@ module.exports.otp = async function(req, res){
 
     messageBird.verify.verify(id, token, async function(err, response){
         if(err){
-            // var n, pa, ph, em, rc;
-            // n = Buffer.from(name).toString('base64');
-            // em = Buffer.from(email).toString('base64');
-            // pa = Buffer.from(password).toString('base64');
-            // ph = Buffer.from(phone).toString('base64');
-            console.log(err);
-            console.log("id is ", id);
-            console.log("token is ", token);
-            alert('OTP entered is incorrect, please signUp again');
+            req.flash('error','OTP entered is incorrect, please signUp again');
             res.redirect('http://localhost:8000/users/sign-up')
         }
         else{
@@ -200,7 +190,7 @@ module.exports.otp = async function(req, res){
             promise.then( async ()=>{
                 User.findOne({email : email}, async function(err , user){
                     if(err){
-                        alert('Something went wrong, please sign-up again');
+                        req.flash('error','Something went wrong, please sign-up again');
                         console.log('Error in finding user in Sign-in ');
                         return res.redirect('/sign-up');
                     }
@@ -209,6 +199,7 @@ module.exports.otp = async function(req, res){
                         User.create(user1,async function(err,user){
                             if(err){
                                 console.log('Error in creating a user while account activation', err);
+                                req.flash('error','Something went wrong!');
                                 return res.redirect('back');
                             }
                             if(referCode != ""){
@@ -216,10 +207,12 @@ module.exports.otp = async function(req, res){
                                     wallet : amount + 100
                                 }})
                             }
-                            console.log("SignUp successfully!!");
+                            console.log("SignUp successfull!");
+                            req.flash('success','SignUp successfull!')
                             return res.redirect('http://localhost:8000/');
                         });
                     }else{
+                        req.flash('error','User already exist!');
                         return res.redirect('/sign-in');
                     }
                 });
@@ -237,6 +230,7 @@ module.exports.activateAccount = async function(req,res){
         jwt.verify(token,activatekey, async function(err, decodedToken){
             if(err){
                 console.log('Incorrect or expire link');
+                req.flash('error','Incorrect or expire link');
                 return res.redirect('http://localhost:8000/users/sign-up');
             }
             const{name , email , password, confirmPassword, phone, referCode} = decodedToken;
@@ -298,6 +292,7 @@ module.exports.activateAccount = async function(req,res){
                 User.findOne({email : email}, function(err , user){
                     if(err){
                         console.log('Error in finding user in Sign-in ');
+                        req.flash('error','Something went wrong!');
                         return res.redirect('http://localhost:8000/users/sign-up');
                     }
                     
@@ -305,6 +300,7 @@ module.exports.activateAccount = async function(req,res){
                         User.create(user1, async function(err,user){
                             if(err){
                                 console.log('Error in creating a user while account activation', err);
+                                req.flash('error','Something went wrong!');
                                 return res.redirect('back');
                             }
                             if(userIdRefer != ""){
@@ -315,7 +311,7 @@ module.exports.activateAccount = async function(req,res){
                             return res.redirect('http://localhost:8000/users/sign-in');
                         });
                     }else{
-                        // alert('Email id already exists')
+                        req.flash('error','Email id already exists')
                         return res.redirect('http://localhost:8000/users/sign-in');
                     }
                 });
@@ -324,7 +320,7 @@ module.exports.activateAccount = async function(req,res){
             })
         });
     }else{
-        alert('Something went wrong, please sign-up again');
+        req.flash('error','Something went wrong, please sign-up again');
         console.log('Something went wrong!!');
         return res.redirect('http://localhost:8000/users/sign-in');
     }
@@ -338,5 +334,6 @@ module.exports.createSession = function(req, res){
 
 module.exports.destroySession = function(req, res){
     req.logout();
+    req.flash('success','Logged Out Successfully!');
     return res.redirect('sign-in');
 }

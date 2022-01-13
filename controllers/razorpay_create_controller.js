@@ -1,6 +1,6 @@
-const Razorpay = require('razorpay');
-const alert = require('alert');
 const User = require('../models/user');
+
+const Razorpay = require('razorpay');
 var request = require('request');
 
 const razorpay = new Razorpay({
@@ -40,10 +40,10 @@ module.exports.checkTransaction = async function(req, res){
                     }})
                     console.log(updatedUser);
                 }
-                alert('Transaction successfull');
+                req.flash('success','Transaction successfull');
             }
             else{
-                alert('Transaction failed please try again')
+                req.flash('error','Transaction failed please try again')
             }
         })
     }catch(err){
@@ -59,10 +59,10 @@ module.exports.withdrawCash = async function(req, res){
     try{
         let user = await User.findOne({userId : userId});
         if(!user.accountNumber){
-            alert('Add Bank Details')
+            req.flash('error','Add Bank Details')
         }
         else if(leftAmount < 0){
-            alert('Not enough balance')
+            req.flash('error','Not enough balance')
         }
         else{
             var options = {

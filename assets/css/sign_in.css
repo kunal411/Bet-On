@@ -61,7 +61,6 @@ body {
     margin: 20px 5px 5px; }
   .container .google {
     position: relative;
-    height: 9.5%;
     width: 80%;
     border: 1px solid #9c9a9a;
     margin: auto;
@@ -69,7 +68,7 @@ body {
     padding-bottom: 2%;
     font-size: 19px;
     border-radius: 50px;
-    margin-top: 11%; }
+    margin: 8% auto; }
     .container .google .image {
       position: relative;
       margin-right: 85%;

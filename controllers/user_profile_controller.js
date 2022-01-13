@@ -1,6 +1,6 @@
 const User = require('../models/user');
+
 var request = require('request');
-const alert = require('alert');
 
 module.exports.profile = async function(req, res){
     const userId = req.params.userId;
@@ -12,12 +12,13 @@ module.exports.profile = async function(req, res){
     }
 
     let isUserPresent = user.followers.find(id => id == req.user.userId);
+    
     if(isUserPresent){
         isUserPresent = true;
     }else{
         isUserPresent = false;
     }
-    console.log(isUserPresent);
+    
     return res.render('user_profile',{
         title: 'My profile',
         userId: userId,
@@ -75,7 +76,7 @@ module.exports.addAccount = async function(req, res){
                 ifsc : ifsc,
                 fundId : fundId
             }});
-            alert('Account Added Successfully')
+            req.flash('success','Account Added Successfully')
         }).catch((err)=>{
             console.log("Error : " + err);
         })

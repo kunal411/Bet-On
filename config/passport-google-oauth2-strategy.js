@@ -18,10 +18,10 @@ passport.use(new googleStrategy({
                 console.log('Error in google strategy passport', err);
                 return;
             }
-            console.log(profile);
             if(user){
                 //if found set this user as req.user
                 console.log('User Already Exists');
+                req.flash('error', 'User Already Exists');
                 return done(null, user);
             }else{
                 var options = {

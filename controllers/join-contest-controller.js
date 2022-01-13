@@ -1,7 +1,6 @@
 const Contest = require('../models/contest');
 const Team = require('../models/team');
 const User = require('../models/user');
-const alert = require('alert');
 
 module.exports.joinContest = async function(req,res){
     const matchId = req.query.matchId;
@@ -15,13 +14,13 @@ module.exports.joinContest = async function(req,res){
             const contestPrice = contest.price / contest.totalSpots;
             const userWallet = user.wallet;
             if(contestPrice > userWallet){
-                alert(`Not enough balance. Add ${contestPrice - userWallet} in wallet`);
+                req.flash('warning',`Not enough balance. Add ${contestPrice - userWallet} in wallet`);
                 return res.redirect('back');
             }
             let userArray = contest.userIds;
             for(let x of userArray){
                 if(userId == x){
-                    alert('User Already Registered!!!');
+                    req.flash('error','User Already Registered!');
                     return res.redirect('back');
                 }
             }
@@ -29,7 +28,7 @@ module.exports.joinContest = async function(req,res){
             let teamsIdArray = contest.teamsId;
             let spotsLeft = contest.spotsLeft;
             if(spotsLeft == 0){
-                alert('Contest Already Full!!');
+                req.flash('error','Contest Already Full!');
                 return res.redirect('back');
             }
             spotsLeft--;
@@ -47,13 +46,13 @@ module.exports.joinContest = async function(req,res){
                         console.log('Error : ' + err);
                     }
                 }else{
-                    alert('Create Team First!!');
+                    req.flash('error','Create Team First!!');
                     return res.redirect('back');
                 }
             } 
             catch(err){
                 console.log('Error : ' + err);
-                alert('Create Team First!!');
+                req.flash('error','Create Team First!!');
                 return res.redirect('back');
             }
             if(user){
@@ -81,7 +80,7 @@ module.exports.joinContest = async function(req,res){
                 }
             }
         }else{
-            alert('Invalid Contest Code!')
+            req.flash('error','Invalid Contest Code!');
         }
     }catch(err){
         console.log('Error : ' + err);

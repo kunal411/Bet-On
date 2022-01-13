@@ -1,4 +1,4 @@
-const alert = require('alert');
+// Imported all required Schema.
 const MatchLiveDetail = require('../models/match_live_details');
 const Contest = require('../models/contest');
 const Team = require('../models/team');
@@ -104,11 +104,25 @@ module.exports.contest = async function(req,res){
                     wicketsSI : match.wicketsSI
                 }
             }
-            try{
-                let contests = await Contest.find({matchId : matchId});
-                if(contests){
-                    for(let x of contests){
-                        if(x.admin == "server-domino-beton"){
+            let contests = await Contest.find({matchId : matchId});
+            if(contests){
+                for(let x of contests){
+                    if(x.admin == "server-domino-beton"){
+                        let contestDet = {
+                            contestId: x._id,
+                            price : x.price,
+                            totalSpots: x.totalSpots,
+                            spotsLeft : x.spotsLeft,
+                            teamsId : x.teamsId,
+                            matchId : x.matchId,
+                            prizeDetails : x.prizeDetails,
+                            contestCode : ""
+                        }
+                        contestsDetails.push(contestDet);
+                        continue;
+                    }
+                    for(let y of x.userIds){
+                        if(y == userId){
                             let contestDet = {
                                 contestId: x._id,
                                 price : x.price,
@@ -117,38 +131,17 @@ module.exports.contest = async function(req,res){
                                 teamsId : x.teamsId,
                                 matchId : x.matchId,
                                 prizeDetails : x.prizeDetails,
-                                contestCode : ""
+                                contestCode : x.id
                             }
                             contestsDetails.push(contestDet);
-                            continue;
-                        }
-                        for(let y of x.userIds){
-                            if(y == userId){
-                                let contestDet = {
-                                    contestId: x._id,
-                                    price : x.price,
-                                    totalSpots: x.totalSpots,
-                                    spotsLeft : x.spotsLeft,
-                                    teamsId : x.teamsId,
-                                    matchId : x.matchId,
-                                    prizeDetails : x.prizeDetails,
-                                    contestCode : x.id
-                                }
-                                contestsDetails.push(contestDet);
-                            }
                         }
                     }
                 }
-            }catch(err){
-                console.log("Error : " + err);
             }
+            
             let user;
-            try{
-                user = await User.findOne({userId : userId});
-
-            }catch(err){
-                console.log("Error : " + err);
-            }
+            user = await User.findOne({userId : userId});
+            
             matchDet.results.push(s);
 
             return res.render('contest_card', {
@@ -164,7 +157,7 @@ module.exports.contest = async function(req,res){
                 wallet : user.wallet
             });
         }else{
-            alert('LineUps are not out yet!!');
+            req.flash('error','LineUps are not out yet!!');
             return res.redirect('back');
         }
     }catch(err){

@@ -14,8 +14,10 @@ const passportGoogle = require('./config/passport-google-oauth2-strategy');
 const MongoStore = require('connect-mongo')(session);
 const { param } = require('./routes');
 const sassMiddleware = require('node-sass-middleware');
-// const flash = require('connect-flash');
-// const customMware = require('./config/middleware');
+
+const flash = require('connect-flash');
+const customFlashMWare = require('./config/flash-middleware');
+
 const cors = require('cors');
 require('dotenv').config();
 
@@ -74,6 +76,8 @@ app.use(passport.session());
 
 app.use(passport.setAuthenticatedUser);
 
+app.use(flash());
+app.use(customFlashMWare.setFlash);
 
 
 const dbCo = require('./controllers/matchDB-controller');
