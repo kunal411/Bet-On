@@ -99,17 +99,16 @@ async function addUpdatedTeamScore(){
     await TeamScoreUpdate.scoreUpdate();
 }
 
-// addMatch();
-// addLiveMatch();
-// addLiveScore();
-// addUpdatedTeamScore();
+addMatch();
+addLiveMatch();
+addLiveScore();
+addUpdatedTeamScore();
 
 // use express router
 app.use('/', require('./routes'));
 
 
-
-app.listen(port, function(err){
+app.listen(process.env.PORT || port, function(err){
     if (err){
         console.log(`Error in running the server: ${err}`);
     }

@@ -37,9 +37,9 @@ module.exports.addMatchLiveScoreDettoDb = async function(){
         for(let i = 0; i < matchList.length; i++){
             let matchId = matchList[i].matchId;
 
-            // if(matchList[i].inPlay == "No"){
-            //     continue;
-            // }
+            if(matchList[i].inPlay == "No"){
+                continue;
+            }
             
             if(matchList[i].result == "Yes"){
                 // We can give reference in the model and then populate it, it will save much time!!

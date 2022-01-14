@@ -5,7 +5,7 @@ const User = require('../models/user');
 const flagURLs = require('country-flags-svg');
 module.exports.home = async function (req, res){
     if (!req.isAuthenticated()) {
-        return res.redirect(`${process.env.PORT}/users/sign-in`);
+        return res.redirect(`${process.env.PORTURL}/users/sign-in`);
     } 
     const userId = req.user.userId;
     let userMatches = [];
