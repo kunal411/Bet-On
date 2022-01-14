@@ -50,6 +50,20 @@ if(referAndEarn){
     })
 }
 
+const transactionDiv = document.getElementById('transaction-div');
+if(transactionDiv){
+    transactionDiv.addEventListener('click', function(){
+        console.log('transaction div clicked');
+        const transactionDet = document.getElementById('transaction-details-container');
+        if(transactionDet.style.display == "block"){
+            transactionDet.style.display = "none";
+        }
+        else{
+            transactionDet.style.display = "block";
+        }
+    })
+}
+
 const wallet = document.getElementById('wallet-icon-name');
 if(wallet){
     wallet.addEventListener('click', function(){
@@ -243,4 +257,13 @@ if(closeFollowingList){
         followersListDiv.style.display = "none";
         container.style.opacity = "1"
     })
+}
+
+const action = document.getElementsByClassName('action');
+for(let i = 0; i < action.length; i++){
+    console.log(action[i].textContent);
+    if(action[i].textContent.trim() == "CASH WITHDRAW" || action[i].textContent.trim() == "JOINED CONTEST"){
+        console.log('color shoud get changed');
+        action[i].style.color = "red";
+    }
 }

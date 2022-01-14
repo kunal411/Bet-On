@@ -144,19 +144,39 @@
 
     <% if(user.userId == userId){ %>
         <div class="my-transaction profile-sections">
-            <div class="logo-name">
+            <div class="logo-name" id="transaction-div">
                 <i class="fas fa-money-bill"></i>
                 <p>
                     My Transaction
                 </p>
             </div>
-            <div id="transaction-details">
+
+            <% function checkLength(num) {%>
+                <% if(num.toString().length == 1){ %>
+                    <% console.log("0"+num.toString());%>
+                    <% return "0"+num.toString(); %>
+                <% } %>
+                <% console.log(num.toString());%>
+                <% return num.toString(); %>
+            <% } %>
+
+            <div id="transaction-details-container">
                 <% for(let i = 0; i < transactions.length; i++){ %>
-                    <div>
-                        <%= transactions[i].amount %>
-                        <%= transactions[i].action %>
-                        <%= transactions[i].transactionId %>
-                        <%= transactions[i].createdAt %>
+                    <% let date = new Date(transactions[i].createdAt); %>
+                    <div class="transaction-details">
+                        <div class="amount">
+                            ₹<%= transactions[i].amount %>
+                        </div>
+                        <div class="action">
+                            <%= transactions[i].action.toUpperCase() %>
+                        </div>
+                        <div class="transactioId">
+                            <%= transactions[i].transactionId %>
+                        </div>
+                        <div class="date">
+                            <%= checkLength(date.getDate()) %>/<%= checkLength(date.getMonth()+1).trim() %>/<%= date.getFullYear() %> 
+                            <%= checkLength(date.getHours()) %>:<%= checkLength(date.getMinutes()) %>:<%= checkLength(date.getSeconds()) %>
+                        </div>
                     </div>
                 <% } %>
             </div>

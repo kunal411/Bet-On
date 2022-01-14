@@ -5,6 +5,33 @@ const User = require('../models/user');
 const Team = require('../models/team');
 const transaction = require('../controllers/transaction_details_controller');
 
+function prizeBreakUp(numWinners, spots, entryAmount){
+    let total = spots * entryAmount;
+    let prize = [];
+    if(numWinners == 1){
+        prize = [
+            .9 * total
+        ];
+    }else if(numWinners == 2){
+        prize = [
+            .6 * total, .3 * total
+        ];
+    }else if(numWinners == 3){
+        prize = [
+            .5 * total, .25 * total, .15 * total
+        ];
+    }else if(numWinners == 4){
+        prize = [
+            .4 * total, .25 * total, .15 * total, .10 * total
+        ];
+    }else if(numWinners == 5){
+        prize = [
+            .35 * total, .25 * total, .15 * total, .10 * total, .05 * total 
+        ];
+    }
+    return prize;
+}
+
 // function to create new user contest 
 module.exports.createContest = async function(req, res){
     
@@ -13,6 +40,15 @@ module.exports.createContest = async function(req, res){
     const spots = req.query.spots;
     const numWinners = req.query.winners;
     const matchId = req.query.matchId;
+    const prize = prizeBreakUp(numWinners, spots, entryAmount);
+
+    let prizeDetails = [];
+    for( let j = 0; j < prize.length; j++){
+        let prizeobj = { prize : prize[j] };
+        prizeDetails.push(prizeobj);
+    }
+    
+
 
     let userTeamId;
     try{
@@ -42,6 +78,7 @@ module.exports.createContest = async function(req, res){
     contest.numWinners = numWinners;
     contest.userIds.push(userId);
     contest.teamsId.push(userTeamId);
+    contest.prizeDetails  = prizeDetails;
 
     
     try{

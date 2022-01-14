@@ -367,8 +367,14 @@ createContestSaveButton.addEventListener('click', function(){
         alert('Spots cannot be greater than 100 and less than 2');
         return;
     }
-    if(winners < 1 || winners > spots/2){
-        alert('winners cannot be greater than ' + spots/2 + ' and less than 1');
+    if(winners < 1 || winners > spots-1 || winners > 5){
+        if(winners > spots-1){
+            alert(`winners cannot be greater than ${spots - 1}`);
+        }else if(winners > 5){
+            alert('winners cannot be greater than ' + "5");
+        }else{
+            alert('winners cannot be less than ' + "1");
+        }
         return;
     }
     if(wallet < entryAmount){

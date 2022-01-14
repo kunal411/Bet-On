@@ -1,9 +1,10 @@
 body {
   margin: 0;
   margin-top: 7%;
-  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSS5Yc4NbLPmI0oPtLpiZwxGpRdzWB7BVPfog&usqp=CAU");
+  background-image: url("https://images.unsplash.com/photo-1559579313-021b6ec9f6d6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c3RhZGl1bXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80");
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size: 100% 100%; }
+  background-size: 100% 100%;
+  min-width: 850px; }
   body #layout-main {
     height: 100%; }

@@ -46,7 +46,7 @@
                 <div class="grid-item grid-item-header">Rank</div>
                 <div class="grid-item grid-item-header">Winnings</div>
                 <% for(let i = 0; i < x.prizeDetails.length; i++) { %>
-                    <div class="grid-item">Rank <%= i + 1 %></div>
+                    <div class="grid-item"> <%= i + 1 %></div>
                     <div class="grid-item">₹ <%= x.prizeDetails[i].prize %></div>
                 <% } %>
             </div>

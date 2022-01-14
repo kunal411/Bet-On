@@ -44,12 +44,12 @@ input::-webkit-inner-spin-button {
     margin-bottom: 3%;
     font-family: monospace;
     margin-bottom: 3%;
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(255,255,255,0.8);
 }
 .contest-card{
     width: 60%;
     display: flex;
-    background-color: rgba(255,255,255,0.8);
+    background-color: rgba(255,255,255,0.9);
     margin: auto;
     flex-direction: column;
     padding: 1% 2%;
@@ -58,11 +58,9 @@ input::-webkit-inner-spin-button {
 }
 
 .contest-card:hover{
-    width: 62%;
     transition: 0.2s ease-in;
-    background-color: rgba(255,255,255,0.8);
-    padding: 1.1% 2%;
     cursor: pointer;
+    transform: scale(1.05);
 }
 
 .contest-prize-pool{
@@ -440,7 +438,7 @@ label{
 
 .grid-item {
     font-size: 15px;
-    text-align: left;
+    text-align: center;
     color: white;
     border-bottom: 1px solid gray;
     padding-left: 5%;
@@ -448,6 +446,7 @@ label{
 
 .grid-item-header{
     background-color: gray;
+    text-align: center;
 }
 
 #team-score{
@@ -526,7 +525,7 @@ label{
 .winnings-breakdown-container{
     display: none;
     position: fixed;
-    height: 54%;
+    height: auto;
     width: 24%;
     top: 23%;
     left: 38%;
@@ -537,6 +536,7 @@ label{
     background-size: 100% 100%;
     color: white;
     text-align: center;
+    z-index: 10;
 }
 .winnings-breakdown-container::-webkit-scrollbar{
     display: none;
