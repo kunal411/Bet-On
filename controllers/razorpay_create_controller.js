@@ -35,7 +35,7 @@ module.exports.checkTransaction = async function(req, res){
                 }})
                 transaction.createTransaction(userId, req.body.razorpay_payment_id, cashAdded, "cash added");
                 req.flash('success','Transaction successfull');
-                res.redirect(`http://localhost:8000/users/profile/${req.user.userId}`);
+                res.redirect(`${process.env.PORT}/users/profile/${req.user.userId}`);
             }
             else{
                 req.flash('error','Transaction failed please try again')

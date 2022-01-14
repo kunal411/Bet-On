@@ -6,7 +6,6 @@ var request = require('request');
 const jwt = require('jsonwebtoken');
 const messageBird = require('messagebird')('W2tTRdqV8xxNjMYhIXSX3eEY6');
 const activatekey = 'accountactivatekey123';
-const clientURL = 'http://localhost:8000';
 
 const mailGunKey = '5d5399a434023a5c229e7a1e1a80d493-cac494aa-586b59e2';
 const domain = 'sandbox11a51a4bfd9245d587c2b8a6d188b1fd.mailgun.org';
@@ -20,7 +19,7 @@ const transaction = require('../controllers/transaction_details_controller');
 module.exports.signUp = function(req, res){
     if (req.isAuthenticated()){
         req.flash('error','Already Signed-In!')
-        return res.redirect('http://localhost:8000/');
+        return res.redirect(`${process.env.PORT}/`);
     }
     return res.render('user_sign_up', {
         title: "BETON-DOMINO | Sign Up"
@@ -33,7 +32,7 @@ module.exports.signIn = function(req, res){
 
     if (req.isAuthenticated()){
         req.flash('error','Already Signed-In!')
-        return res.redirect('http://localhost:8000/');
+        return res.redirect(`${process.env.PORT}/`);
     }
     return res.render('user_sign_in', {
         title: "BETON-DOMINO | Sign In"
@@ -48,13 +47,13 @@ module.exports.create = async function(req,res){
     console.log(req.body);
     if( password != confirmPassword){
         req.flash('error',"Password and Confirm Password should be same");
-        return res.redirect('http://localhost:8000/users/sign-up');
+        return res.redirect(`${process.env.PORT}/users/sign-up`);
     }
     
     User.findOne({email : email}, function(err , user){
         if(err){
             req.flash('error','Something went wrong, please sign-up again');
-            return res.redirect('http://localhost:8000/users/sign-up');
+            return res.redirect(`${process.env.PORT}/users/sign-up`);
         }
 
         if(!user){ 
@@ -68,13 +67,13 @@ module.exports.create = async function(req,res){
                     subject: 'Account Activation Key',
                     html : `
                         <h2>Please click  on below link to activate your account</h2>
-                        <a href="${clientURL}/authentication/activate?token=${token}">CLICK HERE</a>
+                        <a href="${process.env.PORT}/authentication/activate?token=${token}">CLICK HERE</a>
                     `
                 };
                 mg.messages().send(data, function (error, body) {
                     if(error){
                         req.flash('error','Something went wrong, please sign-up again');
-                        return res.redirect('http://localhost:8000/users/sign-up');
+                        return res.redirect(`${process.env.PORT}/users/sign-up`);
                     }
                     console.log('Email has been sent for verification');
                     req.flash('success','Email has been sent for verification, please veirfy');
@@ -89,7 +88,7 @@ module.exports.create = async function(req,res){
                 }, function(err, resp){
                     if(err){
                         req.flash('error','Something went wrong, please sign-up again');
-                        return res.redirect('http://localhost:8000/users/sign-up');
+                        return res.redirect(`${process.env.PORT}/users/sign-up`);
                     }
                     else{
                         var n, pa, ph, em, rc;
@@ -134,7 +133,7 @@ module.exports.otp = async function(req, res){
     messageBird.verify.verify(id, token, async function(err, response){
         if(err){
             req.flash('error','OTP entered is incorrect, please signUp again');
-            res.redirect('http://localhost:8000/users/sign-up')
+            return res.redirect(`${process.env.PORT}/users/sign-up`);
         }
         else{
             var user1 = new User();
@@ -213,7 +212,7 @@ module.exports.otp = async function(req, res){
                             }
                             console.log("SignUp successfull!");
                             req.flash('success','SignUp successfull!')
-                            return res.redirect('http://localhost:8000/');
+                            return res.redirect(`${process.env.PORT}/`);
                         });
                     }else{
                         req.flash('error','User already exist!');
@@ -235,7 +234,7 @@ module.exports.activateAccount = async function(req,res){
             if(err){
                 console.log('Incorrect or expire link');
                 req.flash('error','Incorrect or expire link');
-                return res.redirect('http://localhost:8000/users/sign-up');
+                return res.redirect(`${process.env.PORT}/users/sign-up`);
             }
             const{name , email , password, confirmPassword, phone, referCode} = decodedToken;
 
@@ -297,7 +296,7 @@ module.exports.activateAccount = async function(req,res){
                     if(err){
                         console.log('Error in finding user in Sign-in ');
                         req.flash('error','Something went wrong!');
-                        return res.redirect('http://localhost:8000/users/sign-up');
+                        return res.redirect(`${process.env.PORT}/users/sign-up`);
                     }
                     
                     if(!user){
@@ -314,11 +313,11 @@ module.exports.activateAccount = async function(req,res){
                                 }})
                                 transaction.createTransaction(userRefer.userId, "", 100, "extra cash");
                             }
-                            return res.redirect('http://localhost:8000/users/sign-in');
+                            return res.redirect(`${process.env.PORT}/users/sign-in`);
                         });
                     }else{
                         req.flash('error','Email id already exists')
-                        return res.redirect('http://localhost:8000/users/sign-in');
+                        return res.redirect(`${process.env.PORT}/users/sign-in`);
                     }
                 });
             }).catch((err)=>{
@@ -328,14 +327,14 @@ module.exports.activateAccount = async function(req,res){
     }else{
         req.flash('error','Something went wrong, please sign-up again');
         console.log('Something went wrong!!');
-        return res.redirect('http://localhost:8000/users/sign-in');
+        return res.redirect(`${process.env.PORT}/users/sign-in`);
     }
 }
 
 
 // sign in and create a session for the user
 module.exports.createSession = function(req, res){
-    return res.redirect('http://localhost:8000/');
+    return res.redirect(`${process.env.PORT}/`);
 }
 
 module.exports.destroySession = function(req, res){

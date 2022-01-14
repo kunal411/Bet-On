@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken');
 // Importing meassagebird for sending email.
 const messageBird = require('messagebird')('W2tTRdqV8xxNjMYhIXSX3eEY6');
 const activatekey = 'accountactivatekey123';
-const clientURL = 'http://localhost:8000';
 
 // Messagebird domain and api_key
 const mailGunKey = '5d5399a434023a5c229e7a1e1a80d493-cac494aa-586b59e2';
@@ -42,7 +41,7 @@ module.exports.resetPassword = async function(req,res){
                 subject: 'Account Reset Key',
                 html : `
                     <h2>Please click  on below link to reset your account</h2>
-                    <a href="${clientURL}/authentication/reset?token=${token}">CLICK HERE</a>
+                    <a href="${process.env.PORT}/authentication/reset?token=${token}">CLICK HERE</a>
                 `
             };
             await mg.messages().send(data,function (error, body) {
@@ -98,7 +97,7 @@ module.exports.otp = function(req, res){
     messageBird.verify.verify(id, token, function(err, response){
         if(err){
             req.flash('error','OTP entered is incorrect');
-            res.redirect('http://localhost:8000/users/sign-up')
+            res.redirect(`${process.env.PORT}/users/sign-up`)
         }
         else{
             // Rendering reset_password view after successful verification
@@ -120,7 +119,7 @@ module.exports.resetAccount = function(req,res){
             if(err){
                 // Expired or incorrect link
                 console.log('Incorrect or expire link');
-                return res.redirect('http://localhost:8000/users/sign-in');
+                return res.redirect(`${process.env.PORT}/users/sign-in`);
             }
             const{email, phone} = decodedToken;
             // Rendering reset_password view after successful verification
@@ -134,7 +133,7 @@ module.exports.resetAccount = function(req,res){
         // redirecting to sign page
         req.flash('error','Something went wrong, please try again');
         console.log('Something went wrong!!');
-        return res.redirect('http://localhost:8000/users/sign-in');
+        return res.redirect(`${process.env.PORT}/users/sign-in`);
     }
 }
 
@@ -157,7 +156,7 @@ module.exports.restPasswordIndb = async function(req,res){
             password : password
         }});
         req.flash('success','Password reset successfully!!');
-        return res.redirect('http://localhost:8000/users/sign-in');
+        return res.redirect(`${process.env.PORT}/users/sign-in`);
     }catch(err){
         console.log("Error : " + err); 
     }

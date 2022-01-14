@@ -8,7 +8,7 @@ module.exports.contest = async function(req,res){
 
     if (!req.isAuthenticated()) {
         req.flash('error','Please login');
-        return res.redirect('http://localhost:8000/users/sign-in');
+        return res.redirect(`${process.env.PORT}/users/sign-in`);
     } 
 
     const matchId = req.query.id;
