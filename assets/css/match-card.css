@@ -11,7 +11,24 @@ body{
 }
 
 .match-info{
+    display: flex;
     padding: 3%;
+}
+
+.home-flag-img, .away-flag-img{
+    margin-top: -7%;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.away-flag-img{
+    margin-left: 20%;
+}
+
+.home-flag-img{
+    margin-right: 20%;
+    margin-left: -20%;
 }
 
 .container{
@@ -56,8 +73,8 @@ body{
 .match-card-main-container{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    overflow-x: scroll;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .matches-status-heading{

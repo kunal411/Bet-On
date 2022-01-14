@@ -17,12 +17,13 @@
             <% let mat = matches.results[i]; %>
             <% if(mat.home.code == "" || mat.away.code == "") {%>
                 <% continue; %>
-            <% } %>
+            <% } %> 
             <div class="card" id="<%= mat.id %>" data-home-name="<%= mat.home.name %>" data-away-name="<%= mat.away.name %>">
                 <div class="card-body">
                 <p class="card-title"><%= mat.match_title %></p>
                 <div class="teams">
                     <div class="match-info">
+                        <img src="<%= mat.teamHomeFlagUrl %>" alt="<%= mat.home.name %>" class="home-flag-img">
                         <h4><%= mat.home.code %></h4>
                     </div>
                     <div class="match-info">
@@ -30,6 +31,7 @@
                     </div>
                     <div class="match-info">
                         <h4><%= mat.away.code %></h4>
+                        <img src="<%= mat.teamAwayFlagUrl %>" alt="<%= mat.away.name %>" class="away-flag-img">
                     </div>
                 </div>
                     <% const date1 = new Date(); %>
@@ -69,39 +71,45 @@
         <% } %>
     <% } %>
 
-
-    <div class="my-matches-container match-cards">
-        <h2 class="matches-status-heading">My Matches</h2>
-        <div class="match-card-main-container">
-            <% userMatches.results.sort( compare ); %>
-            <% matchCardMakers(userMatches); %>
+    <% if(userMatches.results.length != 0) {%>
+        <div class="my-matches-container match-cards">
+            <h2 class="matches-status-heading">My Matches</h2>
+            <div class="match-card-main-container">
+                <% userMatches.results.sort( compare ); %>
+                <% matchCardMakers(userMatches); %>
+            </div>
         </div>
-        
-    </div>
+    <% } %>
 
-    <div class="live-matches-container match-cards">
-        <h2 class="matches-status-heading">Live Matches</h2>
-        <div class="match-card-main-container">
-            <% liveMatchesDetails.results.sort( compare ); %>
-            <% matchCardMakers(liveMatchesDetails); %>
+    <% if(liveMatchesDetails.results.length != 0) {%>
+        <div class="live-matches-container match-cards">
+            <h2 class="matches-status-heading">Live Matches</h2>
+            <div class="match-card-main-container">
+                <% liveMatchesDetails.results.sort( compare ); %>
+                <% matchCardMakers(liveMatchesDetails); %>
+            </div>
         </div>
-    </div>
+    <% } %>
 
-    <div class="upcoming-matches-container match-cards">
-        <h2 class="matches-status-heading">Upcoming Matches</h2>
-        <div class="match-card-main-container">
-            <% upcomingMatchesDetails.results.sort( compare ); %>
-            <% matchCardMakers(upcomingMatchesDetails); %>
+    <% if(upcomingMatchesDetails.results.length != 0) {%>
+        <div class="upcoming-matches-container match-cards">
+            <h2 class="matches-status-heading">Upcoming Matches</h2>
+            <div class="match-card-main-container">
+                <% upcomingMatchesDetails.results.sort( compare ); %>
+                <% matchCardMakers(upcomingMatchesDetails); %>
+            </div>
         </div>
-    </div>
+    <% } %>
 
-    <div class="past-matches-container match-cards">
-        <h2 class="matches-status-heading">Past Matches</h2>
-        <div class="match-card-main-container">
-            <% pastMatchesDetails.results.sort( compare ); %>
-            <% matchCardMakers(pastMatchesDetails); %>
+    <% if(pastMatchesDetails.results.length != 0) {%>
+        <div class="past-matches-container match-cards">
+            <h2 class="matches-status-heading">Past Matches</h2>
+            <div class="match-card-main-container">
+                <% pastMatchesDetails.results.sort( compare ); %>
+                <% matchCardMakers(pastMatchesDetails); %>
+            </div>
         </div>
-    </div>
+    <% } %>
     
 </div>
 

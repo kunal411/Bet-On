@@ -19,6 +19,7 @@
     "connect-mongo": "^3.2.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
+    "country-flags-svg": "^1.1.1",
     "cric-live": "^1.0.19",
     "crypto": "^1.0.1",
     "dotenv": "^10.0.0",

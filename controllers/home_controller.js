@@ -2,7 +2,7 @@
 const Matches = require('../models/match');
 const LiveMatches = require('../models/match_live_details');
 const User = require('../models/user');
-
+const flagURLs = require('country-flags-svg');
 module.exports.home = async function (req, res){
     if (!req.isAuthenticated()) {
         return res.redirect('http://localhost:8000/users/sign-in');
@@ -38,6 +38,14 @@ module.exports.home = async function (req, res){
         let match_det = await LiveMatches.findOne({matchId : x});
 
         if(match_det){
+            let teamHomeFlagUrl = flagURLs.findFlagUrlByCountryName(match.teamHomeName);
+            let teamAwayFlagUrl = flagURLs.findFlagUrlByCountryName(match.teamAwayName);
+            if(!teamAwayFlagUrl){
+                teamAwayFlagUrl = "https://i.pinimg.com/originals/1b/56/5b/1b565bb93bbc6968be498ccb00504e8f.jpg";
+            }
+            if(!teamHomeFlagUrl){
+                teamHomeFlagUrl = "https://i.pinimg.com/originals/1b/56/5b/1b565bb93bbc6968be498ccb00504e8f.jpg";
+            }
             let mat = {
                 match_title : match.matchTitle,
                 home: {
@@ -53,7 +61,9 @@ module.exports.home = async function (req, res){
                 livestatus : "",
                 result: "",
                 status: "",
-                inPlay: ""
+                inPlay: "",
+                teamHomeFlagUrl: teamHomeFlagUrl,
+                teamAwayFlagUrl: teamAwayFlagUrl
             }
             mat.status = match_det.status;
             mat.inPlay = match_det.inPlay;
@@ -85,6 +95,14 @@ module.exports.home = async function (req, res){
             let liveStatus="";
             try{
                 let match = await LiveMatches.findOne({matchId : matchList[i].matchId});
+                let teamHomeFlagUrl = flagURLs.findFlagUrlByCountryName(matchList[i].teamHomeName);
+                let teamAwayFlagUrl = flagURLs.findFlagUrlByCountryName(matchList[i].teamAwayName);
+                if(!teamAwayFlagUrl){
+                    teamAwayFlagUrl = "https://i.pinimg.com/originals/1b/56/5b/1b565bb93bbc6968be498ccb00504e8f.jpg";
+                }
+                if(!teamHomeFlagUrl){
+                    teamHomeFlagUrl = "https://i.pinimg.com/originals/1b/56/5b/1b565bb93bbc6968be498ccb00504e8f.jpg";
+                }
                 let mat = {
                     match_title : matchList[i].matchTitle,
                     home: {
@@ -100,7 +118,9 @@ module.exports.home = async function (req, res){
                     livestatus : "",
                     result: "",
                     status: "",
-                    inPlay: ""
+                    inPlay: "",
+                    teamHomeFlagUrl: teamHomeFlagUrl,
+                    teamAwayFlagUrl: teamAwayFlagUrl
 
                 }
                 if(match){

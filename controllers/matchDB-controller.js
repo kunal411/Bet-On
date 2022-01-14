@@ -100,13 +100,13 @@ module.exports.addMatchtoDb = async function(){
                                 contest1.matchId = matchId;
                                 let prizeDetails = [
                                     {
-                                        prize : prize[j] * 0.4
+                                        prize : prize[j] * 0.35
                                     },
                                     {
                                         prize : prize[j] * 0.25
                                     },
                                     {
-                                        prize : prize[j] * 0.20
+                                        prize : prize[j] * 0.15
                                     },
                                     {
                                         prize : prize[j] * 0.10
