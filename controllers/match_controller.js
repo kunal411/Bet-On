@@ -14,6 +14,7 @@ module.exports.contest = async function(req,res){
     const matchId = req.query.id;
     const homeTeamName = req.query.homeTeamName;
     const awayTeamName = req.query.awayTeamName;
+    let contestDisable = req.query.contestDisable;
     const userId = req.user.userId;
     let teamDetail = "undefined";
 
@@ -107,6 +108,10 @@ module.exports.contest = async function(req,res){
             let contests = await Contest.find({matchId : matchId});
             if(contests){
                 for(let x of contests){
+                    let totalPoolPrize = 0;
+                    for(let i = 0; i < x.prizeDetails.length; i++){
+                        totalPoolPrize += x.prizeDetails[i].prize;
+                    }
                     if(x.admin == "server-domino-beton"){
                         let contestDet = {
                             contestId: x._id,
@@ -116,12 +121,14 @@ module.exports.contest = async function(req,res){
                             teamsId : x.teamsId,
                             matchId : x.matchId,
                             prizeDetails : x.prizeDetails,
-                            contestCode : ""
+                            contestCode : "",
+                            totalPoolPrize: totalPoolPrize
                         }
                         contestsDetails.push(contestDet);
                         continue;
                     }
                     for(let y of x.userIds){
+
                         if(y == userId){
                             let contestDet = {
                                 contestId: x._id,
@@ -131,7 +138,8 @@ module.exports.contest = async function(req,res){
                                 teamsId : x.teamsId,
                                 matchId : x.matchId,
                                 prizeDetails : x.prizeDetails,
-                                contestCode : x.id
+                                contestCode : x.id,
+                                totalPoolPrize: totalPoolPrize
                             }
                             contestsDetails.push(contestDet);
                         }
@@ -154,7 +162,8 @@ module.exports.contest = async function(req,res){
                 contests: contestsDetails,
                 teamDetail: teamDetail,
                 userDetail:user,
-                wallet : user.wallet
+                wallet : user.wallet,
+                contestDisable: contestDisable
             });
         }else{
             req.flash('error','LineUps are not out yet!!');

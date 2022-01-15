@@ -37,9 +37,9 @@ module.exports.addMatchLiveScoreDettoDb = async function(){
         for(let i = 0; i < matchList.length; i++){
             let matchId = matchList[i].matchId;
 
-            if(matchList[i].inPlay == "No"){
-                continue;
-            }
+            // if(matchList[i].inPlay == "No"){
+            //     continue;
+            // }
             
             if(matchList[i].result == "Yes"){
                 // We can give reference in the model and then populate it, it will save much time!!
@@ -80,7 +80,7 @@ module.exports.addMatchLiveScoreDettoDb = async function(){
                 url: `https://cricket-live-data.p.rapidapi.com/match/${matchId}`,
                 headers: {
                 'x-rapidapi-host': 'cricket-live-data.p.rapidapi.com',
-                'x-rapidapi-key': process.env.API_KEY,
+                'x-rapidapi-key': '773ece5d2bmsh8af64b6b53baed6p1e86c9jsnd416b0e51110',
                 useQueryString: true
                 }
             };
@@ -98,7 +98,7 @@ module.exports.addMatchLiveScoreDettoDb = async function(){
             });
             promise.then( async (s)=>{
                 // Change to be done in if condition , this is only for code testing!!!
-                if(s.results.live_details.match_summary.in_play == "Yes"){
+                if(s.results.live_details.match_summary.in_play == "No"){
                     let inPlay = "Yes";
                     let status = s.results.live_details.match_summary.status;
                     let toss = s.results.live_details.match_summary.toss;

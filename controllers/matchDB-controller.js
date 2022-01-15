@@ -33,13 +33,12 @@ module.exports.addMatchtoDb = async function(){
 
     for (let i = 0; i < numberOfDays; i++){
         console.log(formattedDate);
-        console.log(process.env.API_KEY);
         const options = {
             method: 'GET',
             url: `https://cricket-live-data.p.rapidapi.com/fixtures-by-date/${formattedDate}`,
             headers: {
             'x-rapidapi-host': 'cricket-live-data.p.rapidapi.com',
-            'x-rapidapi-key': process.env.API_KEY,
+            'x-rapidapi-key': '773ece5d2bmsh8af64b6b53baed6p1e86c9jsnd416b0e51110',
             useQueryString: true 
             }  
         };

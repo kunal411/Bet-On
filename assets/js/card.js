@@ -32,6 +32,7 @@ for(let i = 0; i < x.length; i++){
 }
 
 var card = document.querySelectorAll('.card');
+var matchLineUp = document.querySelectorAll('.match-status-lineup');
 for(let i = 0 ; i < card.length; i++){
     let match_id = card[i].getAttribute('id');
     let homeName = card[i].getAttribute('data-home-name');
@@ -42,7 +43,6 @@ for(let i = 0 ; i < card.length; i++){
     });
 }
 
-var matchLineUp = document.querySelectorAll('.match-status-lineup');
 for(let i = 0 ; i < matchLineUp.length; i++){
     let status = matchLineUp[i].getAttribute('data-status');
     if(status == "Line-ups are out!"){

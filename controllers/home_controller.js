@@ -70,6 +70,9 @@ module.exports.home = async function (req, res){
             liveStatus = "Line-ups are out!";
             mat.livestatus = liveStatus;
             if(match_det.result == "No"){
+                if(match_det.status){
+                    mat.livestatus = match_det.status;
+                }
                 mat.result = "No";
             }
             else{
@@ -129,6 +132,9 @@ module.exports.home = async function (req, res){
                     liveStatus = "Line-ups are out!";
                     mat.livestatus = liveStatus;
                     if(match.result == "No"){
+                        if(match.status){
+                            mat.livestatus = match.status;
+                        }
                         mat.result = "No";
                         liveMatchesDetails.results.push(mat);
                     }

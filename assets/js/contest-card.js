@@ -1,6 +1,7 @@
 const createBtn = document.getElementById('create-team-button');
 const createContestBtn = document.getElementById('create-contest-button');
 const contestCards = document.querySelectorAll('#money-to-join-contest');
+const contestJoinDisablebutton = document.querySelectorAll('#money-to-join-contest-disabled');
 const backgrnd = document.getElementById('container');
 const allContainers = document.querySelectorAll('.extra-contanier');
 const myTeamBtn = document.getElementById('team-display-button');
@@ -14,22 +15,26 @@ function closeContainers(){
 
 let contestId;
 let matchId;
-createBtn.addEventListener('click',function(){
-    console.log('Create team button clicked');
-    alert('Select the players according to the followings rule :\r\n1. Select 4-7 players from each team.\r\n2. Select 3-6 batsman\r\n3. Select 3-6 bowlers.\r\n4. Select 1-3 wicket-keeper(s).\r\n5. Select 1-3 all-rounder(s).')
-    const div=document.getElementById('select-players-parent');
-    closeContainers();
-    backgrnd.style.opacity = "0.5";
-    div.style.display="block";
-});
+if(createBtn){
+    createBtn.addEventListener('click',function(){
+        console.log('Create team button clicked');
+        alert('Select the players according to the followings rule :\r\n1. Select 4-7 players from each team.\r\n2. Select 3-6 batsman\r\n3. Select 3-6 bowlers.\r\n4. Select 1-3 wicket-keeper(s).\r\n5. Select 1-3 all-rounder(s).')
+        const div=document.getElementById('select-players-parent');
+        closeContainers();
+        backgrnd.style.opacity = "0.5";
+        div.style.display="block";
+    });
+}
 
-createContestBtn.addEventListener('click',function(){
-    console.log('Create contest button clicked');
-    const div=document.getElementById('create-contest-parent');
-    closeContainers();
-    backgrnd.style.opacity = "0.5";
-    div.style.display="block";
-})
+if(createContestBtn){
+    createContestBtn.addEventListener('click',function(){
+        console.log('Create contest button clicked');
+        const div=document.getElementById('create-contest-parent');
+        closeContainers();
+        backgrnd.style.opacity = "0.5";
+        div.style.display="block";
+    })
+}
 
 for(let i = 0; i < contestCards.length; i++){
     contestCards[i].addEventListener('click', function(event){
@@ -51,6 +56,13 @@ for(let i = 0; i < contestCards.length; i++){
         const div=document.getElementById('join-contest');
         backgrnd.style.opacity = "0.5";
         div.style.display="block";
+    })
+}
+
+for(let i = 0; i < contestJoinDisablebutton.length; i++){
+    contestJoinDisablebutton[i].addEventListener('click', function(event){
+        event.stopPropagation();
+        alert('Match has already started');
     })
 }
 

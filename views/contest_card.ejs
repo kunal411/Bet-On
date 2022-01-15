@@ -30,8 +30,12 @@
                 <p>Entry</p>
             </div>
             <div class="pool-price">
-                <p class="contest-prize-pool" data-count = "<%= count %>">₹ <%= x.price %> ↓</p>
-                <button id="money-to-join-contest" data-contest-id = "<%= x.contestId%>" data-price = "<%=x.price/x.totalSpots %>" data-wallet="<%= wallet %>" data-match-id="<%= matchId %>">₹<%= x.price/x.totalSpots %></button>
+                <p class="contest-prize-pool" data-count = "<%= count %>">₹ <%= x.totalPoolPrize %> ↓</p>
+                <% if(!details.titleFI) {%>
+                    <button id="money-to-join-contest" data-contest-id = "<%= x.contestId%>" data-price = "<%=x.price/x.totalSpots %>" data-wallet="<%= wallet %>" data-match-id="<%= matchId %>">₹<%= x.price/x.totalSpots %></button>
+                <% }else { %>
+                    <button id="money-to-join-contest-disabled">₹<%= x.price/x.totalSpots %></button>
+                <% } %>
             </div>
             <div class="contest-participation">
                 <p> <%= x.spotsLeft %> Spots Left</p>
@@ -296,9 +300,13 @@
 
 
 <div class="create-team-footer">
-    <button id="create-team-button" class="create-footer-button">CREATE TEAM</button>
-    <button id="create-contest-button" class="create-footer-button">CREATE / JOIN  CONTEST</button>
-    <button id="team-display-button" class="create-footer-button">MY TEAM</button>
+    <% if(!details.titleFI){ %>
+        <button id="create-team-button" class="create-footer-button">CREATE TEAM</button>
+        <button id="create-contest-button" class="create-footer-button">CREATE / JOIN  CONTEST</button>
+    <% } %>
+    <% if(teamDetail != "undefined"){ %>
+        <button id="team-display-button" class="create-footer-button">MY TEAM</button>
+    <% } %>
 </div>
 
 <div id="select-players-parent" class="extra-contanier">

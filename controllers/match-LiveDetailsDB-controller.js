@@ -29,7 +29,7 @@ module.exports.addMatchLiveDettoDb = async function(){
                     url: `https://cricket-live-data.p.rapidapi.com/match/${matchId}`,
                     headers: {
                     'x-rapidapi-host': 'cricket-live-data.p.rapidapi.com',
-                    'x-rapidapi-key': process.env.API_KEY,
+                    'x-rapidapi-key': '773ece5d2bmsh8af64b6b53baed6p1e86c9jsnd416b0e51110',
                     useQueryString: true
                     }
                 }; 
