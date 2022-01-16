@@ -77,6 +77,14 @@ body{
     flex-wrap: wrap;
 }
 
+.live{
+    color: rgb(58, 161, 58);
+}
+
+.upcoming-status{
+    color: rgb(196, 28, 28);
+}
+
 .matches-status-heading{
     background-color: rgba(255,255,255,0.5);
     text-align: center;

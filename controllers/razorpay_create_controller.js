@@ -38,11 +38,13 @@ module.exports.checkTransaction = async function(req, res){
                 res.redirect(`${process.env.PORTURL}/users/profile/${req.user.userId}`);
             }
             else{
-                req.flash('error','Transaction failed please try again')
+                req.flash('error','Transaction failed please try again');
+                res.redirect(`${process.env.PORTURL}/users/profile/${req.user.userId}`);
             }
         })
     }catch(err){
         console.log('Error : ' + err);
+        res.redirect(`${process.env.PORTURL}/users/profile/${req.user.userId}`);
     }
 }
 
@@ -88,7 +90,6 @@ module.exports.withdrawCash = async function(req, res){
                     if (error) reject(error);
                     console.log(response.body);
                     let s = JSON.parse(response.body);
-                    res.json(response.body);
                     resolve(s);
                 });
             });
@@ -100,6 +101,8 @@ module.exports.withdrawCash = async function(req, res){
                     await User.updateOne({userId : userId}, {$set :{
                         wallet : leftAmount
                     }})
+                    req.flash('success', 'Withdrawal Successful');
+                    res.json();
                 }
             }).catch((err)=>{
                 console.log("Error : " + err);

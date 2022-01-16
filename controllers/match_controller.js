@@ -102,7 +102,8 @@ module.exports.contest = async function(req,res){
                     titleSI : match.titleSI,
                     toss : match.toss,
                     wicketsFI : match.wicketsFI,
-                    wicketsSI : match.wicketsSI
+                    wicketsSI : match.wicketsSI,
+                    date : match.date
                 }
             }
             let contests = await Contest.find({matchId : matchId});

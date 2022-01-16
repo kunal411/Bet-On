@@ -37,9 +37,9 @@ module.exports.addMatchLiveScoreDettoDb = async function(){
         for(let i = 0; i < matchList.length; i++){
             let matchId = matchList[i].matchId;
 
-            // if(matchList[i].inPlay == "No"){
-            //     continue;
-            // }
+            if(matchList[i].inPlay == "No"){
+                continue;
+            }
             
             if(matchList[i].result == "Yes"){
                 // We can give reference in the model and then populate it, it will save much time!!
@@ -64,7 +64,9 @@ module.exports.addMatchLiveScoreDettoDb = async function(){
                                 transaction.createTransaction(teamsArray[i].userId, "", contest.prizeDetails[i].prize, "won contest");
                                 const user = await User.findOneAndUpdate({userId : teamsArray[i].userId},
                                     {$inc:{
-                                        wallet : contest.prizeDetails[i].prize
+                                        wallet : contest.prizeDetails[i].prize,
+                                        numberOfContestWon : 1,
+                                        totalAmountWon : contest.prizeDetails[i].prize
                                     }});
                             }
                             const updatedContest = await Contest.updateOne({_id : contestId}, {$set:{
@@ -98,7 +100,7 @@ module.exports.addMatchLiveScoreDettoDb = async function(){
             });
             promise.then( async (s)=>{
                 // Change to be done in if condition , this is only for code testing!!!
-                if(s.results.live_details.match_summary.in_play == "No"){
+                if(s.results.live_details.match_summary.in_play == "Yes"){
                     let inPlay = "Yes";
                     let status = s.results.live_details.match_summary.status;
                     let toss = s.results.live_details.match_summary.toss;

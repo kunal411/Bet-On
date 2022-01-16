@@ -79,14 +79,16 @@ module.exports.addAccount = async function(req, res){
                 ifsc : ifsc,
                 fundId : fundId
             }});
-            req.flash('success','Account Added Successfully')
+            req.flash('success','Account Added Successfully');
+            return res.redirect('back');
         }).catch((err)=>{
             console.log("Error : " + err);
+            return res.redirect('back');
         })
     }catch(err){
         console.log('Error : ' + err);
+        return res.redirect('back');
     }
-    return res.redirect('back');
     
 }
 

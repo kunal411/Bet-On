@@ -186,11 +186,11 @@ if(withdrawMonetTextArea){
 
 const withdrawCashButton = document.getElementById('withdraw-cash-button');
 if(withdrawCashButton){
-    withdrawCashButton.addEventListener('click', function(){
-        axios.post(`/users/profile/withdraw?amount=${Number(withdrawMonetTextArea.value)}`);
-        // To be checked!!!!!!!!
-        alert('Withdrawal Successful');
+    withdrawCashButton.addEventListener('click', async function(){
+        withdrawCashButton.disabled = true;
+        await axios.post(`/users/profile/withdraw?amount=${Number(withdrawMonetTextArea.value)}`);
         location.reload();
+        withdrawCashButton.disabled = true;
     })
 }
 

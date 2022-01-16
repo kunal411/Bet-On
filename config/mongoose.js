@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-// mongoose.connect('mongodb+srv://domino-beton:dominobeton@dominobeton.rxgn1.mongodb.net/dominobeton?retryWrites=true&w=majority');
-mongoose.connect('mongodb://localhost/BETON_DOMINO');
+mongoose.connect('mongodb+srv://domino-beton:dominobeton@dominobeton.rxgn1.mongodb.net/dominobeton?retryWrites=true&w=majority');
+// mongoose.connect('mongodb://localhost/BETON_DOMINO');
 
 const db = mongoose.connection;
 

@@ -131,7 +131,7 @@ module.exports.home = async function (req, res){
                     mat.inPlay = match.inPlay;
                     liveStatus = "Line-ups are out!";
                     mat.livestatus = liveStatus;
-                    if(match.result == "No"){
+                    if(match.result == "No" || !match.result){
                         if(match.status){
                             mat.livestatus = match.status;
                         }

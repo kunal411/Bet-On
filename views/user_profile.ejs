@@ -161,6 +161,9 @@
             <% } %>
 
             <div id="transaction-details-container">
+                <% if(transactions.length == 0) {%>
+                    <div class="transaction-details" style="align-items: center;">No Transactions Yet!</div>
+                <% } %>
                 <% for(let i = 0; i < transactions.length; i++){ %>
                     <% let date = new Date(transactions[i].createdAt); %>
                     <div class="transaction-details">

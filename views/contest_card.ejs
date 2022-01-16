@@ -10,7 +10,10 @@
 
 
     <% let details = match_details.results[0].live_details %>
-    <div id = "score-btn-div">
+    <% let matchDate = new Date(details.date) %>
+    <% let diffTime = matchDate - (new Date()) %>
+
+    <div id = "score-btn-div" data-diff-time = "<%= diffTime %>">
         <button id="scoreCard" >SCORECARD</button>
     </div>
 
@@ -31,7 +34,7 @@
             </div>
             <div class="pool-price">
                 <p class="contest-prize-pool" data-count = "<%= count %>">₹ <%= x.totalPoolPrize %> ↓</p>
-                <% if(!details.titleFI) {%>
+                <% if(diffTime > 0) {%>
                     <button id="money-to-join-contest" data-contest-id = "<%= x.contestId%>" data-price = "<%=x.price/x.totalSpots %>" data-wallet="<%= wallet %>" data-match-id="<%= matchId %>">₹<%= x.price/x.totalSpots %></button>
                 <% }else { %>
                     <button id="money-to-join-contest-disabled">₹<%= x.price/x.totalSpots %></button>
@@ -300,7 +303,7 @@
 
 
 <div class="create-team-footer">
-    <% if(!details.titleFI){ %>
+    <% if(diffTime > 0){ %>
         <button id="create-team-button" class="create-footer-button">CREATE TEAM</button>
         <button id="create-contest-button" class="create-footer-button">CREATE / JOIN  CONTEST</button>
     <% } %>

@@ -12,7 +12,7 @@
         <% return 0; %>
     <% } %>
 
-    <% function matchCardMakers(matches) { %>
+    <% function matchCardMakers(matches, status) { %>
         <% for(let i = 0; i <= matches.results.length - 1; i++) { %>
             <% let mat = matches.results[i]; %>
             <% if(mat.home.code == "" || mat.away.code == "") {%>
@@ -34,38 +34,55 @@
                         <img src="<%= mat.teamAwayFlagUrl %>" alt="<%= mat.away.name %>" class="away-flag-img">
                     </div>
                 </div>
-                    <% const date1 = new Date(); %>
-                    <% let d1 = new Date(mat.date); %>
-                    <% let diffTime = (d1 - date1); %>
-                    <% let hour = parseInt(diffTime/(60 * 60 * 1000)); %>
-                    <% let min = parseInt(diffTime/(60 * 1000)) - (hour * 60); %>
-                    <% let sec = parseInt(diffTime/(1000)) - (min * 60) - (hour * 3600); %>
-                    <% if(diffTime <= 0) {%>
-                        <% ans = "Match has already started" %>
-                    <% } else { %>
-                        <% if(hour == 0){ %>
-                            <% ans = min.toString() + " m " + sec.toString() + " s "; %>
-                            <% if(min == 0){ %>
-                                <% ans = sec.toString() + " s "; %>
-                            <% } %>
-                        <%} else{ %>
-                            <% ans = hour.toString() + " h " + min.toString() + " m " + sec.toString() + " s "; %>
-                        <% } %>
+
+                <% const date1 = new Date(); %>
+                <% let d1 = new Date(mat.date); %>
+                <% let diffTime = (d1 - date1); %>
+                <% let hour = parseInt(diffTime/(60 * 60 * 1000)); %>
+                <% let min = parseInt(diffTime/(60 * 1000)) - (hour * 60); %>
+                <% let sec = parseInt(diffTime/(1000)) - (min * 60) - (hour * 3600); %>
+                <% let timer; %>
+                <% if(hour == 0){ %>
+                    <% timer = min.toString() + " m " + sec.toString() + " s "; %>
+                    <% if(min == 0){ %>
+                        <% timer = sec.toString() + " s "; %>
                     <% } %>
-                    <% if(mat.result == "Yes") {%>
-                        <% mat.status %>
-                    <% }else if(mat.inPlay == "Yes"){ %>
-                        <p class="match-status-lineup" data-status = "<%= mat.livestatus %>">
-                            Live
+                <%} else{ %>
+                    <% timer = hour.toString() + " h " + min.toString() + " m " + sec.toString() + " s "; %>
+                <% } %>
+
+                <% if(status == 'live'){ %>
+                    <% if(diffTime > 0){ %>
+                        <p class="timer" id="<%= mat.date %>">
+                            <%= timer %>
                         </p>
                     <% }else{ %>
-                        <p class="match-status-lineup" data-status = "<%= mat.livestatus %>">
-                            <%= mat.livestatus %>
+                        <p class="live">
+                            Live
                         </p>
                     <% } %>
-                    <p class="match-status" id="<%= mat.date %>" data-result="<%= mat.result %>" data-inplay="<%= mat.inPlay %>" data-status="<%= mat.status %>">
-                        <%= ans %>
+                <% } %>
+
+                <% if(status == 'upcoming'){ %>
+                    <p class="timer" id="<%= mat.date %>">
+                        <%= timer %>
                     </p>
+                <% } %>
+
+                <p class="match-status" id="<%= mat.date %>">
+                    <p class="upcoming-status">
+                        <% if(status == 'upcoming'){ %>
+                            Line ups are not out yet!
+                        <% } %>
+                    </p>
+
+                    <% if(status == 'past' || status == 'live' || status == "mymatch"){ %>
+                        <%= mat.status %>
+                    <% } %>
+                </p>
+
+
+
                 </div>
             </div>
         <% } %>
@@ -76,7 +93,7 @@
             <h2 class="matches-status-heading">My Matches</h2>
             <div class="match-card-main-container">
                 <% userMatches.results.sort( compare ); %>
-                <% matchCardMakers(userMatches); %>
+                <% matchCardMakers(userMatches, "mymatch"); %>
             </div>
         </div>
     <% } %>
@@ -86,7 +103,7 @@
             <h2 class="matches-status-heading">Live Matches</h2>
             <div class="match-card-main-container">
                 <% liveMatchesDetails.results.sort( compare ); %>
-                <% matchCardMakers(liveMatchesDetails); %>
+                <% matchCardMakers(liveMatchesDetails, "live"); %>
             </div>
         </div>
     <% } %>
@@ -96,7 +113,7 @@
             <h2 class="matches-status-heading">Upcoming Matches</h2>
             <div class="match-card-main-container">
                 <% upcomingMatchesDetails.results.sort( compare ); %>
-                <% matchCardMakers(upcomingMatchesDetails); %>
+                <% matchCardMakers(upcomingMatchesDetails, "upcoming"); %>
             </div>
         </div>
     <% } %>
@@ -106,7 +123,7 @@
             <h2 class="matches-status-heading">Past Matches</h2>
             <div class="match-card-main-container">
                 <% pastMatchesDetails.results.sort( compare ); %>
-                <% matchCardMakers(pastMatchesDetails); %>
+                <% matchCardMakers(pastMatchesDetails, "past"); %>
             </div>
         </div>
     <% } %>

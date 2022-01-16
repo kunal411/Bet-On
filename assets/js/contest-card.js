@@ -5,6 +5,27 @@ const contestJoinDisablebutton = document.querySelectorAll('#money-to-join-conte
 const backgrnd = document.getElementById('container');
 const allContainers = document.querySelectorAll('.extra-contanier');
 const myTeamBtn = document.getElementById('team-display-button');
+const scoreBtn = document.getElementById('score-btn-div');
+
+let diffTime = scoreBtn.getAttribute('data-diff-time');
+let isLeaderboardVisible = false;
+
+if(diffTime <= 0){
+    isLeaderboardVisible = true;
+}
+
+if(diffTime > 0){
+    var myVar = setInterval(function(){
+        let d2 = new Date();
+        if(diffTime <= 0) {
+            isLeaderboardVisible = true;
+            clearInterval(myVar);
+            location.reload();
+        } else {
+            diffTime = (diffTime - d2);
+        }
+    }, 1000);
+}
 
 // To close all the container on contest-card pages.
 function closeContainers(){
@@ -358,8 +379,13 @@ for(let i = 0; i < contestCard.length; i++){
     let contestId = contestCard[i].getAttribute('data-contest-id');
     let matchId = contestCard[i].getAttribute('data-match-id');
     contestCard[i].addEventListener('click', function(){
-        console.log(contestId); 
-        window.location.href = `http://localhost:8000/match/contest/leaderboard?matchId=${matchId}&contestId=${contestId}`;
+        if(isLeaderboardVisible){
+            console.log(contestId); 
+            window.location.href = `http://localhost:8000/match/contest/leaderboard?matchId=${matchId}&contestId=${contestId}`;
+        }else{
+            alert('Leaderboard will be visible after match starts');
+            return;
+        }
     })
 }
 
