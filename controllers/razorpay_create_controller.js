@@ -55,10 +55,12 @@ module.exports.withdrawCash = async function(req, res){
     try{
         let user = await User.findOne({userId : userId});
         if(!user.accountNumber){
-            req.flash('error','Add Bank Details')
+            req.flash('error','Add Bank Details');
+            res.json();
         }
         else if(leftAmount < 0){
-            req.flash('error','Not enough balance')
+            req.flash('error','Not enough balance');
+            res.json();
         }
         else{
             var options = {

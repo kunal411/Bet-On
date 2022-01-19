@@ -114,6 +114,8 @@ module.exports.followUpdate = async function(req, res){
             await User.updateOne({userId : folloUserId}, { $set : {
                 followers : followers
             }});
+            req.flash('success', `You started following ${folloUserId}`);
+            res.json();
         }
     }catch(err){
         console.log('Error :' + err);

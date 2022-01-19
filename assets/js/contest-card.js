@@ -8,6 +8,7 @@ const myTeamBtn = document.getElementById('team-display-button');
 const scoreBtn = document.getElementById('score-btn-div');
 
 let diffTime = scoreBtn.getAttribute('data-diff-time');
+let matchTime = scoreBtn.getAttribute('data-match-date');
 let isLeaderboardVisible = false;
 
 if(diffTime <= 0){
@@ -20,9 +21,10 @@ if(diffTime > 0){
         if(diffTime <= 0) {
             isLeaderboardVisible = true;
             clearInterval(myVar);
+            alert('Match has started');
             location.reload();
         } else {
-            diffTime = (diffTime - d2);
+            diffTime = (matchTime - d2);
         }
     }, 1000);
 }

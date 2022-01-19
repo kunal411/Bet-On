@@ -13,7 +13,7 @@
     <% let matchDate = new Date(details.date) %>
     <% let diffTime = matchDate - (new Date()) %>
 
-    <div id = "score-btn-div" data-diff-time = "<%= diffTime %>">
+    <div id = "score-btn-div" data-diff-time = "<%= diffTime %>" data-match-date="<%= matchDate %>">
         <button id="scoreCard" >SCORECARD</button>
     </div>
 

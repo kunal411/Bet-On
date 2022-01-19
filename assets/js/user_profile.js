@@ -14,9 +14,10 @@ if(stats){
 
 const followButton = document.getElementById('follow-button');
 if(followButton){
-    followButton.addEventListener('click', function(){
+    followButton.addEventListener('click', async function(){
         const followUserId = followButton.getAttribute('data-follow-userId');
-        axios.post(`/users/profile/follow?followUserId=${followUserId}`);
+        await axios.post(`/users/profile/follow?followUserId=${followUserId}`);
+        followButton.disabled = true;
         location.reload();
     })
 }
