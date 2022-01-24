@@ -19,7 +19,7 @@ const flash = require('connect-flash');
 const customFlashMWare = require('./config/flash-middleware');
 
 //setup the chat server to be used with socket.io
-const chatServer = require('http').Server(app);
+const chatServer = require('https').Server(app);
 const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
 chatServer.listen(5100);
 
