@@ -44,7 +44,7 @@
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "razorpay": "^2.8.0",
-    "socket.io": "^4.4.1"
+    "socket.io": "^1.7.0"
   },
   "bugs": {
     "url": "https://github.com/kunal411/Bet-On/issues"
