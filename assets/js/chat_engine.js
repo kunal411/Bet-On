@@ -5,7 +5,7 @@ class ChatEngine{
         this.userEmail = userEmail;
         this.chatRoom = chatRoom;
 
-        this.socket = io.connect('ws://domino-beton.herokuapp.com', { transports : ['websocket'] });
+        this.socket = io.connect('wss://domino-beton.herokuapp.com', { transports : ['websocket'] });
 
         if (this.userEmail){
             this.connectionHandler();
