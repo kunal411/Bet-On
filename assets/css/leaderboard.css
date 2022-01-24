@@ -9,6 +9,23 @@ body{
     text-align: center;
     font-family: monospace;
 }
+
+#chat-button{
+    margin-left: 45%;
+    text-align: center;
+    border-radius: 10px;
+    padding: 0.5%;
+    background-color: rgb(116, 116, 116);
+    text-decoration: none;
+    outline: none;
+}
+
+#chat-button:hover{
+    transform: scale(0.9);
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+}
+
 .container{
     width: 60%;
 }

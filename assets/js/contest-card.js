@@ -255,18 +255,20 @@ for(let i = 0; i < addPlayer.length; i++){
     });
 }
 
-myTeamBtn.addEventListener('click', function(){
-    closeContainers();
-    const userteamContainer = document.getElementsByClassName('user-team')[0];
-    const isTeamPresent = userteamContainer.getAttribute("data-team");
-    if(isTeamPresent == "false"){
-        alert('Create Team First!!');
-        backgrnd.style.opacity = "1";
-        return;
-    }
-    backgrnd.style.opacity = "0.5";
-    userteamContainer.style.display = "block";
-});
+if(myTeamBtn){
+    myTeamBtn.addEventListener('click', function(){
+        closeContainers();
+        const userteamContainer = document.getElementsByClassName('user-team')[0];
+        const isTeamPresent = userteamContainer.getAttribute("data-team");
+        if(isTeamPresent == "false"){
+            alert('Create Team First!!');
+            backgrnd.style.opacity = "1";
+            return;
+        }
+        backgrnd.style.opacity = "0.5";
+        userteamContainer.style.display = "block";
+    });
+}
 
 const closeTeam = document.getElementsByClassName('close-team')[0];
 closeTeam.addEventListener('click', function(){

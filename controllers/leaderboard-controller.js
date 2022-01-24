@@ -58,6 +58,7 @@ module.exports.leaderBoardUpdate = async function(req,res){
         userId : userId,
         numberOfWinners : numberOfWinners,
         inPlay: inPlay,
-        mathcResult: mathcResult
+        mathcResult: mathcResult,
+        contestId : contestId
     })
 }   

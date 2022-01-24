@@ -37,6 +37,29 @@ for(let i = 0; i < closeTeam.length; i++){
 }
 
 const user = document.getElementById('userId');
-user.addEventListener('click', function(event){
-    event.stopPropagation();
+if(user){
+    user.addEventListener('click', function(event){
+        event.stopPropagation();
+    })
+}
+
+const chatButton = document.getElementById('chat-button');
+chatButton.addEventListener('click', function(){
+    const chatBox = document.getElementById('user-chat-box');
+    chatBox.style.display = 'block'
 })
+
+const closeChat = document.getElementsByClassName('close-chat')[0];
+closeChat.addEventListener('click', function(){
+    const chatBox = document.getElementById('user-chat-box');
+    chatBox.style.display = 'none'
+})
+
+var chatMessageInput = document.getElementById("chat-message-input");
+chatMessageInput.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("send-message").click();
+        chatMessageInput.value = "";
+    }
+});
