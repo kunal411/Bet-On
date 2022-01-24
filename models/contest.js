@@ -61,6 +61,20 @@ const contestSchema = new mongoose.Schema({
             trim : true,
             lowercase : true
         }
+    ],
+
+    chatMessages : [
+        {
+            userId : {
+                type : String,
+                trim : true
+            },
+
+            message: {
+                type : String,
+                trim : true
+            }
+        }
     ]
 },{
     timestamps : true

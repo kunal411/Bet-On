@@ -38,7 +38,7 @@ module.exports.addMatchtoDb = async function(){
             url: `https://cricket-live-data.p.rapidapi.com/fixtures-by-date/${formattedDate}`,
             headers: {
             'x-rapidapi-host': 'cricket-live-data.p.rapidapi.com',
-            'x-rapidapi-key': '773ece5d2bmsh8af64b6b53baed6p1e86c9jsnd416b0e51110',
+            'x-rapidapi-key': '2b909860edmsh5c0b119df2b0392p18cb35jsn3e8d627a0d59',
             useQueryString: true 
             }  
         };

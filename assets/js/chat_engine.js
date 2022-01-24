@@ -47,7 +47,7 @@ class ChatEngine{
             }
         });
 
-        self.socket.on('receive_message', function(data){
+        self.socket.on('receive_message', async function(data){
             console.log('message received', data.message);
 
 
@@ -76,6 +76,7 @@ class ChatEngine{
             $('#chat-messages-list').append(newMessage);
             let height = chatMessageList.scrollHeight;
             chatMessageList.scrollBy(0, height);
+            await axios.post(`/match/contest/leaderboard/addMessage?message=${data.message}&userId=${data.user_email}&contestId=${self.chatRoom}`);
         })
     }
 }

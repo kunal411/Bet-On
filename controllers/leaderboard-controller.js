@@ -16,6 +16,7 @@ module.exports.leaderBoardUpdate = async function(req,res){
     let results = [];
     let inPlay;
     let mathcResult;
+    let chatMessages;
     try{
         let match = await MatchLiveDet.findOne({matchId : matchId});
         if(match){
@@ -29,6 +30,7 @@ module.exports.leaderBoardUpdate = async function(req,res){
     try{
         const contest = await Contest.findOne({_id : contestId});
         if(contest){
+            chatMessages = contest.chatMessages;
             const teamsArray = contest.teamsId;
             numberOfWinners = contest.prizeDetails.length;
             for(let teamId of teamsArray){
@@ -59,6 +61,7 @@ module.exports.leaderBoardUpdate = async function(req,res){
         numberOfWinners : numberOfWinners,
         inPlay: inPlay,
         mathcResult: mathcResult,
-        contestId : contestId
+        contestId : contestId,
+        chatMessages: chatMessages
     })
-}   
+}

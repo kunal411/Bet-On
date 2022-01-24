@@ -10,7 +10,21 @@
 		<hr>
 
 		<ul id="chat-messages-list">
-
+			<% if(chatMessages.length != 0){ %>
+				<% for(let i = 0; i < chatMessages.length; i++){ %>
+					<% if(chatMessages[i].userId != locals.user.userId){ %>
+						<li class="other-message">
+							<p><%= chatMessages[i].userId %></p>
+							<span><%= chatMessages[i].message %></span>
+						</li>
+					<% }else{ %>
+						<li class="self-message">
+							<p>You</p>
+							<span><%= chatMessages[i].message %></span>
+						</li>
+					<% } %>
+				<% } %>
+			<% } %>
 		</ul>
 
 		<hr>
