@@ -76,7 +76,7 @@ class ChatEngine{
             $('#chat-messages-list').append(newMessage);
             let height = chatMessageList.scrollHeight;
             chatMessageList.scrollBy(0, height);
-            await axios.post(`/match/contest/leaderboard/addMessage?message=${data.message}&userId=${data.user_email}&contestId=${self.chatRoom}`);
+            await axios.post(`http://domino-beton.herokuapp.com/match/contest/leaderboard/addMessage?message=${data.message}&userId=${data.user_email}&contestId=${self.chatRoom}`);
         })
     }
 }
