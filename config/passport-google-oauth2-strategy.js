@@ -8,7 +8,7 @@ const request = require('request');
 passport.use(new googleStrategy({
         clientID: "359903220192-qfi6cfmvl3ilq5fk1a210rnuebm1r6p1.apps.googleusercontent.com",
         clientSecret: "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",
-        callbackURL: "http://localhost:8000/users/auth/google/callback"
+        callbackURL: "https://domino-beton.herokuapp.com/users/auth/google/callback"
     },
 
     function(accessToken, refreshToken, profile, done){

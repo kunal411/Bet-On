@@ -35,7 +35,7 @@ for(let i = 0 ; i < card.length; i++){
     let awayName = card[i].getAttribute('data-away-name');
     card[i].addEventListener('click',function(){
         console.log('Card clicked');
-        window.location.href = `http://localhost:8000/match/contest?id=${match_id}&homeTeamName=${homeName}&awayTeamName=${awayName}`;
+        window.location.href = `https://domino-beton.herokuapp.com/match/contest?id=${match_id}&homeTeamName=${homeName}&awayTeamName=${awayName}`;
     });
 }
 
