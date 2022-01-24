@@ -23,12 +23,6 @@ const chatServer = require('https').Server(app);
 const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
 chatServer.listen(5100);
 
-const expressStatusMonitor = require('express-status-monitor');
-app.use(expressStatusMonitor({
-    websocket: io,
-    port: app.get('port')
-}));
-
 console.log('Chat Server is listening on port 5100');
 
 const cors = require('cors');
