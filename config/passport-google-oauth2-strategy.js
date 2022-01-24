@@ -6,8 +6,8 @@ const request = require('request');
 
 //tell passport to use a new startegy for google login
 passport.use(new googleStrategy({
-        clientID: "359903220192-qfi6cfmvl3ilq5fk1a210rnuebm1r6p1.apps.googleusercontent.com",
-        clientSecret: "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",
+        clientID: "1079664389518-m4uaid1nv7rhhvm1cp6ins5o2nivag6g.apps.googleusercontent.com",
+        clientSecret: "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",
         callbackURL: "https://domino-beton.herokuapp.com/users/auth/google/callback"
     },
 
