@@ -1,6 +1,6 @@
 
 const User = require('../models/user');
-
+const portURL = "https://domino-beton.herokuapp.com";
 var request = require('request');
 
 const jwt = require('jsonwebtoken');

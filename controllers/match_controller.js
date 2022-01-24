@@ -3,6 +3,7 @@ const MatchLiveDetail = require('../models/match_live_details');
 const Contest = require('../models/contest');
 const Team = require('../models/team');
 const User = require('../models/user');
+const portURL = "https://domino-beton.herokuapp.com";
 
 module.exports.contest = async function(req,res){
 

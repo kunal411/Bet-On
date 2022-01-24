@@ -3,6 +3,7 @@ const Matches = require('../models/match');
 const LiveMatches = require('../models/match_live_details');
 const User = require('../models/user');
 const flagURLs = require('country-flags-svg');
+const portURL = "https://domino-beton.herokuapp.com";
 module.exports.home = async function (req, res){
     if (!req.isAuthenticated()) {
         return res.redirect(`${portURL}/users/sign-in`);

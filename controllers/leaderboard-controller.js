@@ -1,7 +1,7 @@
 const Contest = require('../models/contest');
 const Team = require('../models/team');
 const MatchLiveDet = require('../models/match_live_details');
-
+const portURL = "https://domino-beton.herokuapp.com";
 
 module.exports.leaderBoardUpdate = async function(req,res){
     if (!req.isAuthenticated()) {
