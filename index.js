@@ -21,9 +21,9 @@ const customFlashMWare = require('./config/flash-middleware');
 //setup the chat server to be used with socket.io
 const chatServer = require('https').Server(app);
 const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
-chatServer.listen(process.env.PORT || port);
+chatServer.listen(5100);
 
-console.log(`Chat Server is listening on port ${process.env.PORT || port}`);
+console.log('Chat Server is listening on port 5100');
 
 const cors = require('cors');
 require('dotenv').config();
