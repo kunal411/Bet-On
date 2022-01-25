@@ -21,7 +21,7 @@ const customFlashMWare = require('./config/flash-middleware');
 //setup the chat server to be used with socket.io
 const chatServer = require('https').Server(app);
 const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
-chatServer.listen(process.env.PORT || 5100);
+chatServer.listen(5100);
 
 console.log(`Chat Server is listening on port 5100`);
 
@@ -115,7 +115,7 @@ async function addUpdatedTeamScore(){
 app.use('/', require('./routes'));
 
 
-app.listen(port, function(err){
+app.listen(process.env.PORT || port, function(err){
     if (err){
         console.log(`Error in running the server: ${err}`);
     }
