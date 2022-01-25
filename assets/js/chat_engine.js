@@ -16,6 +16,10 @@ class ChatEngine{
     connectionHandler(){
         let self = this;
 
+        this.socket.on("connect_error", (err) => {
+            console.log(`connect_error due to ${err.message}`);
+        });
+
         this.socket.on('connect', function(){
             console.log('connection established using sockets...!');
 

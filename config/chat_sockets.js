@@ -1,11 +1,5 @@
 module.exports.chatSockets = function(socketServer){
-    let io = require('socket.io')(socketServer, {
-        allowEIO3: true
-    });
-
-    io.sockets.on("connect_error", (err) => {
-        console.log(`**********************************************#######################&&&&&&&&&&&&&&&&&connect_error due to ${err.message}`);
-    });
+    let io = require('socket.io')(socketServer);
 
     io.sockets.on('connection', function(socket){
         console.log('new connection received', socket.id);
