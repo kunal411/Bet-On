@@ -1,0 +1,14 @@
+{
+  "css/chat_box.css": "css/chat_box-91cebedf6a.css",
+  "css/contest-card.css": "css/contest-card-52abcbd7a8.css",
+  "css/footer.css": "css/footer-bb64bb1892.css",
+  "css/forget_password.css": "css/forget_password-fa02660fa0.css",
+  "css/header.css": "css/header-38fb15e967.css",
+  "css/layout.css": "css/layout-b1a3fe12a4.css",
+  "css/leaderboard.css": "css/leaderboard-cdae11493e.css",
+  "css/match-card.css": "css/match-card-a543eaa9bc.css",
+  "css/otp_auth.css": "css/otp_auth-08656c0fa4.css",
+  "css/sign_in.css": "css/sign_in-57594a5368.css",
+  "css/sign_up.css": "css/sign_up-b40c8ba306.css",
+  "css/user_profile.css": "css/user_profile-d41d8cd98f.css"
+}

@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="/css/leaderboard.css">
+<link rel="stylesheet" href="<%= assetPath('css/leaderboard.css') %>">
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<link rel="stylesheet" href="/css/chat_box.css">
+<link rel="stylesheet" href="<%= assetPath('css/chat_box.css') %>">
 
 <button id="chat-button">
     Chat With Friends
@@ -109,9 +109,9 @@
     <%- include('_chat_box') -%>
 </div>
 
-<script src="/js/leaderboard.js"></script>
+<script src="<%= assetPath('js/leaderboard.js') %>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
-<script src="/js/chat_engine.js"></script>
+<script src="<%= assetPath('js/chat_engine.js') %>"></script>
 <% if (locals.user){ %>
     <script>
         new ChatEngine('user-chat-box', '<%= locals.user.userId %>', '<%= contestId %>')

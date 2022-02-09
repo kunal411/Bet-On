@@ -1,6 +1,9 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const env = require('./config/environment');
+const morgan = require('morgan');
 const app = express();
+require('./config/view-helper')(app);
 const port = 8000;
 const expressLayouts = require('express-ejs-layouts');
 const schedule = require('node-schedule');
@@ -14,7 +17,7 @@ const passportGoogle = require('./config/passport-google-oauth2-strategy');
 const MongoStore = require('connect-mongo')(session);
 const { param } = require('./routes');
 const sassMiddleware = require('node-sass-middleware');
-
+const path = require('path');
 const flash = require('connect-flash');
 const customFlashMWare = require('./config/flash-middleware');
 
@@ -28,19 +31,21 @@ console.log('Chat Server is listening on port 5100');
 const cors = require('cors');
 require('dotenv').config();
 
-app.use(sassMiddleware({
-    src: './assets/scss',
-    dest: './assets/css',
-    debug: true,
-    outputStyle: 'extended',
-    prefix: '/css'
-}));
+if(env.name == 'development'){
+    app.use(sassMiddleware({
+        src: path.join(__dirname, env.asset_path, 'scss'),
+        dest: path.join(__dirname, env.asset_path, 'css'),
+        debug: true,
+        outputStyle: 'extended',
+        prefix: '/css'
+    }));
+}
 app.use(express.urlencoded());
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
 
-app.use(express.static('./assets'));
+app.use(express.static(env.asset_path));
 //make the uploads path available to the browser
 
 
@@ -60,7 +65,7 @@ app.set('views', './views');
 app.use(session({
     name: 'BETON-DOMINO',
     // TODO change the secret before deployment in production mode
-    secret: 'blahsomething',
+    secret: env.session_cookie_key,
     saveUninitialized: false,
     resave: false,
     cookie: {
@@ -86,6 +91,7 @@ app.use(passport.setAuthenticatedUser);
 app.use(flash());
 app.use(customFlashMWare.setFlash);
 
+app.use(morgan(env.morgan.mode, env.morgan.options));
 
 const dbCo = require('./controllers/matchDB-controller');
 const LivematchdetController = require('./controllers/match-LiveDetailsDB-controller');

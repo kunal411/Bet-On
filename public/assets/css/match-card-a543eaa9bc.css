@@ -1,0 +1,93 @@
+body{
+    /* background-image: url('https://images.unsplash.com/photo-1559579313-021b6ec9f6d6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c3RhZGl1bXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80'); */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+
+.teams{
+    display: flex;
+    justify-content: space-around;
+}
+
+.match-info{
+    display: flex;
+    padding: 3%;
+}
+
+.home-flag-img, .away-flag-img{
+    margin-top: -7%;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.away-flag-img{
+    margin-left: 20%;
+}
+
+.home-flag-img{
+    margin-right: 20%;
+    margin-left: -20%;
+}
+
+.container{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.crousel-lite{
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+}
+
+.card{
+    margin: 10px;
+    width: 20rem;
+    background-color: rgba(255,255,255,0.8);
+    text-align: center;
+    color: black;
+    min-width: 40%;
+    min-height: 200px;
+}
+
+.match-status{
+    margin-bottom: 0;
+}
+.match-status-lineup{
+    color: red;
+    font-size: big;
+    margin-bottom: 0;
+}
+
+.match-cards{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 7%;
+}
+
+.match-card-main-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.live{
+    color: rgb(58, 161, 58);
+}
+
+.upcoming-status{
+    color: rgb(196, 28, 28);
+}
+
+.matches-status-heading{
+    background-color: rgba(255,255,255,0.5);
+    text-align: center;
+    font-family: monospace;
+    font-weight: 500;
+}

@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="/css/contest-card.css">
-<link rel="stylesheet" href="/css/leaderboard.css">
+<link rel="stylesheet" href="<%= assetPath('css/contest-card.css') %>">
+<link rel="stylesheet" href="<%= assetPath('css/leaderboard.css') %>">
 
 <div id="container">
     <% let playerListHome = match_details.results[0].live_details.teamsheets.home.playerListHome %>
@@ -565,4 +565,5 @@
         </div>
     </div>
 </div>
-<script src="/js/contest-card.js"></script>
+
+<script src="<%= assetPath('js/contest-card.js') %>"></script>
