@@ -11,10 +11,10 @@
   "css/sign_in.css": "css/sign_in-57594a5368.css",
   "css/sign_up.css": "css/sign_up-b40c8ba306.css",
   "css/user_profile.css": "css/user_profile-d41d8cd98f.css",
-  "js/card.js": "js/card-c26ac389c7.js",
-  "js/chat_engine.js": "js/chat_engine-b88e0205ed.js",
-  "js/contest-card.js": "js/contest-card-b9c01ef74a.js",
-  "js/forget-password.js": "js/forget-password-9c7556b185.js",
+  "js/card.js": "js/card-da05554188.js",
+  "js/chat_engine.js": "js/chat_engine-7e3e041b3e.js",
+  "js/contest-card.js": "js/contest-card-0004aabbb1.js",
+  "js/forget-password.js": "js/forget-password-7ffd3db1d0.js",
   "js/leaderboard.js": "js/leaderboard-27f59fdbe3.js",
   "js/user_profile.js": "js/user_profile-8cee23e8b7.js"
 }
