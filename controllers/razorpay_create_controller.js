@@ -35,16 +35,16 @@ module.exports.checkTransaction = async function(req, res){
                 }})
                 transaction.createTransaction(userId, req.body.razorpay_payment_id, cashAdded, "cash added");
                 req.flash('success','Transaction successfull');
-                res.redirect(`${process.env.PORTURL}/users/profile/${req.user.userId}`);
+                res.redirect(`/users/profile/${req.user.userId}`);
             }
             else{
                 req.flash('error','Transaction failed please try again');
-                res.redirect(`${process.env.PORTURL}/users/profile/${req.user.userId}`);
+                res.redirect(`/users/profile/${req.user.userId}`);
             }
         })
     }catch(err){
         console.log('Error : ' + err);
-        res.redirect(`${process.env.PORTURL}/users/profile/${req.user.userId}`);
+        res.redirect(`/users/profile/${req.user.userId}`);
     }
 }
 

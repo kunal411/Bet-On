@@ -41,7 +41,7 @@ module.exports.resetPassword = async function(req,res){
                 subject: 'Account Reset Key',
                 html : `
                     <h2>Please click  on below link to reset your account</h2>
-                    <a href="${process.env.PORTURL}/authentication/reset?token=${token}">CLICK HERE</a>
+                    <a href="/authentication/reset?token=${token}">CLICK HERE</a>
                 `
             };
             await mg.messages().send(data,function (error, body) {
@@ -97,7 +97,7 @@ module.exports.otp = function(req, res){
     messageBird.verify.verify(id, token, function(err, response){
         if(err){
             req.flash('error','OTP entered is incorrect');
-            res.redirect(`${process.env.PORTURL}/users/sign-up`)
+            res.redirect(`/users/sign-up`)
         }
         else{
             // Rendering reset_password view after successful verification
@@ -119,7 +119,7 @@ module.exports.resetAccount = function(req,res){
             if(err){
                 // Expired or incorrect link
                 console.log('Incorrect or expire link');
-                return res.redirect(`${process.env.PORTURL}/users/sign-in`);
+                return res.redirect(`/users/sign-in`);
             }
             const{email, phone} = decodedToken;
             // Rendering reset_password view after successful verification
@@ -133,7 +133,7 @@ module.exports.resetAccount = function(req,res){
         // redirecting to sign page
         req.flash('error','Something went wrong, please try again');
         console.log('Something went wrong!!');
-        return res.redirect(`${process.env.PORTURL}/users/sign-in`);
+        return res.redirect(`/users/sign-in`);
     }
 }
 
@@ -156,7 +156,7 @@ module.exports.restPasswordIndb = async function(req,res){
             password : password
         }});
         req.flash('success','Password reset successfully!!');
-        return res.redirect(`${process.env.PORTURL}/users/sign-in`);
+        return res.redirect(`/users/sign-in`);
     }catch(err){
         console.log("Error : " + err); 
     }

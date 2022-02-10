@@ -293,7 +293,7 @@ for(let i = 0;i < captainBtn.length; i++){
 
 const yesButton = document.getElementById('yes-contest-join-button');
 yesButton.addEventListener('click', function(){
-    window.location.href = `http://localhost:8000/match/contest/join?matchId=${matchId}&contestId=${contestId}`;
+    window.location.href = `http://3.110.212.123:8000/match/contest/join?matchId=${matchId}&contestId=${contestId}`;
 })
 
 const saveButton = document.getElementById('select-player-save');
@@ -341,7 +341,7 @@ saveButton.addEventListener('click',function(){
         div.style.display="none";
         backgrnd.style.opacity = "1";
         let players = JSON.stringify(addedPlayers);
-        window.location.href = `http://localhost:8000/match/contest/team?id=${matchId}&teamArray=${players}&captainId=${captainId}&viceCaptainId=${viceCaptainId}`;
+        window.location.href = `http://3.110.212.123:8000/match/contest/team?id=${matchId}&teamArray=${players}&captainId=${captainId}&viceCaptainId=${viceCaptainId}`;
     }else{
         alert('Please select 11 players to create a team!!');
         return;
@@ -385,7 +385,7 @@ for(let i = 0; i < contestCard.length; i++){
     contestCard[i].addEventListener('click', function(){
         if(isLeaderboardVisible){
             console.log(contestId); 
-            window.location.href = `http://localhost:8000/match/contest/leaderboard?matchId=${matchId}&contestId=${contestId}`;
+            window.location.href = `http://3.110.212.123:8000/match/contest/leaderboard?matchId=${matchId}&contestId=${contestId}`;
         }else{
             alert('Leaderboard will be visible after match starts');
             return;
@@ -423,7 +423,7 @@ createContestSaveButton.addEventListener('click', function(){
         alert(`Not enough balance. Add ₹${entryAmount-wallet} in wallet`);
         return;
     }
-    window.location.href = `http://localhost:8000/match/contest/create-contest?entryAmount=${entryAmount}&spots=${spots}&winners=${winners}&matchId=${matchId}`;
+    window.location.href = `http://3.110.212.123:8000/match/contest/create-contest?entryAmount=${entryAmount}&spots=${spots}&winners=${winners}&matchId=${matchId}`;
 })
 
 const joinContestSaveButton = document.getElementById('join-contest-save');
@@ -431,7 +431,7 @@ joinContestSaveButton.addEventListener('click',function(){
     const matchId = joinContestSaveButton.getAttribute('data-match-id');
     const joinCode = document.getElementById('join-code').value;
     console.log(matchId +" **************************//////////" + joinCode);
-    window.location.href = `http://localhost:8000/match/contest/join-contest?joinCode=${joinCode}&matchId=${matchId}`;
+    window.location.href = `http://3.110.212.123:8000/match/contest/join-contest?joinCode=${joinCode}&matchId=${matchId}`;
 })
 
 const codeCopyBtn = document.querySelectorAll('#contest-code-copy');
