@@ -100,3 +100,39 @@
 ::1 - - [09/Feb/2022:13:27:53 +0000] "GET /match/contest?id=2555859&homeTeamName=dolphins&awayTeamName=warriors HTTP/1.1" 200 42922 "http://localhost:8000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.80 Safari/537.36"
 ::1 - - [09/Feb/2022:13:27:53 +0000] "GET /css/footer-bb64bb1892.css HTTP/1.1" 404 164 "http://localhost:8000/match/contest?id=2555859&homeTeamName=dolphins&awayTeamName=warriors" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.80 Safari/537.36"
 ::1 - - [09/Feb/2022:13:27:53 +0000] "GET /img/logo-img.png HTTP/1.1" 404 155 "http://localhost:8000/css/header-38fb15e967.css" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.80 Safari/537.36"
+[0mGET / [36m302[0m 10.782 ms - 72[0m
+[0mGET /users/sign-in [32m200[0m 30.484 ms - 3359[0m
+[0mGET /users/css/header.css [33m404[0m 12.291 ms - 159[0m
+[0mGET /users/css/layout.css [33m404[0m 6.906 ms - 159[0m
+[0mGET /users/css/sign_in.css [33m404[0m 6.089 ms - 160[0m
+[0mGET /users/js/forget-password.js [33m404[0m 7.750 ms - 166[0m
+[0mGET /users/css/layout.css [33m404[0m 1.512 ms - 159[0m
+[0mGET /users/css/header.css [33m404[0m 1.944 ms - 159[0m
+[0mGET /users/css/sign_in.css [33m404[0m 1.595 ms - 160[0m
+[0mGET /users/sign-in [36m304[0m 36.592 ms - -[0m
+[0mGET /users/css/header.css [33m404[0m 4.219 ms - 159[0m
+[0mGET /users/css/sign_in.css [33m404[0m 9.960 ms - 160[0m
+[0mGET /users/css/layout.css [33m404[0m 16.638 ms - 159[0m
+[0mGET /users/js/forget-password.js [33m404[0m 5.958 ms - 166[0m
+[0mGET /users/sign-in [36m304[0m 26.421 ms - -[0m
+[0mGET /users/css/header.css [33m404[0m 6.444 ms - 159[0m
+[0mGET /users/css/sign_in.css [33m404[0m 6.987 ms - 160[0m
+[0mGET /users/css/layout.css [33m404[0m 13.163 ms - 159[0m
+[0mGET /users/js/forget-password.js [33m404[0m 1.827 ms - 166[0m
+[0mGET /users/sign-in [36m304[0m 5.610 ms - -[0m
+[0mGET /users/css/layout.css [33m404[0m 8.950 ms - 159[0m
+[0mGET /users/css/header.css [33m404[0m 0.706 ms - 159[0m
+[0mGET /users/css/sign_in.css [33m404[0m 0.759 ms - 160[0m
+[0mGET /users/js/forget-password.js [33m404[0m 0.583 ms - 166[0m
+[0mGET / [36m302[0m 14.074 ms - 72[0m
+[0mGET /users/sign-in [36m304[0m 10.436 ms - -[0m
+[0mGET /users/css/layout.css [33m404[0m 7.915 ms - 159[0m
+[0mGET /users/css/sign_in.css [33m404[0m 1.973 ms - 160[0m
+[0mGET /users/css/header.css [33m404[0m 1.399 ms - 159[0m
+[0mGET /users/js/forget-password.js [33m404[0m 1.063 ms - 166[0m
+[0mPOST /users/create-session [36m302[0m 98.242 ms - 46[0m
+[0mGET / [32m200[0m 1063.335 ms - 12130[0m
+[0mGET /css/match-card.css [33m404[0m 2.877 ms - 157[0m
+[0mGET /css/header.css [33m404[0m 1.767 ms - 153[0m
+[0mGET /css/layout.css [33m404[0m 1.255 ms - 153[0m
+[0mGET /js/card.js [33m404[0m 0.521 ms - 149[0m

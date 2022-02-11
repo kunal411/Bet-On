@@ -24,7 +24,7 @@ const customFlashMWare = require('./config/flash-middleware');
 //setup the chat server to be used with socket.io
 const chatServer = require('http').Server(app);
 const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
-chatServer.listen(5000);
+chatServer.listen(5100);
 
 console.log('Chat Server is listening on port 5100');
 
